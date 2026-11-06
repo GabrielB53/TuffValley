@@ -1,0 +1,568 @@
+
+/* ========================================
+   1. IMPORTAÇÕES
+======================================== */
+
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/bootstrap-icons/font/bootstrap-icons.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+/* ========================================
+   2. CONFIGURAÇÕES GERAIS
+======================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--text-color);
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* ========================================
+   3. IDENTIDADE VISUAL - TEMA CLARO
+======================================== */
+
+:root {
+    color-scheme: light;
+
+    /* Paleta principal */
+    --olive: #50552C;
+    --sage: #7A8660;
+    --wine: #782117;
+    --gold: #E79321;
+    --peach: #FED6A2;
+
+    /* Cores auxiliares */
+    --cream: #F4F1E8;
+    --dark-green: #242719;
+    --soft-green: #D5D9C8;
+
+    /* Superfícies */
+    --background: #F4F1E8;
+    --surface: #FFFFFF;
+    --surface-secondary: #E9EBDD;
+
+    /* Textos */
+    --text-color: #242719;
+    --text-secondary: #62664F;
+
+    /* Bordas */
+    --border-color: #D5D9C8;
+
+    /* Cores de interação */
+    --primary: #50552C;
+    --primary-hover: #3D4220;
+
+    --accent: #E79321;
+    --danger: #782117;
+
+    /* Sidebar */
+    --sidebar-bg: #FFFFFF;
+    --sidebar-text: #242719;
+    --sidebar-hover: #E9EBDD;
+
+    /* Header */
+    --header-bg: #FFFFFF;
+    --header-text: #242719;
+    --header-icon-bg: #F4F1E8;
+    --header-icon-color: #50552C;
+
+    /* Sombras */
+    --card-shadow: 0 4px 16px rgba(36, 39, 25, 0.08);
+
+    /* Bootstrap */
+    --bs-body-bg: var(--background);
+    --bs-body-color: var(--text-color);
+
+    --bs-secondary-color: var(--text-secondary);
+    --bs-tertiary-bg: var(--surface-secondary);
+
+    --bs-primary: var(--primary);
+    --bs-primary-rgb: 80, 85, 44;
+
+    --bs-secondary: var(--sage);
+    --bs-secondary-rgb: 122, 134, 96;
+
+    --bs-border-color: var(--border-color);
+
+    --bs-link-color: var(--primary);
+    --bs-link-hover-color: var(--primary-hover);
+
+    --bs-border-radius: 8px;
+}
+
+
+/* ========================================
+   4. TEMA ESCURO
+======================================== */
+
+.dark-theme {
+    color-scheme: dark;
+
+    /* Superfícies */
+    --background: #242719;
+    --surface: #343923;
+    --surface-secondary: #414832;
+
+    /* Textos */
+    --text-color: #F4F1E8;
+    --text-secondary: #D5D9C8;
+
+    /* Bordas */
+    --border-color: #50552C;
+
+    /* Cores de interação */
+    --primary: #7A8660;
+    --primary-hover: #929F75;
+
+    --accent: #E79321;
+    --danger: #C45B45;
+
+    /* Sidebar */
+    --sidebar-bg: #343923;
+    --sidebar-text: #F4F1E8;
+    --sidebar-hover: #414832;
+
+    /* Header */
+    --header-bg: #343923;
+    --header-text: #F4F1E8;
+    --header-icon-bg: #242719;
+    --header-icon-color: #7A8660;
+
+    /* Sombras */
+    --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+    /* Bootstrap */
+    --bs-body-bg: var(--background);
+    --bs-body-color: var(--text-color);
+
+    --bs-secondary-color: var(--text-secondary);
+    --bs-tertiary-bg: var(--surface-secondary);
+
+    --bs-primary: var(--primary);
+    --bs-primary-rgb: 122, 134, 96;
+
+    --bs-secondary: var(--sage);
+    --bs-secondary-rgb: 122, 134, 96;
+
+    --bs-border-color: var(--border-color);
+
+    --bs-link-color: var(--soft-green);
+    --bs-link-hover-color: var(--gold);
+}
+
+
+/* ========================================
+   5. HEADER
+======================================== */
+
+.colorHeader {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+
+    border-bottom: 1px solid var(--border-color);
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.Icon {
+    width: 32px;
+    height: 32px;
+
+    background-color: var(--header-icon-bg);
+    color: var(--header-icon-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+
+    transition: all 0.3s ease;
+}
+
+
+/* ========================================
+   6. SIDEBAR
+======================================== */
+
+/* Estrutura */
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
+
+    margin: 14px 0;
+    padding: 10px 0;
+
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+
+    box-shadow: var(--card-shadow);
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* Logo */
+
+.logo {
+    width: 60px;
+    height: 60px;
+}
+
+.migs {
+    border-radius: 30px;
+}
+
+/* Links */
+
+.sidebar a {
+    display: block;
+    position: relative;
+
+    width: 90%;
+    height: 40px;
+
+    margin-top: 10px;
+    margin-left: 5%;
+    padding: 0 20px;
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 40px;
+    text-align: center;
+
+    color: var(--sidebar-text);
+    text-decoration: none;
+
+    border-radius: 10px;
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+/* Sublinhado animado */
+
+.sidebar a::after {
+    content: '';
+
+    position: absolute;
+
+    width: 80%;
+    bottom: 50%;
+    left: -100%;
+
+    border-bottom: 1px solid var(--border-color);
+
+    transition: all 0.5s ease;
+}
+
+.sidebar a:hover::after,
+.sidebar a.hover::after {
+    left: 100%;
+}
+
+/* Texto animado */
+
+.sidebar a .text {
+    text-shadow: 0 -40px 0 var(--sidebar-text);
+
+    transform: translateY(100%) translateZ(0);
+
+    transition:
+        transform 0.75s ease,
+        text-shadow 0.75s ease;
+}
+
+.sidebar a:hover .text,
+.sidebar a.hover .text {
+    text-shadow: 0 -40px 0 transparent;
+
+    transform: translateY(0%) translateZ(0) scale(1.1);
+
+    font-weight: 600;
+}
+
+/* Hover */
+
+.sidebar a:hover,
+.sidebar a.hover {
+    font-size: 18px;
+    font-weight: bold;
+
+    background-color: var(--sidebar-hover);
+    color: var(--primary);
+
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+
+    transition: all 0.3s ease;
+}
+
+
+/* ========================================
+   7. BOTÕES PERSONALIZADOS
+======================================== */
+
+.CorNavButtonLog {
+    background-color: var(--primary);
+    color: #FFFFFF;
+
+    border: none;
+    border-radius: 8px;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.CorNavButtonLog:hover {
+    background-color: var(--primary-hover);
+    color: #FFFFFF;
+}
+
+
+/* ========================================
+   8. CARDS E CONTAINERS
+======================================== */
+
+.caixota {
+    padding: 30px;
+
+    background-color: var(--surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+
+    box-shadow: var(--card-shadow);
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.caixota2 {
+    padding: 30px;
+
+    background-color: var(--surface-secondary);
+
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* ========================================
+   9. DESTAQUES E ALERTAS
+======================================== */
+
+.highlight {
+    color: var(--gold);
+}
+
+.alert-custom {
+    background-color: var(--danger);
+    color: #FFFFFF;
+
+    border: none;
+    border-radius: 8px;
+}
+
+
+/* ========================================
+   10. TABELAS
+======================================== */
+
+.table-wrapper {
+    max-height: 69vh;
+    overflow-y: auto;
+}
+
+.table {
+    color: var(--text-color);
+    border-color: var(--border-color);
+
+    --bs-table-color: var(--text-color);
+    --bs-table-bg: var(--surface);
+    --bs-table-border-color: var(--border-color);
+
+    --bs-table-striped-bg: var(--surface-secondary);
+    --bs-table-striped-color: var(--text-color);
+
+    --bs-table-hover-bg: var(--surface-secondary);
+    --bs-table-hover-color: var(--text-color);
+}
+
+.table > :not(caption) > * > * {
+    background-color: var(--bs-table-bg);
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color);
+}
+
+
+/* ========================================
+   11. FORMULÁRIOS
+======================================== */
+
+.form-control,
+.form-select {
+    background-color: var(--surface);
+    color: var(--text-color);
+
+    border-color: var(--border-color);
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--surface);
+    color: var(--text-color);
+
+    border-color: var(--sage);
+
+    box-shadow: 0 0 0 0.2rem rgba(122, 134, 96, 0.2);
+}
+
+.form-control::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+
+/* ========================================
+   12. GRÁFICOS
+======================================== */
+
+#ContainerGraph {
+    width: 100%;
+    height: 500px;
+}
+
+
+/* ========================================
+   13. SCROLLBAR
+======================================== */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--sage) var(--background);
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--sage);
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
+}
+
+
+/* ========================================
+   14. TRANSIÇÕES GERAIS
+======================================== */
+
+body,
+.colorHeader,
+.Icon,
+.sidebar,
+.sidebar a,
+.caixota,
+.caixota2,
+.form-control,
+.form-select,
+.table,
+.table td,
+.table th,
+.CorNavButtonLog {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* =========================================
+   MATERIAL UI - INTEGRAÇÃO COM TEMA GLOBAL
+========================================= */
+
+.MuiInputBase-root {
+    color: var(--text-color);
+}
+
+.MuiInputBase-input {
+    color: var(--text-color);
+    -webkit-text-fill-color: var(--text-color);
+}
+
+.MuiInputLabel-root {
+    color: var(--text-secondary);
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border-color: var(--border-color);
+}
+
+.MuiFormHelperText-root {
+    color: var(--text-secondary);
+}
+
+/* Transição entre os temas */
+.MuiInputBase-root,
+.MuiInputBase-input,
+.MuiInputLabel-root,
+.MuiOutlinedInput-notchedOutline {
+    transition:
+        color 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
