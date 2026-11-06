@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 import ThemeToggleButton from '../Botoes/TrocarCor';
-import Logo from '../../assets/images/logo.png';
+import Logo from '../../assets/images/Logo.png';
 
 import { ThemeContext } from '../../contexts/ThemeContext';
 
