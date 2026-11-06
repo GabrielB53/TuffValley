@@ -1,7 +1,6 @@
 import axios from "axios";
 
-//const API_URL =  "https://projeto.com.br/"; //remote(produção)
-const API_URL = "http://localhost:8080/"; //local(desenvolvimento)
+const API_URL = import.meta.env.VITE_API_URL;
 
 const mainInstance = axios.create({
   baseURL: API_URL,
@@ -11,19 +10,15 @@ const mainInstance = axios.create({
 });
 
 const multipartInstance = axios.create({
-  baseURL: API_URL,
-  headers: {
-    "Content-type": "multipart/form-data"
-  }
+  baseURL: API_URL
 });
 
-const apiCep = axios.create( {
-  baseURL: `https://viacep.com.br/ws/`,
+const apiCep = axios.create({
+  baseURL: "https://viacep.com.br/ws/",
   headers: {
     "Content-type": "application/json"
   }
 });
-
 
 const httpCommom = {
   mainInstance,
