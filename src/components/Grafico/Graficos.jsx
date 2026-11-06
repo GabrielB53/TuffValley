@@ -8,7 +8,7 @@ const data = [
     { name: 'Quinta', Manha: 2780, Tarde: 3908, Noite: 2000 },
     { name: 'Sexta', Manha: 1890, Tarde: 4800, Noite: 2181 }
 ];
-
+/* */
 const GraficoComTema = () => {
     const [theme, setTheme] = useState('Claro'); // Estado para armazenar o tema
 

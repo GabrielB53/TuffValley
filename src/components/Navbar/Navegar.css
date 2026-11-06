@@ -1,13 +1,110 @@
-.CorNavButtonLog{
-    background-color: rgb(0, 30, 255);
-    color: white;
+
+/* =========================================
+   TUFFVALLEY - NAVBAR
+========================================= */
+
+.tuff-navbar {
+    width: 100%;
+    min-height: 76px;
+
+    background-color: var(--surface);
+    color: var(--text-color);
+
+    border-bottom: 1px solid var(--border-color);
+
+    box-shadow: 0 3px 12px rgba(36, 39, 25, 0.06);
+
+    padding: 10px 0;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
-.CorNavButtonLog:hover{
-    background-color: rgb(255, 0, 0);
-    color:white
+
+/* MARCA */
+
+.tuff-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 0;
+    color: var(--text-color);
+
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+
+    transition: color 0.3s ease;
 }
-.brand-container {
+
+.tuff-brand:hover {
+    color: var(--primary);
+}
+
+/* LOGO */
+
+.tuff-logo {
+    width: 46px;
+    height: 46px;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+}
+
+/* NOME */
+
+.tuff-brand-name {
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.tuff-brand:hover .tuff-brand-name {
+    color: var(--primary);
+}
+
+/* BOTÃO DE TEMA */
+
+.tuff-theme-button {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+}
+
+/* MENU MOBILE */
+
+.tuff-navbar .navbar-toggler {
+    border-color: var(--border-color);
+    padding: 7px 10px;
+}
+
+.tuff-navbar .navbar-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(122, 134, 96, 0.2);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 991px) {
+    .tuff-navbar .navbar-collapse {
+        padding: 15px 0 8px;
+    }
+
+    .tuff-theme-button {
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .tuff-brand {
+        font-size: 1.2rem;
+    }
+
+    .tuff-logo {
+        width: 40px;
+        height: 40px;
+    }
 }
