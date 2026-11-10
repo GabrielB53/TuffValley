@@ -1,0 +1,463 @@
+
+/* ========================================
+   PERFIL — ESTRUTURA
+======================================== */
+
+.perfil-layout {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    background-color: var(--background);
+    color: var(--text-color);
+}
+
+.perfil-content {
+    flex: 1;
+    min-width: 0;
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.perfil-main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 12px 0 30px;
+}
+
+/* ========================================
+   CARD PRINCIPAL
+======================================== */
+
+.perfil-card {
+    width: 100%;
+    max-width: 900px;
+    padding: 32px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+
+    background-color: var(--surface);
+    color: var(--text-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+
+    box-shadow: var(--card-shadow);
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease;
+}
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.perfil-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.perfil-heading-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--surface-secondary);
+    color: var(--primary);
+
+    border-radius: 14px;
+}
+
+.perfil-heading-icon svg {
+    font-size: 1.8rem;
+}
+
+.perfil-heading h2 {
+    margin: 0 0 5px;
+
+    color: var(--text-color);
+
+    font-size: 1.45rem;
+    font-weight: 800;
+}
+
+.perfil-heading p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ========================================
+   FOTO DE PERFIL
+======================================== */
+
+.perfil-photo-section {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    padding: 22px;
+
+    background-color: var(--surface-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+}
+
+.perfil-avatar.MuiAvatar-root {
+    width: 112px;
+    height: 112px;
+    flex-shrink: 0;
+
+    border: 3px solid var(--primary);
+
+    background-color: var(--surface);
+    color: var(--primary);
+
+    font-size: 2rem;
+}
+
+.perfil-avatar img {
+    object-fit: cover;
+}
+
+.perfil-photo-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+}
+
+.perfil-photo-info h3 {
+    margin: 0;
+
+    color: var(--text-color);
+
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.perfil-photo-info p {
+    margin: 0 0 5px;
+
+    color: var(--text-secondary);
+
+    font-size: 0.87rem;
+}
+
+/* ========================================
+   CAMPOS
+======================================== */
+
+.perfil-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.perfil-section-title {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.perfil-section-title h3 {
+    margin: 0;
+
+    color: var(--text-color);
+
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.perfil-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.perfil-field label {
+    color: var(--text-color);
+
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.perfil-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.perfil-input-wrapper > svg {
+    flex-shrink: 0;
+    color: var(--primary);
+    font-size: 1.25rem;
+}
+
+.perfil-input-wrapper .form-control {
+    min-width: 0;
+    min-height: 45px;
+
+    padding: 10px 13px;
+
+    background-color: var(--background);
+    color: var(--text-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+
+    font-size: 0.9rem;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.perfil-input-wrapper .form-control:focus {
+    background-color: var(--surface);
+    color: var(--text-color);
+
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 3px rgba(122, 134, 96, 0.16);
+}
+
+.perfil-input-wrapper .form-control[readonly] {
+    background-color: var(--surface-secondary);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+.perfil-fields-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* ========================================
+   BOTÕES
+======================================== */
+
+.perfil-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding-top: 22px;
+    border-top: 1px solid var(--border-color);
+}
+
+.perfil-save-button.MuiButton-root {
+    min-height: 44px;
+    padding: 10px 20px;
+
+    background-color: var(--primary);
+    color: #FFFFFF;
+
+    border-radius: 9px;
+
+    font-weight: 700;
+    text-transform: none;
+
+    box-shadow: none;
+}
+
+.perfil-save-button.MuiButton-root:hover {
+    background-color: var(--primary-hover);
+    box-shadow: var(--card-shadow);
+}
+
+.perfil-password-button.MuiButton-root {
+    min-height: 44px;
+    padding: 10px 20px;
+
+    color: var(--text-color);
+    border-color: var(--border-color);
+
+    border-radius: 9px;
+
+    font-weight: 700;
+    text-transform: none;
+}
+
+.perfil-password-button.MuiButton-root:hover {
+    background-color: var(--surface-secondary);
+    border-color: var(--primary);
+}
+
+/* ========================================
+   MENSAGENS
+======================================== */
+
+.perfil-message {
+    padding: 13px 16px;
+
+    border-radius: 9px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.perfil-message.success {
+    background-color: rgba(76, 139, 91, 0.12);
+    color: #4C8B5B;
+    border: 1px solid rgba(76, 139, 91, 0.3);
+}
+
+.perfil-message.error {
+    background-color: rgba(180, 55, 55, 0.10);
+    color: #C04B4B;
+    border: 1px solid rgba(180, 55, 55, 0.3);
+}
+
+/* ========================================
+   TEMA
+======================================== */
+
+.perfil-theme-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding-top: 18px;
+    border-top: 1px solid var(--border-color);
+}
+
+.perfil-theme-section span {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+/* ========================================
+   CARREGAMENTO E ERRO
+======================================== */
+
+.perfil-loading {
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    padding: 24px;
+
+    background-color: var(--background);
+    color: var(--text-color);
+
+    text-align: center;
+}
+
+.perfil-loading p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.perfil-loading h3 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 768px) {
+    .perfil-content {
+        padding: 12px;
+    }
+
+    .perfil-card {
+        padding: 22px;
+        gap: 22px;
+    }
+
+    .perfil-fields-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .perfil-photo-section {
+        gap: 18px;
+        padding: 18px;
+    }
+
+    .perfil-avatar.MuiAvatar-root {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media (max-width: 480px) {
+    .perfil-content {
+        padding: 8px;
+    }
+
+    .perfil-card {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .perfil-heading {
+        align-items: flex-start;
+    }
+
+    .perfil-heading h2 {
+        font-size: 1.2rem;
+    }
+
+    .perfil-heading p {
+        font-size: 0.82rem;
+    }
+
+    .perfil-photo-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .perfil-photo-info {
+        align-items: center;
+    }
+
+    .perfil-actions {
+        flex-direction: column;
+    }
+
+    .perfil-actions .MuiButton-root {
+        width: 100%;
+    }
+
+    .perfil-theme-section {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

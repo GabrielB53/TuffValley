@@ -1,0 +1,538 @@
+
+/* ========================================
+   ESTRUTURA GERAL
+======================================== */
+
+.usuarios-lista-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--background);
+    color: var(--text-color);
+}
+
+.usuarios-lista-content {
+    flex: 1;
+    min-width: 0;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.usuarios-lista-main {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.usuarios-lista-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 26px 30px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+}
+
+.usuarios-lista-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.usuarios-lista-heading h2 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.65rem;
+    font-weight: 750;
+}
+
+.usuarios-lista-heading p {
+    margin: 8px 0 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.usuarios-lista-heading-icon {
+    width: 65px;
+    height: 65px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: var(--surface-secondary);
+    color: var(--primary);
+}
+
+.usuarios-lista-heading-icon svg {
+    font-size: 2.2rem;
+}
+
+/* ========================================
+   CARD PRINCIPAL
+======================================== */
+
+.usuarios-lista-card {
+    padding: 25px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    min-width: 0;
+}
+
+/* ========================================
+   PESQUISA
+======================================== */
+
+.usuarios-lista-search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.usuarios-lista-search-field {
+    min-width: 0;
+    flex: 1;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--background);
+    color: var(--text-secondary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.usuarios-lista-search-field:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+.usuarios-lista-search-field svg {
+    flex-shrink: 0;
+    font-size: 21px;
+}
+
+.usuarios-lista-search-field input {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.usuarios-lista-search-field input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.usuarios-lista-search-button.MuiButton-root,
+.usuarios-lista-reset-button.MuiButton-root {
+    min-height: 46px;
+    border-radius: 10px;
+    padding: 0 17px;
+    display: inline-flex;
+    gap: 7px;
+    white-space: nowrap;
+    font-weight: 650;
+}
+
+.usuarios-lista-search-button.MuiButton-root {
+    background: var(--primary);
+    color: #fff;
+}
+
+.usuarios-lista-search-button.MuiButton-root:hover {
+    background: var(--primary-hover);
+}
+
+.usuarios-lista-reset-button.MuiButton-root {
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+/* ========================================
+   ALERTAS
+======================================== */
+
+.usuarios-lista-alert {
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+/* ========================================
+   BARRA DE FERRAMENTAS
+======================================== */
+
+.usuarios-lista-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.usuarios-lista-counter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.usuarios-lista-counter-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--surface-secondary);
+    color: var(--primary);
+}
+
+.usuarios-lista-counter-icon svg {
+    font-size: 23px;
+}
+
+.usuarios-lista-counter > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.usuarios-lista-counter span {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.usuarios-lista-counter-number {
+    color: var(--text-color) !important;
+    font-size: 1.2rem !important;
+    font-weight: 750;
+}
+
+.usuarios-lista-inactive-button.MuiButton-root {
+    min-height: 42px;
+    border-radius: 9px;
+    display: inline-flex;
+    gap: 7px;
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.usuarios-lista-inactive-button.MuiButton-contained {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* ========================================
+   TABELA
+======================================== */
+
+.usuarios-lista-table-wrapper {
+    width: 100%;
+    min-width: 0;
+}
+
+.usuarios-lista-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: var(--text-color);
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.usuarios-lista-table thead th {
+    padding: 15px 13px;
+    background: var(--surface-secondary);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.82rem;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+.usuarios-lista-table tbody td {
+    padding: 13px;
+    vertical-align: middle;
+    background: var(--surface);
+    color: var(--text-color);
+    border-color: var(--border-color);
+    font-size: 0.88rem;
+}
+
+.usuarios-lista-table tbody tr:hover td {
+    background: var(--surface-secondary);
+}
+
+.usuarios-lista-name {
+    font-weight: 650;
+}
+
+.usuarios-lista-access {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 7px;
+    background: var(--surface-secondary);
+    color: var(--text-color);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.usuarios-lista-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+.usuarios-lista-status.status-ativo {
+    background: rgba(80, 120, 70, 0.15);
+    color: #568447;
+}
+
+.usuarios-lista-status.status-inativo {
+    background: rgba(180, 65, 55, 0.15);
+    color: #c45b50;
+}
+
+.usuarios-lista-open-button.MuiButton-root {
+    min-width: 85px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    text-transform: none;
+    font-weight: 650;
+}
+
+.usuarios-lista-open-button.MuiButton-root:hover {
+    filter: brightness(0.92);
+}
+
+.usuarios-lista-open-button svg {
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+/* ========================================
+   CARREGAMENTO E ESTADO VAZIO
+======================================== */
+
+.usuarios-lista-loading,
+.usuarios-lista-empty {
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.usuarios-lista-loading .MuiCircularProgress-root {
+    color: var(--primary);
+}
+
+.usuarios-lista-loading p,
+.usuarios-lista-empty p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.usuarios-lista-empty svg {
+    font-size: 48px;
+    color: var(--primary);
+}
+
+.usuarios-lista-empty h3 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* ========================================
+   RODAPÉ E PAGINAÇÃO
+======================================== */
+
+.usuarios-lista-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding-top: 20px;
+    margin-top: 18px;
+    border-top: 1px solid var(--border-color);
+}
+
+.usuarios-lista-record-count {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.usuarios-lista-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.usuarios-lista-pagination label {
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 650;
+}
+
+.usuarios-lista-pagination select {
+    min-height: 36px;
+    padding: 5px 25px 5px 9px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    background: var(--surface);
+    color: var(--text-color);
+}
+
+.usuarios-lista-page-buttons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.usuarios-lista-page-buttons button {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    background: var(--surface);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.usuarios-lista-page-buttons button:hover:not(:disabled) {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.usuarios-lista-page-buttons button.active {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #fff;
+}
+
+.usuarios-lista-page-buttons button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 900px) {
+    .usuarios-lista-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .usuarios-lista-pagination {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 650px) {
+    .usuarios-lista-content {
+        padding: 10px;
+    }
+
+    .usuarios-lista-heading {
+        padding: 20px;
+    }
+
+    .usuarios-lista-heading h2 {
+        font-size: 1.3rem;
+    }
+
+    .usuarios-lista-heading p {
+        font-size: 0.85rem;
+    }
+
+    .usuarios-lista-heading-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .usuarios-lista-card {
+        padding: 15px;
+    }
+
+    .usuarios-lista-search {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .usuarios-lista-search-button.MuiButton-root,
+    .usuarios-lista-reset-button.MuiButton-root {
+        justify-content: center;
+    }
+
+    .usuarios-lista-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .usuarios-lista-pagination {
+        width: 100%;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 420px) {
+    .usuarios-lista-heading-icon {
+        display: none;
+    }
+
+    .usuarios-lista-pagination {
+        gap: 8px;
+    }
+
+    .usuarios-lista-pagination label {
+        width: 100%;
+    }
+
+    .usuarios-lista-page-buttons {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
