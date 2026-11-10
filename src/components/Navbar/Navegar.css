@@ -1,110 +1,70 @@
 
-/* =========================================
-   TUFFVALLEY - NAVBAR
-========================================= */
+/* Ações da Navbar */
+.tuff-nav-actions {
+    gap: 20px;
+}
 
-.tuff-navbar {
-    width: 100%;
-    min-height: 76px;
+/* Perfil do usuário */
+.tuff-user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-    background-color: var(--surface);
-    color: var(--text-color);
+    padding: 6px 12px;
+    border-radius: 10px;
 
-    border-bottom: 1px solid var(--border-color);
-
-    box-shadow: 0 3px 12px rgba(36, 39, 25, 0.06);
-
-    padding: 10px 0;
+    cursor: pointer;
 
     transition:
         background-color 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
+        transform 0.2s ease;
 }
 
-/* MARCA */
-
-.tuff-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-
-    margin: 0;
-    color: var(--text-color);
-
-    font-weight: 800;
-    font-size: 1.4rem;
-    letter-spacing: -0.5px;
-
-    transition: color 0.3s ease;
+.tuff-user-profile:hover {
+    background-color: var(--surface-secondary);
+    transform: translateY(-1px);
 }
 
-.tuff-brand:hover {
-    color: var(--primary);
+/* Foto */
+.tuff-user-avatar {
+    width: 42px;
+    height: 42px;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    border: 2px solid var(--primary);
 }
 
-/* LOGO */
-
-.tuff-logo {
-    width: 46px;
-    height: 46px;
-
-    object-fit: contain;
-
-    border-radius: 12px;
-}
-
-/* NOME */
-
-.tuff-brand-name {
-    color: var(--text-color);
-    transition: color 0.3s ease;
-}
-
-.tuff-brand:hover .tuff-brand-name {
-    color: var(--primary);
-}
-
-/* BOTÃO DE TEMA */
-
-.tuff-theme-button {
+/* Informações */
+.tuff-user-info {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 2px;
 }
 
-/* MENU MOBILE */
-
-.tuff-navbar .navbar-toggler {
-    border-color: var(--border-color);
-    padding: 7px 10px;
+.tuff-user-name {
+    color: var(--text-color);
+    font-size: 0.88rem;
+    font-weight: 700;
 }
 
-.tuff-navbar .navbar-toggler:focus {
-    box-shadow: 0 0 0 3px rgba(122, 134, 96, 0.2);
+.tuff-user-role {
+    color: var(--text-secondary);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* RESPONSIVIDADE */
-
+/* Responsividade */
 @media (max-width: 991px) {
-    .tuff-navbar .navbar-collapse {
-        padding: 15px 0 8px;
+    .tuff-nav-actions {
+        align-items: flex-start !important;
+        gap: 12px;
+        padding-top: 15px;
     }
 
-    .tuff-theme-button {
-        justify-content: flex-start;
-        margin-top: 10px;
-    }
-}
-
-@media (max-width: 576px) {
-    .tuff-brand {
-        font-size: 1.2rem;
-    }
-
-    .tuff-logo {
-        width: 40px;
-        height: 40px;
+    .tuff-user-profile {
+        padding-left: 0;
     }
 }

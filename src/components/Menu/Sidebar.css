@@ -1,0 +1,184 @@
+
+.sidebar {
+    width: 240px;
+    min-width: 240px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px 14px;
+
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+
+    border-right: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+
+    z-index: 100;
+}
+
+/* Perfil do usuário */
+.sidebar-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 12px 8px 18px;
+}
+
+.sidebar-avatar {
+    width: 76px !important;
+    height: 76px !important;
+    border: 3px solid var(--primary);
+    box-shadow: var(--card-shadow);
+}
+
+.sidebar-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 100%;
+}
+
+.sidebar-user-name {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.sidebar-user-role {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.sidebar-profile-actions {
+    margin-top: 5px;
+}
+
+.sidebar-profile-actions .MuiButton-root {
+    color: var(--primary);
+    border-color: var(--border-color);
+    min-width: 42px;
+}
+
+.sidebar-profile-actions .MuiButton-root:hover {
+    background-color: var(--surface-secondary);
+    border-color: var(--primary);
+}
+
+/* Divisória */
+.sidebar-divider {
+    border-color: var(--border-color) !important;
+    margin: 8px 0 20px !important;
+}
+
+/* Navegação */
+.sidebar-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.sidebar-section-title {
+    color: var(--text-secondary);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    padding: 0 12px;
+    margin-bottom: 8px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px;
+    border-radius: 9px;
+
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.sidebar-link:hover {
+    background-color: var(--surface-secondary);
+    color: var(--primary);
+    transform: translateX(3px);
+}
+
+.sidebar-link.active {
+    background-color: var(--primary);
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.sidebar-link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-link-icon svg {
+    font-size: 21px;
+}
+
+/* Rodapé */
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    margin-top: auto;
+    padding: 18px 10px 5px;
+
+    border-top: 1px solid var(--border-color);
+}
+
+.sidebar-footer span {
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 0.95rem;
+}
+
+.sidebar-footer small {
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 190px;
+        min-width: 190px;
+        padding: 15px 10px;
+    }
+
+    .sidebar-avatar {
+        width: 65px !important;
+        height: 65px !important;
+    }
+
+    .sidebar-link {
+        font-size: 0.82rem;
+        padding: 10px;
+    }
+}
