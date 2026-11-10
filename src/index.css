@@ -80,10 +80,10 @@ body {
     --accent: #E79321;
     --danger: #782117;
 
-    /* Sidebar */
-    --sidebar-bg: #FFFFFF;
-    --sidebar-text: #242719;
-    --sidebar-hover: #E9EBDD;
+    /* Sidebar: acompanha as superfícies e textos do tema */
+    --sidebar-bg: var(--surface);
+    --sidebar-text: var(--text-color);
+    --sidebar-hover: var(--surface-secondary);
 
     /* Header */
     --header-bg: #FFFFFF;
@@ -142,10 +142,10 @@ body {
     --accent: #E79321;
     --danger: #C45B45;
 
-    /* Sidebar */
-    --sidebar-bg: #343923;
-    --sidebar-text: #F4F1E8;
-    --sidebar-hover: #414832;
+    /* Sidebar: acompanha as superfícies e textos do tema */
+    --sidebar-bg: var(--surface);
+    --sidebar-text: var(--text-color);
+    --sidebar-hover: var(--surface-secondary);
 
     /* Header */
     --header-bg: #343923;
@@ -210,31 +210,15 @@ body {
    6. SIDEBAR
 ======================================== */
 
-/* Estrutura */
+/*
+   A aparência e o comportamento da Sidebar ficam em:
+   components/Menu/Sidebar.css
 
-.sidebar {
-    width: 200px;
-    height: 100vh;
+   Evite adicionar regras globais para .sidebar ou .sidebar a
+   aqui, pois elas podem sobrescrever o menu recolhível.
+*/
 
-    margin: 14px 0;
-    padding: 10px 0;
-
-    background-color: var(--sidebar-bg);
-    color: var(--sidebar-text);
-
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-
-    box-shadow: var(--card-shadow);
-
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-/* Logo */
+/* Classes antigas mantidas para componentes que ainda as utilizem. */
 
 .logo {
     width: 60px;
@@ -243,93 +227,6 @@ body {
 
 .migs {
     border-radius: 30px;
-}
-
-/* Links */
-
-.sidebar a {
-    display: block;
-    position: relative;
-
-    width: 90%;
-    height: 40px;
-
-    margin-top: 10px;
-    margin-left: 5%;
-    padding: 0 20px;
-
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 40px;
-    text-align: center;
-
-    color: var(--sidebar-text);
-    text-decoration: none;
-
-    border-radius: 10px;
-    overflow: hidden;
-
-    cursor: pointer;
-
-    transition: all 0.3s ease;
-}
-
-/* Sublinhado animado */
-
-.sidebar a::after {
-    content: '';
-
-    position: absolute;
-
-    width: 80%;
-    bottom: 50%;
-    left: -100%;
-
-    border-bottom: 1px solid var(--border-color);
-
-    transition: all 0.5s ease;
-}
-
-.sidebar a:hover::after,
-.sidebar a.hover::after {
-    left: 100%;
-}
-
-/* Texto animado */
-
-.sidebar a .text {
-    text-shadow: 0 -40px 0 var(--sidebar-text);
-
-    transform: translateY(100%) translateZ(0);
-
-    transition:
-        transform 0.75s ease,
-        text-shadow 0.75s ease;
-}
-
-.sidebar a:hover .text,
-.sidebar a.hover .text {
-    text-shadow: 0 -40px 0 transparent;
-
-    transform: translateY(0%) translateZ(0) scale(1.1);
-
-    font-weight: 600;
-}
-
-/* Hover */
-
-.sidebar a:hover,
-.sidebar a.hover {
-    font-size: 18px;
-    font-weight: bold;
-
-    background-color: var(--sidebar-hover);
-    color: var(--primary);
-
-    border-radius: 10px;
-    box-shadow: var(--card-shadow);
-
-    transition: all 0.3s ease;
 }
 
 
@@ -469,6 +366,12 @@ body {
     opacity: 0.8;
 }
 
+/* Opções de formulários também acompanham o tema */
+.form-select option {
+    background-color: var(--surface);
+    color: var(--text-color);
+}
+
 
 /* ========================================
    12. GRÁFICOS
@@ -515,8 +418,6 @@ body {
 body,
 .colorHeader,
 .Icon,
-.sidebar,
-.sidebar a,
 .caixota,
 .caixota2,
 .form-control,

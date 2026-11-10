@@ -1,36 +1,95 @@
 
+/* =========================================
+   TUFFVALLEY - SIDEBAR
+========================================= */
+
 .sidebar {
     width: 240px;
     min-width: 240px;
     height: 100vh;
+    height: 100dvh;
+
     position: sticky;
     top: 0;
 
     display: flex;
     flex-direction: column;
 
-    padding: 20px 14px;
+    padding: 16px 12px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    background-color: var(--sidebar-bg);
-    color: var(--sidebar-text);
+    background-color: var(--surface);
+    color: var(--text-color);
 
     border-right: 1px solid var(--border-color);
     box-shadow: var(--card-shadow);
 
     transition:
+        width 0.3s ease,
+        min-width 0.3s ease,
+        padding 0.3s ease,
         background-color 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
+        color 0.3s ease;
 
     z-index: 100;
 }
 
-/* Perfil do usuário */
+/* =========================================
+   SIDEBAR RECOLHIDA
+========================================= */
+
+.sidebar.sidebar-collapsed {
+    width: 76px;
+    min-width: 76px;
+    padding: 16px 9px;
+}
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 42px;
+    margin-bottom: 12px;
+    padding: 0 5px;
+}
+
+.sidebar-header-title {
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.sidebar-toggle {
+    color: var(--primary) !important;
+    border-radius: 9px !important;
+}
+
+.sidebar-toggle:hover {
+    background-color: var(--surface-secondary) !important;
+}
+
+.sidebar-collapsed .sidebar-header {
+    justify-content: center;
+    padding: 0;
+}
+
+/* =========================================
+   PERFIL
+========================================= */
+
 .sidebar-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+
     gap: 10px;
     padding: 12px 8px 18px;
 }
@@ -38,22 +97,31 @@
 .sidebar-avatar {
     width: 76px !important;
     height: 76px !important;
+
     border: 3px solid var(--primary);
     box-shadow: var(--card-shadow);
+
+    transition: all 0.3s ease;
+}
+
+.sidebar-collapsed .sidebar-avatar {
+    width: 46px !important;
+    height: 46px !important;
 }
 
 .sidebar-user-info {
     display: flex;
     flex-direction: column;
     gap: 4px;
+
     max-width: 100%;
+    overflow-wrap: anywhere;
 }
 
 .sidebar-user-name {
     color: var(--text-color);
     font-size: 0.95rem;
     font-weight: 700;
-    overflow-wrap: anywhere;
 }
 
 .sidebar-user-role {
@@ -62,6 +130,8 @@
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+
+/* AÇÕES DO PERFIL */
 
 .sidebar-profile-actions {
     margin-top: 5px;
@@ -78,13 +148,34 @@
     border-color: var(--primary);
 }
 
-/* Divisória */
+.sidebar-collapsed-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.sidebar-collapsed-actions .MuiIconButton-root {
+    color: var(--primary);
+}
+
+.sidebar-collapsed-actions .MuiIconButton-root:hover {
+    background-color: var(--surface-secondary);
+}
+
+/* =========================================
+   DIVISÓRIA
+========================================= */
+
 .sidebar-divider {
     border-color: var(--border-color) !important;
     margin: 8px 0 20px !important;
 }
 
-/* Navegação */
+/* =========================================
+   NAVEGAÇÃO
+========================================= */
+
 .sidebar-navigation {
     display: flex;
     flex-direction: column;
@@ -93,23 +184,30 @@
 
 .sidebar-section-title {
     color: var(--text-secondary);
+
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 1.3px;
+
     padding: 0 12px;
     margin-bottom: 8px;
 }
+
+/* LINKS */
 
 .sidebar-link {
     display: flex;
     align-items: center;
     gap: 12px;
 
+    min-height: 44px;
     padding: 12px;
+
     border-radius: 9px;
 
-    color: var(--sidebar-text);
+    color: var(--text-color);
     text-decoration: none;
+
     font-size: 0.9rem;
     font-weight: 500;
 
@@ -131,17 +229,34 @@
     font-weight: 600;
 }
 
+/* LINKS RECOLHIDOS */
+
+.sidebar-collapsed .sidebar-link {
+    justify-content: center;
+    padding: 12px 5px;
+}
+
+.sidebar-collapsed .sidebar-link:hover {
+    transform: none;
+}
+
+/* ÍCONES */
+
 .sidebar-link-icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .sidebar-link-icon svg {
     font-size: 21px;
 }
 
-/* Rodapé */
+/* =========================================
+   RODAPÉ
+========================================= */
+
 .sidebar-footer {
     display: flex;
     flex-direction: column;
@@ -164,12 +279,39 @@
     font-size: 0.72rem;
 }
 
-/* Responsividade */
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
 @media (max-width: 768px) {
+
     .sidebar {
         width: 190px;
         min-width: 190px;
         padding: 15px 10px;
+    }
+
+    .sidebar.sidebar-collapsed {
+        width: 65px;
+        min-width: 65px;
+        padding: 15px 7px;
     }
 
     .sidebar-avatar {
@@ -177,8 +319,35 @@
         height: 65px !important;
     }
 
+    .sidebar-collapsed .sidebar-avatar {
+        width: 42px !important;
+        height: 42px !important;
+    }
+
     .sidebar-link {
         font-size: 0.82rem;
         padding: 10px;
+    }
+}
+
+@media (max-height: 600px) {
+
+    .sidebar {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .sidebar-profile {
+        gap: 6px;
+        padding-bottom: 10px;
+    }
+
+    .sidebar-avatar {
+        width: 55px !important;
+        height: 55px !important;
+    }
+
+    .sidebar-divider {
+        margin-bottom: 12px !important;
     }
 }

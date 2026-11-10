@@ -1,5 +1,6 @@
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
+
 import { UserContext } from "../../contexts/UserContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
@@ -13,7 +14,8 @@ import {
     Button,
     ButtonGroup,
     Divider,
-    Tooltip
+    Tooltip,
+    IconButton
 } from "@mui/material";
 
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
@@ -22,6 +24,8 @@ import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import MenuOpenRoundedIcon from "@mui/icons-material/MenuOpenRounded";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
 const Sidebar = () => {
 
@@ -31,13 +35,15 @@ const Sidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const [collapsed, setCollapsed] = useState(false);
+
     const logout = () => {
         clearUser();
         navigate("/");
     };
 
-    const editar = (id) => {
-        navigate(`/usuarioperfil/${id}`);
+    const editar = () => {
+        navigate(`/usuarioperfil/${currentUser.id}`);
     };
 
     const menuItems = [
@@ -66,78 +72,146 @@ const Sidebar = () => {
     if (!currentUser) return null;
 
     return (
-        <aside className="sidebar">
+        <aside className={`sidebar ${collapsed ? "sidebar-collapsed" : ""}`}>
 
-            {/* Perfil */}
+            {/* CABEÇALHO DA SIDEBAR */}
+            <div className="sidebar-header">
+
+                {!collapsed && (
+                    <span className="sidebar-header-title">
+                        TuffValley
+                    </span>
+                )}
+
+                <Tooltip title={collapsed ? "Expandir menu" : "Recolher menu"}>
+                    <IconButton
+                        onClick={() => setCollapsed(!collapsed)}
+                        className="sidebar-toggle"
+                        aria-label={collapsed ? "Expandir menu" : "Recolher menu"}
+                    >
+                        {collapsed
+                            ? <MenuRoundedIcon />
+                            : <MenuOpenRoundedIcon />
+                        }
+                    </IconButton>
+                </Tooltip>
+
+            </div>
+
+            {/* PERFIL */}
             <div className="sidebar-profile">
 
-                <Avatar
-                    src={currentUser.foto || perfil}
-                    alt={currentUser.nome}
-                    className="sidebar-avatar"
-                />
+                <Tooltip title={collapsed ? currentUser.nome : ""}>
+                    <Avatar
+                        src={currentUser.foto || perfil}
+                        alt={currentUser.nome}
+                        className="sidebar-avatar"
+                    />
+                </Tooltip>
 
-                <div className="sidebar-user-info">
-                    <span className="sidebar-user-name">
-                        {currentUser.nome}
-                    </span>
+                {!collapsed && (
+                    <>
+                        <div className="sidebar-user-info">
 
-                    <span className="sidebar-user-role">
-                        {currentUser.nivelAcesso || "USER"}
-                    </span>
-                </div>
+                            <span className="sidebar-user-name">
+                                {currentUser.nome}
+                            </span>
 
-                <ButtonGroup
-                    variant="outlined"
-                    size="small"
-                    className="sidebar-profile-actions"
-                >
-                    <Tooltip title="Sair da conta">
-                        <Button onClick={logout}>
-                            <LogoutRoundedIcon fontSize="small" />
-                        </Button>
-                    </Tooltip>
+                            <span className="sidebar-user-role">
+                                {currentUser.nivelAcesso || "USER"}
+                            </span>
 
-                    <Tooltip title="Editar perfil">
-                        <Button onClick={() => editar(currentUser.id)}>
-                            <AccountCircleRoundedIcon fontSize="small" />
-                        </Button>
-                    </Tooltip>
-                </ButtonGroup>
+                        </div>
+
+                        <ButtonGroup
+                            variant="outlined"
+                            size="small"
+                            className="sidebar-profile-actions"
+                        >
+                            <Tooltip title="Sair da conta">
+                                <Button onClick={logout}>
+                                    <LogoutRoundedIcon fontSize="small" />
+                                </Button>
+                            </Tooltip>
+
+                            <Tooltip title="Editar perfil">
+                                <Button onClick={editar}>
+                                    <AccountCircleRoundedIcon fontSize="small" />
+                                </Button>
+                            </Tooltip>
+                        </ButtonGroup>
+                    </>
+                )}
+
+                {collapsed && (
+                    <div className="sidebar-collapsed-actions">
+
+                        <Tooltip title="Editar perfil">
+                            <IconButton onClick={editar}>
+                                <AccountCircleRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title="Sair da conta">
+                            <IconButton onClick={logout}>
+                                <LogoutRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                    </div>
+                )}
 
             </div>
 
             <Divider className="sidebar-divider" />
 
-            {/* Navegação */}
+            {/* NAVEGAÇÃO */}
             <nav className="sidebar-navigation">
 
-                <span className="sidebar-section-title">
-                    MENU PRINCIPAL
-                </span>
+                {!collapsed && (
+                    <span className="sidebar-section-title">
+                        MENU PRINCIPAL
+                    </span>
+                )}
 
-                {menuItems.map((item) => (
-                    <Link
-                        key={item.path}
-                        to={item.path}
-                        className={`sidebar-link ${
-                            location.pathname === item.path ? "active" : ""
-                        }`}
-                    >
-                        <span className="sidebar-link-icon">
-                            {item.icon}
-                        </span>
+                {menuItems.map((item) => {
 
-                        <span>{item.label}</span>
-                    </Link>
-                ))}
+                    const isActive = location.pathname === item.path;
+
+                    return (
+                        <Tooltip
+                            key={item.path}
+                            title={collapsed ? item.label : ""}
+                            placement="right"
+                            arrow
+                        >
+                            <Link
+                                to={item.path}
+                                className={`sidebar-link ${
+                                    isActive ? "active" : ""
+                                }`}
+                            >
+                                <span className="sidebar-link-icon">
+                                    {item.icon}
+                                </span>
+
+                                {!collapsed && (
+                                    <span>{item.label}</span>
+                                )}
+                            </Link>
+                        </Tooltip>
+                    );
+                })}
 
             </nav>
 
-            <div className="sidebar-footer">
-                <span>TuffValley</span>
-                <small>Conectando experiências.</small>
-            </div>
+            {/* RODAPÉ */}
+            {!collapsed && (
+                <div className="sidebar-footer">
+                    <span>TuffValley</span>
+                    <small>Conectando experiências.</small>
+                </div>
+            )}
 
         </aside>
     );
