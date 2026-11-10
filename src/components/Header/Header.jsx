@@ -1,42 +1,56 @@
-import React, { useContext } from 'react';
+
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import Button from '@mui/material/Button';
-import HomeIcon from '@mui/icons-material/Home';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import { ThemeContext } from '../../contexts/ThemeContext'; // Ajuste o caminho conforme seu projeto
 
-const Header = ({ goto, title, logo }) => {
-  const navigate = useNavigate();
-  const { theme } = useContext(ThemeContext); // Pega o tema do contexto
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-  const vaipara = () => {
-    navigate(goto);
-  };
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
-  const buttonColor = theme === 'Claro' ? 'primary' : 'error';
-  const homeBgColor = theme === 'Claro' ? 'primary.main' : 'error.main';
+import "./Header.css";
 
-  return (
-    <div className="
-        d-flex justify-content-between align-content-center 
-        p-3 border-bottom shadow rounded caixota">
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-        <Button 
-          onClick={vaipara} 
-          variant="contained" 
-          color={buttonColor} 
-          className="fw-medium shadow"
-        >
-          Voltar
-        </Button>
-        <span className="fw-bold h2">{title}</span>
-        <Avatar sx={{ bgcolor: homeBgColor }}>
-          <HomeIcon />
-        </Avatar>
-      </Box>
-    </div>
-  );
+const Header = ({ goto = "/", title = "Página", logo }) => {
+    const navigate = useNavigate();
+
+    const vaipara = () => {
+        navigate(goto);
+    };
+
+    return (
+        <header className="tuff-header">
+            <Box className="tuff-header-content">
+
+                <Button
+                    onClick={vaipara}
+                    variant="contained"
+                    startIcon={<ArrowBackRoundedIcon />}
+                    className="tuff-header-back"
+                    aria-label="Voltar para a página anterior"
+                >
+                    Voltar
+                </Button>
+
+                <Typography
+                    component="h1"
+                    className="tuff-header-title"
+                >
+                    {title}
+                </Typography>
+
+                <Avatar
+                    src={logo || undefined}
+                    className="tuff-header-avatar"
+                    variant="rounded"
+                >
+                    <HomeRoundedIcon />
+                </Avatar>
+
+            </Box>
+        </header>
+    );
 };
 
 export default Header;
