@@ -25,7 +25,8 @@ const NewUser = () => {
         nome: "",
         email: "",
         senha: "",
-        nivelAcesso: "USER"
+        nivelAcesso: "USER",
+        statusUsuario: "ATIVO"
     });
 
     const [message, setMessage] = useState("");
@@ -58,7 +59,8 @@ const NewUser = () => {
         try {
             const response = await UsuarioService.create({
                 ...formData,
-                nivelAcesso: "USER"
+                nivelAcesso: "USER",
+                statusUsuario: "ATIVO"
             });
 
             setMessage(
@@ -71,7 +73,8 @@ const NewUser = () => {
                 nome: "",
                 email: "",
                 senha: "",
-                nivelAcesso: "USER"
+                nivelAcesso: "USER",
+                statusUsuario: "ATIVO"
             });
 
         } catch (error) {
