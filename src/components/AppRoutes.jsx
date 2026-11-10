@@ -30,7 +30,7 @@ import AddPrato from "../templates/Cardapio/AddPratos"
 import AddProduto from "../templates/Cardapio/AddProdutos"
 import AlterarPrato from "../templates/Cardapio/AlterarPrato"
 import PratoLista from "../templates/Cardapio/Pratos"
-
+import NewUser from "../templates/Login/NewUser"
 
 const AppRoutes = () => {
   return (
@@ -42,7 +42,7 @@ const AppRoutes = () => {
 
           <Route path="/login" element={<Login />} />
           <Route path="/newpass/:id" element={<LoginNewPass />}></Route>
-
+          <Route path="/newuser" element={<NewUser />} />
           <Route path="/forgotpass" element={<ForgotPass />} />
 
           <Route path="/mensagem" element={<RotaProtegida><Mensagem /></RotaProtegida>} />
