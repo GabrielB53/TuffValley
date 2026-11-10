@@ -105,11 +105,6 @@
     width: 46px;
     height: 46px;
 
-    border: 2px solid var(--primary);
-    border-radius: 12px;
-
-    background-color: var(--surface-secondary);
-    color: var(--primary);
 
     font-size: 1.5rem;
 }
