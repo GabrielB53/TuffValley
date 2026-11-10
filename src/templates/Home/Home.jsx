@@ -1,36 +1,56 @@
-import Header from "../../components/Header/Header"
-import Sidebar from '../../components/Menu/Sidebar'
-import logo from '../../assets/images/home.png'
-import Caarousel from '../../components/Carousel/Nsei'
-import ContentHome from "../../components/Secoes/ContentHome"
-import './Home.css'
-import '../../components/Carousel/Style.css'
+
+import Header from "../../components/Header/Header";
+import Sidebar from "../../components/Menu/Sidebar";
+import logo from "../../assets/images/home.png";
+
+import CustomCarousel from "../../components/Carousel/Carousel";
+import ContentHome from "../../components/Secoes/ContentHome";
+
+import "./Home.css";
 
 const Home = () => {
-    const OPTIONS = {}
-    const SLIDE_COUNT = 5
-    const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
     return (
-        <div className="d-flex opa">
-           <Sidebar />
-           <div className="p-3 w-100">
-                <Header 
-                    goto={'/'}
-                    title={'Inicial'}
+        <div className="home-layout">
+
+            <Sidebar />
+
+            <div className="home-content">
+
+                <Header
+                    goto="/"
+                    title="Inicial"
                     logo={logo}
-                    />
-                    <div className="caixota mt-3">
-                    <h2 className="text-center fw-bold m-4">Bem-vindo!</h2>
-                <section className='uepa'>
-                  <Caarousel slides={SLIDES} options={OPTIONS} />
-                </section>
-                 <main className="container"> 
-                  <ContentHome />
-                 </main>
+                />
+
+                <div className="home-dashboard">
+
+                    <section className="home-welcome">
+                        <div className="home-welcome-heading">
+                            <span className="home-eyebrow">
+                                TUFFVALLEY
+                            </span>
+
+                            <h2>Bem-vindo!</h2>
+
+                            <p>
+                                Explore o sistema e acompanhe as
+                                informações disponíveis.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section className="home-carousel-section">
+                        <CustomCarousel />
+                    </section>
+
+                    <main className="home-main">
+                        <ContentHome />
+                    </main>
+
+                </div>
             </div>
         </div>
-      </div>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;
