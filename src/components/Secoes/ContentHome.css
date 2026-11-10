@@ -1,0 +1,239 @@
+
+/* ========================================
+   CONTENT HOME — TUFFVALLEY
+======================================== */
+
+.content-home {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    color: var(--text-color);
+}
+
+/* ========================================
+   INTRODUÇÃO
+======================================== */
+
+.content-home-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.content-home-eyebrow {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+}
+
+.content-home-intro h2 {
+    margin: 0;
+
+    color: var(--text-color);
+
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.7px;
+}
+
+.content-home-highlight {
+    max-width: 800px;
+    margin: 0;
+
+    color: var(--primary);
+
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+/* ========================================
+   TEXTOS INSTITUCIONAIS
+======================================== */
+
+.content-home-text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.content-home-text h3,
+.content-home-benefits > h3 {
+    margin: 0;
+
+    color: var(--text-color);
+
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.content-home-text p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.96rem;
+    line-height: 1.9;
+    text-align: justify;
+}
+
+/* ========================================
+   BENEFÍCIOS
+======================================== */
+
+.content-home-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.content-home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.content-home-card {
+    min-width: 0;
+    padding: 22px;
+
+    background-color: var(--surface-secondary);
+
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.content-home-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow);
+}
+
+.content-home-icon {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background-color: var(--surface);
+    color: var(--primary);
+}
+
+.content-home-icon svg {
+    font-size: 1.7rem;
+}
+
+.content-home-card h4 {
+    margin: 0 0 8px;
+
+    color: var(--text-color);
+
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.content-home-card p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
+
+/* ========================================
+   CONCLUSÃO
+======================================== */
+
+.content-home-conclusion {
+    padding: 26px;
+
+    background-color: var(--surface-secondary);
+
+    border-left: 4px solid var(--primary);
+    border-radius: 12px;
+}
+
+.content-home-conclusion h3 {
+    margin: 0 0 14px;
+
+    color: var(--primary);
+
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.content-home-conclusion p {
+    margin: 0 0 12px;
+
+    color: var(--text-secondary);
+
+    font-size: 0.94rem;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.content-home-conclusion p:last-child {
+    margin-bottom: 0;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 768px) {
+    .content-home {
+        gap: 25px;
+    }
+
+    .content-home-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .content-home-card {
+        padding: 18px;
+    }
+
+    .content-home-conclusion {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-home-text p,
+    .content-home-conclusion p {
+        font-size: 0.88rem;
+        line-height: 1.75;
+    }
+
+    .content-home-highlight {
+        font-size: 0.95rem;
+    }
+
+    .content-home-intro h2 {
+        font-size: 1.45rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .content-home-card {
+        transition: none;
+    }
+
+    .content-home-card:hover {
+        transform: none;
+    }
+}
