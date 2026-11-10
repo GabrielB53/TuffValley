@@ -42,8 +42,8 @@ const Header = ({ goto = "/", title = "Página", logo }) => {
 
                 <Avatar
                     src={Logo}
-                    alt="Logo TuffValley"
-                    className="tuff-logo"
+                    className="tuff-header-avatar"
+                    variant="rounded"
                 >
                     <HomeRoundedIcon />
                 </Avatar>
