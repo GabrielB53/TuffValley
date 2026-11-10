@@ -1,17 +1,37 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
+import {
+    Alert,
+    Box,
+    Button,
+    CircularProgress,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    TextField,
+    Typography
+} from "@mui/material";
+
+import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
+import BlockRoundedIcon from "@mui/icons-material/BlockRounded";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import LockResetRoundedIcon from "@mui/icons-material/LockResetRounded";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Menu/Sidebar";
 import logo from "../../assets/images/home.png";
 import UsuarioService from "../../services/UsuarioService";
-import { Alert, Button, TextField, Select, MenuItem, InputLabel, FormControl, Grid, Paper, Typography, Box, ButtonGroup } from '@mui/material';
-import CheckIcon from '@mui/icons-material/Check';
-import { ThemeContext } from "../../contexts/ThemeContext";
+
+import "./Usuario.css";
 
 const UsuarioEditar = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { theme } = useContext(ThemeContext);
 
     const [usuario, setUsuario] = useState({
         id: null,
@@ -22,252 +42,392 @@ const UsuarioEditar = () => {
         statusUsuario: ""
     });
 
-    const [alerta, setAlerta] = useState({ show: false, message: '', type: '' });
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
+    const [actionLoading, setActionLoading] = useState("");
+    const [alerta, setAlerta] = useState({
+        show: false,
+        message: "",
+        type: "info"
+    });
 
     useEffect(() => {
-        UsuarioService.findById(id)
-            .then((response) => {
-                setUsuario(response.data);
-            })
-            .catch(() => {
-                setAlerta({ show: true, message: 'Erro ao buscar usuário.', type: 'error' });
-            });
+        let ativo = true;
+
+        const buscarUsuario = async () => {
+            setLoading(true);
+
+            try {
+                const response = await UsuarioService.findById(id);
+
+                if (ativo) {
+                    setUsuario({
+                        id: response.data?.id ?? null,
+                        nome: response.data?.nome ?? "",
+                        email: response.data?.email ?? "",
+                        nivelAcesso: response.data?.nivelAcesso ?? "",
+                        dataCadastro: response.data?.dataCadastro ?? "",
+                        statusUsuario: response.data?.statusUsuario ?? ""
+                    });
+                }
+            } catch (error) {
+                if (ativo) {
+                    setAlerta({
+                        show: true,
+                        message: "Não foi possível carregar os dados deste usuário.",
+                        type: "error"
+                    });
+                }
+            } finally {
+                if (ativo) setLoading(false);
+            }
+        };
+
+        buscarUsuario();
+
+        return () => {
+            ativo = false;
+        };
     }, [id]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUsuario(prev => ({ ...prev, [name]: value }));
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+
+        setUsuario((anterior) => ({
+            ...anterior,
+            [name]: value
+        }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        UsuarioService.update(id, usuario)
-            .then(() => {
-                setAlerta({ show: true, message: 'Usuário atualizado com sucesso!', type: 'success' });
-                setTimeout(() => navigate('/usuarioslista'), 1000);
-            })
-            .catch(() => {
-                setAlerta({ show: true, message: 'Erro ao atualizar usuário.', type: 'error' });
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (!usuario.nome.trim() || !usuario.email.trim() || !usuario.nivelAcesso) {
+            setAlerta({
+                show: true,
+                message: "Preencha nome, e-mail e nível de acesso.",
+                type: "warning"
             });
-    };
+            return;
+        }
 
-    const inativar = () => {
-        UsuarioService.inativar(id)
-            .then(() => {
-                setAlerta({ show: true, message: 'Usuário inativado com sucesso!', type: 'success' });
-                setTimeout(() => navigate('/usuarioslista'), 1000);
-            })
-            .catch(() => {
-                setAlerta({ show: true, message: 'Erro ao inativar usuário.', type: 'error' });
+        setSaving(true);
+        setAlerta({ show: false, message: "", type: "info" });
+
+        try {
+            await UsuarioService.update(id, {
+                ...usuario,
+                nome: usuario.nome.trim(),
+                email: usuario.email.trim()
             });
-    };
 
-    const reativar = () => {
-        UsuarioService.reativar(id)
-            .then(() => {
-                setAlerta({ show: true, message: 'Usuário reativado com sucesso!', type: 'success' });
-                setTimeout(() => navigate('/usuarioslista'), 2000);
-            })
-            .catch(() => {
-                setAlerta({ show: true, message: 'Erro ao reativar usuário.', type: 'error' });
+            setAlerta({
+                show: true,
+                message: "Usuário atualizado com sucesso!",
+                type: "success"
             });
-    };
 
-    const resetarSenha = () => {
-        UsuarioService.resetarSenha(id)
-            .then(() => {
-                setAlerta({ show: true, message: 'Senha resetada com sucesso!', type: 'success' });
-                setTimeout(() => navigate('/usuarioslista'), 2000);
-            })
-            .catch(() => {
-                setAlerta({ show: true, message: 'Erro ao resetar Senha.', type: 'error' });
+            window.setTimeout(() => navigate("/usuarioslista"), 1200);
+        } catch (error) {
+            setAlerta({
+                show: true,
+                message: "Erro ao atualizar usuário. Verifique os dados e tente novamente.",
+                type: "error"
             });
+        } finally {
+            setSaving(false);
+        }
     };
 
-    const textColor = theme === 'Claro' ? '' : 'white';
-    const background = theme === 'Claro' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.733)';
-    const paperBackground = theme === 'Claro' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.0)'
+    const executarAcao = async (acao, mensagemSucesso, mensagemErro) => {
+        setActionLoading(acao);
+        setAlerta({ show: false, message: "", type: "info" });
+
+        try {
+            if (acao === "inativar") await UsuarioService.inativar(id);
+            if (acao === "reativar") await UsuarioService.reativar(id);
+            if (acao === "senha") await UsuarioService.resetarSenha(id);
+
+            setAlerta({
+                show: true,
+                message: mensagemSucesso,
+                type: "success"
+            });
+
+            window.setTimeout(() => navigate("/usuarioslista"), 1200);
+        } catch (error) {
+            setAlerta({
+                show: true,
+                message: mensagemErro,
+                type: "error"
+            });
+        } finally {
+            setActionLoading("");
+        }
+    };
+
+    const formatarData = (data) => {
+        if (!data) return "—";
+
+        const dataConvertida = new Date(data);
+
+        if (Number.isNaN(dataConvertida.getTime())) return data;
+
+        return dataConvertida.toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        });
+    };
+
+    const ocupado = loading || saving || Boolean(actionLoading);
 
     return (
-        <div className="d-flex">
+        <div className="usuario-editar-layout">
             <Sidebar />
-            <div className="p-3 w-100">
+
+            <main className="usuario-editar-main">
                 <Header
-                    goto={'/usuario'}
-                    title={'Editar Usuário'}
+                    goto="/usuario"
+                    title="Editar usuário"
                     logo={logo}
                 />
 
-                <section className="m-2 p-2">
+                <section className="usuario-editar-container">
+                    <div className="usuario-editar-heading">
+                        <div>
+                            <span className="usuario-editar-eyebrow">
+                                GERENCIAMENTO
+                            </span>
+                            <Typography component="h1" className="usuario-editar-title">
+                                Editar usuário
+                            </Typography>
+                            <Typography className="usuario-editar-subtitle">
+                                Consulte e atualize as informações da conta.
+                            </Typography>
+                        </div>
+
+                        <Button
+                            className="usuario-editar-back"
+                            variant="outlined"
+                            startIcon={<ArrowBackRoundedIcon />}
+                            onClick={() => navigate("/usuarioslista")}
+                        >
+                            Voltar
+                        </Button>
+                    </div>
+
                     {alerta.show && (
                         <Alert
-                            icon={alerta.type === 'success' ? <CheckIcon fontSize="inherit" /> : null}
+                            className="usuario-editar-alert"
                             severity={alerta.type}
-                            sx={{
-                                position: 'absolute',
-                                bottom: 16,
-                                right: 16,
-                                zIndex: 1000,
-                            }}
-                            onClose={() => setAlerta({ show: false, message: '', type: '' })}
+                            onClose={() =>
+                                setAlerta({ show: false, message: "", type: "info" })
+                            }
                         >
                             {alerta.message}
                         </Alert>
                     )}
 
-                    <Paper sx={{ padding: 4, backgroundColor: paperBackground }}>
-                        <Box component="form" onSubmit={handleSubmit}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={2}>
-                                    <TextField
-                                        label="ID"
-                                        value={usuario.id || ''}
-                                        fullWidth
-                                        InputProps={{ readOnly: true, style: { color: textColor } }}
-                                        InputLabelProps={{ style: { color: textColor } }}
-                                        sx={{
-                                            backgroundColor: background,
-                                            borderRadius: 1,
-                                            '& .MuiOutlinedInput-root': {
-                                                '& fieldset': { borderColor: textColor },
-                                                '&:hover fieldset': { borderColor: textColor },
-                                                '&.Mui-focused fieldset': { borderColor: textColor },
-                                            }
-                                        }}
-                                    />
-                                </Grid>
+                    <Paper className="usuario-editar-card" elevation={0}>
+                        {loading ? (
+                            <div className="usuario-editar-loading">
+                                <CircularProgress />
+                                <Typography>Carregando dados do usuário...</Typography>
+                            </div>
+                        ) : usuario.id ? (
+                            <Box component="form" onSubmit={handleSubmit}>
+                                <div className="usuario-editar-card-heading">
+                                    <div>
+                                        <Typography component="h2">
+                                            Informações da conta
+                                        </Typography>
+                                        <Typography>
+                                            Os campos de identificação são somente para consulta.
+                                        </Typography>
+                                    </div>
 
-                                <Grid item xs={12} sm={5}>
-                                    <TextField
-                                        label="Nome"
-                                        name="nome"
-                                        value={usuario.nome}
-                                        onChange={handleChange}
-                                        fullWidth
-                                        InputProps={{ style: { color: textColor } }}
-                                        InputLabelProps={{ style: { color: textColor } }}
-                                        sx={{
-                                            backgroundColor: background,
-                                            borderRadius: 1,
-                                            '& .MuiOutlinedInput-root': {
-                                                '& fieldset': { borderColor: textColor },
-                                                '&:hover fieldset': { borderColor: textColor },
-                                                '&.Mui-focused fieldset': { borderColor: textColor },
-                                            }
-                                        }}
-                                    />
-                                </Grid>
+                                    <span className="usuario-editar-id">
+                                        ID #{usuario.id}
+                                    </span>
+                                </div>
 
-                                <Grid item xs={12} sm={5}>
-                                    <TextField
-                                        label="Email"
-                                        name="email"
-                                        type="email"
-                                        value={usuario.email}
-                                        onChange={handleChange}
-                                        fullWidth
-                                        InputProps={{ style: { color: textColor } }}
-                                        InputLabelProps={{ style: { color: textColor } }}
-                                        sx={{
-                                            backgroundColor: background,
-                                            borderRadius: 1,
-                                            '& .MuiOutlinedInput-root': {
-                                                '& fieldset': { borderColor: textColor },
-                                                '&:hover fieldset': { borderColor: textColor },
-                                                '&.Mui-focused fieldset': { borderColor: textColor },
-                                            }
-                                        }}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12} sm={4}>
-                                    <TextField
-                                        label="Data de Cadastro"
-                                        value={usuario.dataCadastro || ''}
-                                        fullWidth
-                                        InputProps={{ readOnly: true, style: { color: textColor } }}
-                                        InputLabelProps={{ style: { color: textColor } }}
-                                        sx={{
-                                            backgroundColor: background,
-                                            borderRadius: 1,
-                                            '& .MuiOutlinedInput-root': {
-                                                '& fieldset': { borderColor: textColor },
-                                                '&:hover fieldset': { borderColor: textColor },
-                                                '&.Mui-focused fieldset': { borderColor: textColor },
-                                            }
-                                        }}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12} sm={4}>
-                                    <TextField
-                                        label="Status"
-                                        value={usuario.statusUsuario || ''}
-                                        fullWidth
-                                        InputProps={{ readOnly: true, style: { color: textColor } }}
-                                        InputLabelProps={{ style: { color: textColor } }}
-                                        sx={{
-                                            backgroundColor: background,
-                                            borderRadius: 1,
-                                            '& .MuiOutlinedInput-root': {
-                                                '& fieldset': { borderColor: textColor },
-                                                '&:hover fieldset': { borderColor: textColor },
-                                                '&.Mui-focused fieldset': { borderColor: textColor },
-                                            }
-                                        }}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12} sm={4}>
-                                    <FormControl fullWidth>
-                                        <InputLabel
-                                            id="nivelAcesso-label"
-                                            sx={{ color: textColor }}
-                                        >
-                                            Acesso
-                                        </InputLabel>
-                                        <Select
-                                            labelId="nivelAcesso-label"
-                                            name="nivelAcesso"
-                                            value={usuario.nivelAcesso}
+                                <Grid container spacing={2.5}>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            label="Nome"
+                                            name="nome"
+                                            value={usuario.nome}
                                             onChange={handleChange}
-                                            label="Acesso"
-                                            sx={{
-                                                backgroundColor: background,
-                                                borderRadius: 1,
-                                                color: textColor, // cor do texto selecionado
-                                                '& .MuiOutlinedInput-notchedOutline': {
-                                                    borderColor: textColor,
-                                                },
-                                                '&:hover .MuiOutlinedInput-notchedOutline': {
-                                                    borderColor: textColor,
-                                                },
-                                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                                    borderColor: textColor,
-                                                },
-                                            }}
-                                        >
-                                            <MenuItem value="USER">USER</MenuItem>
-                                            <MenuItem value="ADMIN">ADMIN</MenuItem>
-                                        </Select>
-                                    </FormControl>
+                                            fullWidth
+                                            required
+                                            className="usuario-editar-field"
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            label="E-mail"
+                                            name="email"
+                                            type="email"
+                                            value={usuario.email}
+                                            onChange={handleChange}
+                                            fullWidth
+                                            required
+                                            className="usuario-editar-field"
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={4}>
+                                        <TextField
+                                            label="ID do usuário"
+                                            value={usuario.id}
+                                            fullWidth
+                                            InputProps={{ readOnly: true }}
+                                            className="usuario-editar-field usuario-editar-readonly"
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={4}>
+                                        <TextField
+                                            label="Data de cadastro"
+                                            value={formatarData(usuario.dataCadastro)}
+                                            fullWidth
+                                            InputProps={{ readOnly: true }}
+                                            className="usuario-editar-field usuario-editar-readonly"
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={4}>
+                                        <TextField
+                                            label="Status"
+                                            value={usuario.statusUsuario || "—"}
+                                            fullWidth
+                                            InputProps={{ readOnly: true }}
+                                            className="usuario-editar-field usuario-editar-readonly"
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={6}>
+                                        <FormControl fullWidth className="usuario-editar-field">
+                                            <InputLabel id="nivel-acesso-label">
+                                                Nível de acesso
+                                            </InputLabel>
+                                            <Select
+                                                labelId="nivel-acesso-label"
+                                                name="nivelAcesso"
+                                                value={usuario.nivelAcesso}
+                                                onChange={handleChange}
+                                                label="Nível de acesso"
+                                                required
+                                            >
+                                                <MenuItem value="USER">Usuário padrão</MenuItem>
+                                                <MenuItem value="ADMIN">Administrador</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <div className="usuario-editar-actions">
+                                            <Button
+                                                type="submit"
+                                                variant="contained"
+                                                startIcon={
+                                                    saving
+                                                        ? <CircularProgress size={17} color="inherit" />
+                                                        : <SaveRoundedIcon />
+                                                }
+                                                disabled={ocupado}
+                                                className="usuario-editar-save"
+                                            >
+                                                {saving ? "Salvando..." : "Salvar alterações"}
+                                            </Button>
+                                        </div>
+                                    </Grid>
                                 </Grid>
 
-                                <Grid item xs={12} display="flex" justifyContent="space-between">
-                                    <Button type="submit" variant="contained" color="primary">
-                                        Gravar Alterações
+                                <div className="usuario-editar-divider" />
+
+                                <div className="usuario-editar-card-heading usuario-editar-security-heading">
+                                    <div>
+                                        <Typography component="h2">
+                                            Ações da conta
+                                        </Typography>
+                                        <Typography>
+                                            Essas ações alteram o acesso do usuário ao sistema.
+                                        </Typography>
+                                    </div>
+                                </div>
+
+                                <div className="usuario-editar-account-actions">
+                                    <Button
+                                        variant="outlined"
+                                        color="success"
+                                        startIcon={<CheckCircleRoundedIcon />}
+                                        disabled={ocupado}
+                                        onClick={() =>
+                                            executarAcao(
+                                                "reativar",
+                                                "Usuário reativado com sucesso!",
+                                                "Erro ao reativar usuário."
+                                            )
+                                        }
+                                    >
+                                        {actionLoading === "reativar" ? "Reativando..." : "Reativar"}
                                     </Button>
-                                    <ButtonGroup variant="contained" color="secondary" aria-label="Basic button group">
-                                        <Button onClick={reativar}>Reativar</Button>
-                                        <Button onClick={resetarSenha}>Resetar senha</Button>
-                                        <Button onClick={inativar}>Inativar</Button>
-                                    </ButtonGroup>
-                                </Grid>
-                            </Grid>
-                        </Box>
+
+                                    <Button
+                                        variant="outlined"
+                                        color="warning"
+                                        startIcon={<LockResetRoundedIcon />}
+                                        disabled={ocupado}
+                                        onClick={() =>
+                                            executarAcao(
+                                                "senha",
+                                                "Solicitação de redefinição de senha concluída!",
+                                                "Erro ao resetar a senha."
+                                            )
+                                        }
+                                    >
+                                        {actionLoading === "senha" ? "Resetando..." : "Resetar senha"}
+                                    </Button>
+
+                                    <Button
+                                        variant="outlined"
+                                        color="error"
+                                        startIcon={<BlockRoundedIcon />}
+                                        disabled={ocupado}
+                                        onClick={() =>
+                                            executarAcao(
+                                                "inativar",
+                                                "Usuário inativado com sucesso!",
+                                                "Erro ao inativar usuário."
+                                            )
+                                        }
+                                    >
+                                        {actionLoading === "inativar" ? "Inativando..." : "Inativar"}
+                                    </Button>
+                                </div>
+                            </Box>
+                        ) : (
+                            <div className="usuario-editar-empty">
+                                <Typography component="h2">
+                                    Usuário não encontrado
+                                </Typography>
+                                <Typography>
+                                    Não foi possível localizar uma conta com esse identificador.
+                                </Typography>
+                                <Button
+                                    variant="contained"
+                                    onClick={() => navigate("/usuarioslista")}
+                                >
+                                    Voltar para a lista
+                                </Button>
+                            </div>
+                        )}
                     </Paper>
                 </section>
-            </div>
+            </main>
         </div>
     );
 };
