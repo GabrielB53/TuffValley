@@ -39,12 +39,13 @@ const getCurrentUser = () => {
 };
 
 const create = data => {
-    const formData = new FormData();
-    formData.append('nome', data.nome);
-    formData.append('email', data.email);
-    formData.append('nivelAcesso', data.nivelAcesso);
-
-    return http.mainInstance.post(API_URL + "create", formData);
+    return http.mainInstance.post(API_URL + "create", {
+        nome: data.nome,
+        email: data.email,
+        senha: data.senha,
+        nivelAcesso: data.nivelAcesso,
+        statusUsuario: data.statusUsuario
+    });
 };
 
 const update = (id, data) => {
