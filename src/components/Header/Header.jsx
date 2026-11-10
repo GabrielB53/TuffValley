@@ -1,7 +1,7 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import Logo from '../../assets/images/Logo.png';
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -41,9 +41,9 @@ const Header = ({ goto = "/", title = "Página", logo }) => {
                 </Typography>
 
                 <Avatar
-                    src={logo || undefined}
-                    className="tuff-header-avatar"
-                    variant="rounded"
+                    src={Logo}
+                    alt="Logo TuffValley"
+                    className="tuff-logo"
                 >
                     <HomeRoundedIcon />
                 </Avatar>

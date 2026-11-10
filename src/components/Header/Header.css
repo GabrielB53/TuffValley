@@ -2,6 +2,12 @@
 /* ========================================
    HEADER — TUFFVALLEY
 ======================================== */
+.tuff-logo {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    border-radius: 12px;
+}
 
 .tuff-header {
     width: 100%;
