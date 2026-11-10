@@ -288,15 +288,9 @@ const UsuariosLista = () => {
                                     <span>Total cadastrado</span>
 
                                     <strong>
-                                        <Badge
-                                            badgeContent={usuarios.length}
-                                            color="primary"
-                                            max={999}
-                                        >
                                             <span className="usuarios-lista-counter-number">
                                                 {usuarios.length}
                                             </span>
-                                        </Badge>
                                     </strong>
                                 </div>
                             </div>

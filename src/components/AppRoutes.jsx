@@ -31,13 +31,14 @@ import AddProduto from "../templates/Cardapio/AddProdutos"
 import AlterarPrato from "../templates/Cardapio/AlterarPrato"
 import PratoLista from "../templates/Cardapio/Pratos"
 import NewUser from "../templates/Login/NewUser"
-
+import Planos from "../templates/App/Planos"
 const AppRoutes = () => {
   return (
     <ThemeProvider>
       <div>
         <Routes>
           <Route path="/" element={<App />} />
+          <Route path="/planos" element={<Planos />} />
           <Route path="/home" element={<RotaProtegida><Home /></RotaProtegida>} />
 
           <Route path="/login" element={<Login />} />

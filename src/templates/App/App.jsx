@@ -21,7 +21,7 @@ function App() {
     const navigate = useNavigate();
 
     const login = () => {
-        navigate('/login');
+        navigate('/newuser');
     };
 
     return (

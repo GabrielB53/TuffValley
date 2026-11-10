@@ -59,7 +59,7 @@ const Sidebar = () => {
         },
         {
             label: "Usuário",
-            path: "/usuario",
+            path: "/usuarioslista",
             icon: <PeopleAltRoundedIcon />
         },
         {
