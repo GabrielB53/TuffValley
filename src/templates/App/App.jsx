@@ -19,230 +19,441 @@ import {
 } from '@mui/material';
 
 import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
+import PersonAddAlt1RoundedIcon from '@mui/icons-material/PersonAddAlt1Rounded';
 import SpaRoundedIcon from '@mui/icons-material/SpaRounded';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+import NaturePeopleRoundedIcon from '@mui/icons-material/NaturePeopleRounded';
+import SelfImprovementRoundedIcon from '@mui/icons-material/SelfImprovementRounded';
+import YardRoundedIcon from '@mui/icons-material/YardRounded';
+import ForestRoundedIcon from '@mui/icons-material/ForestRounded';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+
+
+const planos = [
+    {
+        nome: 'Broto',
+        descricao: 'O primeiro passo para descobrir novas experiências.',
+        preco: 'R$ 89,90',
+        icon: <SpaRoundedIcon />
+    },
+    {
+        nome: 'Cultivo',
+        descricao: 'Mais possibilidades para sua jornada florescer.',
+        preco: 'R$ 179,90',
+        icon: <YardRoundedIcon />,
+        destaque: true
+    },
+    {
+        nome: 'Colheita',
+        descricao: 'Uma experiência completa de possibilidades.',
+        preco: 'R$ 329,90',
+        icon: <ForestRoundedIcon />
+    }
+];
+
 
 function App() {
     const navigate = useNavigate();
     const { currentUser } = useUser();
 
-    const usuarioLogado = !!currentUser;
+    const usuarioLogado = Boolean(currentUser);
 
-    const irParaLogin = () => {
-        navigate('/login');
-    };
-
-    const irParaPlanos = () => {
-        navigate('/planos');
-    };
+    // Navegação
+    const irParaLogin = () => navigate('/login');
+    const irParaCadastro = () => navigate('/newuser');
+    const irParaPlanos = () => navigate('/planos');
 
     return (
-        <Box className="opa" sx={{ minHeight: '100vh' }}>
+        <Box className="app-home" sx={{ minHeight: '100vh' }}>
 
             {/* NAVEGAÇÃO */}
-            <Box component="nav">
+            <Box component="nav" aria-label="Navegação principal">
                 <Navbar />
             </Box>
 
-            {/* CONTEÚDO PRINCIPAL */}
             <main>
 
-                {/* APRESENTAÇÃO */}
-                <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 7 } }}>
+                {/* HERO */}
+                <Box
+                    component="section"
+                    className="home-hero"
+                    aria-labelledby="home-hero-title"
+                >
+                    <Container maxWidth="lg">
 
-                    <Box sx={{ mb: 4 }}>
-                        <Typography
-                            variant="overline"
-                            color="primary.main"
-                            fontWeight={800}
-                            letterSpacing={2}
+                        <Box className="home-hero-content">
+
+                            {/* CONTEÚDO PRINCIPAL */}
+                            <Box className="home-hero-text">
+
+                                <span className="home-eyebrow">
+                                    <SpaRoundedIcon />
+                                    TUFFVALLEY · CULTIVE NOVAS EXPERIÊNCIAS
+                                </span>
+
+                                <Typography
+                                    id="home-hero-title"
+                                    variant="h1"
+                                    component="h1"
+                                    className="home-hero-title"
+                                >
+                                    Desconecte-se um pouco.
+                                    <span>Reconecte-se com a vida.</span>
+                                </Typography>
+
+                                <Typography
+                                    variant="body1"
+                                    className="home-hero-description"
+                                >
+                                    Encontre um espaço para desacelerar,
+                                    explorar sua criatividade, fortalecer
+                                    conexões e descobrir o prazer de viver
+                                    momentos longe das telas.
+                                </Typography>
+
+                                {/* AÇÕES PARA VISITANTES */}
+                                {!usuarioLogado && (
+                                    <Box className="home-visitor-actions">
+
+                                        <Stack
+                                            direction={{ xs: 'column', sm: 'row' }}
+                                            spacing={2}
+                                            className="home-hero-actions"
+                                            flexWrap="wrap"
+                                        >
+                                            <Button
+                                                onClick={irParaLogin}
+                                                variant="contained"
+                                                startIcon={<LoginRoundedIcon />}
+                                                className="home-primary-button"
+                                            >
+                                                Entrar na minha conta
+                                            </Button>
+
+                                            <Button
+                                                onClick={irParaCadastro}
+                                                variant="outlined"
+                                                startIcon={<PersonAddAlt1RoundedIcon />}
+                                                className="home-secondary-button"
+                                            >
+                                                Criar minha conta
+                                            </Button>
+                                        </Stack>
+
+                                        <Button
+                                            onClick={irParaPlanos}
+                                            variant="text"
+                                            endIcon={<ArrowForwardRoundedIcon />}
+                                            className="home-plans-link"
+                                        >
+                                            Conhecer os planos
+                                        </Button>
+
+                                    </Box>
+                                )}
+
+                                {/* EXPERIÊNCIA PARA USUÁRIOS LOGADOS */}
+                                {usuarioLogado && (
+                                    <Box className="home-logged-content">
+
+                                        <Box className="home-welcome">
+                                            <SpaRoundedIcon />
+
+                                            <Typography variant="body1">
+                                                Que bom ter você de volta,
+                                                <strong>
+                                                    {' '}{currentUser?.nome || 'cultivador'}!
+                                                </strong>
+                                            </Typography>
+                                        </Box>
+
+                                        <Button
+                                            onClick={irParaPlanos}
+                                            variant="contained"
+                                            endIcon={<ArrowForwardRoundedIcon />}
+                                            className="home-primary-button home-logged-button"
+                                        >
+                                            Explorar os planos
+                                        </Button>
+
+                                    </Box>
+                                )}
+
+                                <div className="home-hero-note">
+                                    <CheckCircleRoundedIcon />
+
+                                    <span>
+                                        Novas experiências começam com pequenos passos.
+                                    </span>
+                                </div>
+
+                            </Box>
+
+                            {/* ELEMENTO VISUAL */}
+                            <Box
+                                className="home-hero-visual"
+                                aria-hidden="true"
+                            >
+                                <div className="home-visual-circle">
+
+                                    <div className="home-visual-inner">
+                                        <SpaRoundedIcon />
+                                        <span>Floresça no seu ritmo</span>
+                                    </div>
+
+                                </div>
+
+                                <div className="home-floating-card home-floating-top">
+                                    <NaturePeopleRoundedIcon />
+                                    <span>Conexões reais</span>
+                                </div>
+
+                                <div className="home-floating-card home-floating-bottom">
+                                    <SelfImprovementRoundedIcon />
+                                    <span>Mais bem-estar</span>
+                                </div>
+
+                                <span className="home-decoration decoration-one">
+                                    ✿
+                                </span>
+
+                                <span className="home-decoration decoration-two">
+                                    ✦
+                                </span>
+
+                                <span className="home-decoration decoration-three">
+                                    ❋
+                                </span>
+
+                            </Box>
+
+                        </Box>
+                    </Container>
+                </Box>
+
+
+                {/* APRESENTAÇÃO INSTITUCIONAL */}
+                <Box
+                    component="section"
+                    className="home-section"
+                    aria-label="Conheça a TuffValley"
+                >
+                    <Container maxWidth="lg">
+                        <SectionContent />
+                    </Container>
+                </Box>
+
+
+                {/* EXPERIÊNCIAS */}
+                <Box
+                    component="section"
+                    id="experiencias"
+                    className="home-carousel-section"
+                    aria-labelledby="home-carousel-title"
+                >
+                    <Container maxWidth="lg">
+
+                        <div className="home-section-heading">
+
+                            <span className="home-eyebrow">
+                                <SpaRoundedIcon />
+                                UM CONVITE PARA DESCOBRIR
+                            </span>
+
+                            <Typography
+                                id="home-carousel-title"
+                                variant="h2"
+                                component="h2"
+                            >
+                                Cada espaço, uma nova experiência.
+                            </Typography>
+
+                            <Typography variant="body1">
+                                Conheça os ambientes da TuffValley e descubra
+                                possibilidades para sair da rotina, explorar
+                                sua criatividade e aproveitar o presente.
+                            </Typography>
+
+                        </div>
+
+                        <Paper
+                            elevation={0}
+                            className="home-carousel-paper"
                         >
-                            BEM-VINDO AO TUFFVALLEY
-                        </Typography>
+                            <CustomCarousel />
+                        </Paper>
+
+                    </Container>
+                </Box>
+
+
+                {/* PLANOS */}
+                <Box
+                    component="section"
+                    id="planos"
+                    className="home-plans-section"
+                    aria-labelledby="home-plans-title"
+                >
+                    <Container maxWidth="lg">
+
+                        <div className="home-section-heading">
+
+                            <span className="home-eyebrow">
+                                <SpaRoundedIcon />
+                                CRESÇA COM A TUFFVALLEY
+                            </span>
+
+                            <Typography
+                                id="home-plans-title"
+                                variant="h2"
+                                component="h2"
+                            >
+                                Escolha como florescer.
+                            </Typography>
+
+                            <Typography variant="body1">
+                                Cada jornada começa de um jeito. Conheça
+                                nossas opções e encontre o plano que
+                                acompanha sua vontade de descobrir.
+                            </Typography>
+
+                        </div>
+
+                        <Box className="home-plans-grid">
+
+                            {planos.map((plano) => (
+                                <Paper
+                                    key={plano.nome}
+                                    elevation={0}
+                                    className={`home-plan-card ${
+                                        plano.destaque ? 'home-plan-featured' : ''
+                                    }`}
+                                >
+
+                                    {plano.destaque && (
+                                        <span className="home-plan-badge">
+                                            Em destaque
+                                        </span>
+                                    )}
+
+                                    <div className="home-plan-icon">
+                                        {plano.icon}
+                                    </div>
+
+                                    <Typography
+                                        variant="h3"
+                                        component="h3"
+                                    >
+                                        {plano.nome}
+                                    </Typography>
+
+                                    <Typography variant="body2">
+                                        {plano.descricao}
+                                    </Typography>
+
+                                    <div className="home-plan-price">
+                                        <strong>{plano.preco}</strong>
+                                        <span>/ mês</span>
+                                    </div>
+
+                                    <Button
+                                        onClick={irParaPlanos}
+                                        variant={plano.destaque ? 'contained' : 'outlined'}
+                                        endIcon={<ArrowForwardRoundedIcon />}
+                                        className="home-plan-button"
+                                    >
+                                        Ver detalhes
+                                    </Button>
+
+                                </Paper>
+                            ))}
+
+                        </Box>
+
+                        <div className="home-plans-footer">
+                            <Button
+                                onClick={irParaPlanos}
+                                variant="text"
+                                endIcon={<ArrowForwardRoundedIcon />}
+                            >
+                                Conheça todos os benefícios dos planos
+                            </Button>
+                        </div>
+
+                    </Container>
+                </Box>
+
+
+                {/* CHAMADA FINAL */}
+                <Container
+                    maxWidth="lg"
+                    className="home-final-container"
+                >
+                    <Paper
+                        elevation={0}
+                        className="home-final-cta"
+                    >
+
+                        <div
+                            className="home-cta-decoration"
+                            aria-hidden="true"
+                        >
+                            ✿
+                        </div>
+
+                        <span className="home-eyebrow">
+                            SUA PRÓXIMA EXPERIÊNCIA COMEÇA AQUI
+                        </span>
 
                         <Typography
                             variant="h2"
-                            component="h1"
-                            fontWeight={800}
-                            color="text.primary"
-                            sx={{
-                                fontSize: {
-                                    xs: '2.2rem',
-                                    md: '3.5rem'
-                                },
-                                mt: 1,
-                                mb: 2
-                            }}
-                        >
-                            Desconecte-se um pouco.
-                            <br />
-
-                            <Box
-                                component="span"
-                                sx={{ color: 'primary.main' }}
-                            >
-                                Reconecte-se com a vida.
-                            </Box>
-                        </Typography>
-
-                        <Typography
-                            variant="h6"
-                            color="text.secondary"
-                            fontWeight={400}
-                            sx={{
-                                maxWidth: 720,
-                                lineHeight: 1.7
-                            }}
-                        >
-                            Descubra um ambiente onde o tempo desacelera,
-                            as experiências ganham espaço e as conexões
-                            acontecem além das telas.
-                        </Typography>
-
-                        {/* BOTÃO DE LOGIN */}
-                        {!usuarioLogado && (
-                            <Button
-                                onClick={irParaLogin}
-                                variant="contained"
-                                color="primary"
-                                startIcon={<LoginRoundedIcon />}
-                                sx={{
-                                    mt: 3,
-                                    px: 3,
-                                    py: 1.3,
-                                    borderRadius: 2,
-                                    fontWeight: 700
-                                }}
-                            >
-                                Entrar na minha conta
-                            </Button>
-                        )}
-
-                        {/* MENSAGEM PARA USUÁRIO LOGADO */}
-                        {usuarioLogado && (
-                            <Typography
-                                variant="body1"
-                                color="primary.main"
-                                fontWeight={700}
-                                sx={{ mt: 3 }}
-                            >
-                                <SpaRoundedIcon
-                                    sx={{
-                                        verticalAlign: 'middle',
-                                        mr: 1
-                                    }}
-                                />
-                                Bem-vindo de volta, {currentUser.nome}!
-                            </Typography>
-                        )}
-                    </Box>
-
-                    {/* CARROSSEL */}
-                    <Paper
-                        elevation={0}
-                        sx={{
-                            p: { xs: 1, md: 2 },
-                            borderRadius: 4,
-                            bgcolor: 'background.paper',
-                            border: 1,
-                            borderColor: 'divider',
-                            overflow: 'hidden'
-                        }}
-                    >
-                        <CustomCarousel />
-                    </Paper>
-
-                </Container>
-
-                {/* APRESENTAÇÃO DO PROJETO */}
-                <SectionContent />
-
-                {/* CHAMADA PARA AÇÃO */}
-                <Container maxWidth="lg" sx={{ pb: { xs: 5, md: 8 } }}>
-                    <Paper
-                        elevation={0}
-                        sx={{
-                            p: { xs: 3, md: 5 },
-                            borderRadius: 4,
-                            bgcolor: 'primary.main',
-                            color: 'primary.contrastText',
-                            textAlign: 'center'
-                        }}
-                    >
-                        <Typography
-                            variant="h4"
                             component="h2"
-                            fontWeight={800}
-                            sx={{
-                                fontSize: {
-                                    xs: '1.6rem',
-                                    md: '2.3rem'
-                                },
-                                mb: 2
-                            }}
                         >
-                            Que tal viver uma nova experiência?
+                            O próximo momento especial pode começar aqui.
                         </Typography>
 
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                maxWidth: 650,
-                                mx: 'auto',
-                                mb: 3,
-                                opacity: 0.9,
-                                lineHeight: 1.8
-                            }}
-                        >
-                            Conheça nossas propostas e descubra como
-                            pequenos momentos longe das telas podem
-                            transformar sua rotina.
+                        <Typography variant="body1">
+                            Permita-se sair da rotina, descobrir novas
+                            experiências e aproveitar o presente.
                         </Typography>
 
                         <Button
                             onClick={irParaPlanos}
                             variant="contained"
-                            color="secondary"
-                            size="large"
-                            sx={{
-                                px: 4,
-                                py: 1.5,
-                                borderRadius: 2,
-                                fontWeight: 700
-                            }}
+                            endIcon={<ArrowForwardRoundedIcon />}
+                            className="home-cta-button"
                         >
-                            Conheça nossos planos
+                            Encontre seu plano
                         </Button>
+
                     </Paper>
                 </Container>
 
             </main>
 
+
             {/* RODAPÉ */}
             <Box
                 component="footer"
-                sx={{
-                    py: 3,
-                    px: 2,
-                    textAlign: 'center',
-                    borderTop: 1,
-                    borderColor: 'divider',
-                    bgcolor: 'background.paper'
-                }}
+                className="home-footer"
             >
-                <Typography
-                    variant="body2"
-                    color="text.secondary"
-                >
-                    © {new Date().getFullYear()} TuffValley.
-                    Todos os direitos reservados.
-                </Typography>
+                <Container maxWidth="lg">
 
-                <Typography
-                    variant="caption"
-                    color="text.secondary"
-                >
-                    Desconectar para reconectar.
-                </Typography>
+                    <div className="home-footer-brand">
+                        <SpaRoundedIcon />
+                        <strong>TUFFVALLEY</strong>
+                    </div>
+
+                    <Typography variant="body2">
+                        Desconectar para reconectar.
+                    </Typography>
+
+                    <Typography variant="caption">
+                        © {new Date().getFullYear()} TuffValley.
+                        Todos os direitos reservados.
+                    </Typography>
+
+                </Container>
             </Box>
 
         </Box>

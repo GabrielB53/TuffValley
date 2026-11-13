@@ -1,0 +1,734 @@
+
+/* =========================================
+   TUFFVALLEY - APRESENTAÇÃO INSTITUCIONAL
+   Identidade visual: Botanical / Organic
+========================================= */
+
+.section-content {
+    width: 100%;
+    padding: 45px 0 65px;
+    color: var(--text-color);
+}
+
+/* =========================================
+   ELEMENTOS GERAIS
+========================================= */
+
+.section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.section-eyebrow svg {
+    font-size: 18px;
+}
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.section-heading {
+    max-width: 780px;
+    margin: 0 auto 48px;
+    text-align: center;
+}
+
+.section-chip {
+    margin-bottom: 22px;
+    padding: 5px 12px;
+    border: 1px solid var(--primary) !important;
+    border-radius: 30px !important;
+    background: transparent !important;
+    color: var(--primary) !important;
+    font-weight: 800 !important;
+    letter-spacing: 1.5px;
+}
+
+.section-chip .MuiChip-icon {
+    color: var(--primary) !important;
+}
+
+.section-main-title {
+    margin-bottom: 18px !important;
+    color: var(--text-color);
+    font-size: clamp(2.3rem, 5vw, 4rem) !important;
+    font-weight: 850 !important;
+    line-height: 1.12 !important;
+    letter-spacing: -1.8px !important;
+}
+
+.section-main-title span {
+    display: block;
+    color: var(--primary);
+}
+
+.section-subtitle {
+    max-width: 620px;
+    margin: 0 auto !important;
+    color: var(--text-secondary);
+    font-size: 1.05rem !important;
+    line-height: 1.8 !important;
+}
+
+/* =========================================
+   DESTAQUE DA ESSÊNCIA
+========================================= */
+
+.section-highlight {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    overflow: hidden;
+    margin-bottom: 75px;
+    padding: 55px 60px !important;
+
+    border: 1px solid var(--border-color);
+    border-radius: 28px !important;
+
+    background:
+        radial-gradient(
+            circle at 95% 10%,
+            rgba(169, 183, 139, 0.13),
+            transparent 35%
+        ),
+        var(--surface-secondary) !important;
+
+    box-shadow: var(--card-shadow);
+}
+
+.section-highlight-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+}
+
+.section-highlight .section-eyebrow {
+    margin-bottom: 22px;
+}
+
+.section-highlight-title {
+    max-width: 760px;
+    margin-bottom: 20px !important;
+    color: var(--text-color);
+    font-size: clamp(1.7rem, 3vw, 2.6rem) !important;
+    font-weight: 850 !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.7px !important;
+}
+
+.section-highlight-description {
+    max-width: 650px;
+    color: var(--text-secondary);
+    font-size: 1rem !important;
+    line-height: 1.85 !important;
+}
+
+/* Elemento decorativo */
+
+.section-highlight-decoration {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 180px;
+    height: 180px;
+
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+
+    color: var(--primary);
+    background: rgba(169, 183, 139, 0.06);
+
+    transform: rotate(-8deg);
+    transition: transform 0.4s ease;
+}
+
+.section-highlight:hover .section-highlight-decoration {
+    transform: rotate(0deg) scale(1.04);
+}
+
+.section-highlight-decoration::before {
+    position: absolute;
+    inset: 12px;
+    border: 1px dashed var(--primary);
+    border-radius: 50%;
+    opacity: 0.55;
+    content: "";
+}
+
+.section-highlight-decoration svg {
+    margin-bottom: 8px;
+    font-size: 42px;
+}
+
+.section-highlight-decoration span {
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   CONTEÚDO PRINCIPAL
+========================================= */
+
+.section-content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    align-items: start;
+    gap: 65px;
+}
+
+/* =========================================
+   HISTÓRIA E PROPOSTA
+========================================= */
+
+.section-story {
+    min-width: 0;
+}
+
+.section-story > .section-eyebrow {
+    margin-bottom: 13px;
+}
+
+.section-story-title {
+    max-width: 550px;
+    margin-bottom: 35px !important;
+    color: var(--text-color);
+    font-size: clamp(1.8rem, 3vw, 2.5rem) !important;
+    font-weight: 850 !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.8px !important;
+}
+
+.section-story-blocks {
+    position: relative;
+}
+
+.section-story-item {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 17px;
+    align-items: start;
+}
+
+.section-story-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+
+    background: var(--surface-secondary);
+    color: var(--primary);
+
+    font-size: 0.75rem;
+    font-weight: 850;
+}
+
+.section-story-heading {
+    margin-bottom: 9px !important;
+    color: var(--text-color);
+    font-size: 1.08rem !important;
+    font-weight: 800 !important;
+}
+
+.section-story-text {
+    color: var(--text-secondary);
+    font-size: 0.94rem !important;
+    line-height: 1.85 !important;
+}
+
+/* =========================================
+   PILARES
+========================================= */
+
+.section-values {
+    min-width: 0;
+}
+
+.section-values-heading {
+    margin-bottom: 25px;
+}
+
+.section-values-heading .section-eyebrow {
+    margin-bottom: 12px;
+}
+
+.section-values-title {
+    margin-bottom: 10px !important;
+    color: var(--text-color);
+    font-size: 2rem !important;
+    font-weight: 850 !important;
+    letter-spacing: -0.7px;
+}
+
+.section-values-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem !important;
+    line-height: 1.7 !important;
+}
+
+.section-pillars {
+    width: 100%;
+}
+
+/* Cards dos pilares */
+
+.section-pillar-card {
+    position: relative;
+    overflow: hidden;
+
+    padding: 24px !important;
+
+    border: 1px solid var(--border-color);
+    border-radius: 19px !important;
+
+    background: var(--surface) !important;
+    color: var(--text-color);
+
+    box-shadow: var(--card-shadow);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.3s ease;
+}
+
+.section-pillar-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+
+    box-shadow:
+        0 14px 32px rgba(0, 0, 0, 0.10),
+        0 0 0 1px rgba(169, 183, 139, 0.08);
+}
+
+.section-pillar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.section-pillar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+
+    background: var(--surface-secondary);
+    color: var(--primary);
+}
+
+.section-pillar-icon svg {
+    font-size: 25px;
+}
+
+.section-pillar-number {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.section-pillar-title {
+    margin-bottom: 8px !important;
+    color: var(--text-color);
+    font-size: 1.08rem !important;
+    font-weight: 800 !important;
+}
+
+.section-pillar-description {
+    max-width: 370px;
+    color: var(--text-secondary);
+    font-size: 0.88rem !important;
+    line-height: 1.75 !important;
+}
+
+.section-pillar-arrow {
+    position: absolute;
+    right: 22px;
+    bottom: 20px;
+
+    color: var(--primary);
+    opacity: 0;
+
+    transform: translate(-4px, 4px);
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+.section-pillar-card:hover .section-pillar-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* =========================================
+   FRASE FINAL
+========================================= */
+
+.section-quote {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    overflow: hidden;
+
+    margin-top: 75px;
+    padding: 38px 45px !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px !important;
+
+    background:
+        radial-gradient(
+            circle at 95% 5%,
+            rgba(233, 162, 59, 0.13),
+            transparent 35%
+        ),
+        var(--primary) !important;
+
+    box-shadow: var(--card-shadow);
+}
+
+.section-quote-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 58px;
+    height: 58px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+
+    color: #F4F1E8;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.section-quote-icon svg {
+    font-size: 28px;
+}
+
+.section-quote-content {
+    position: relative;
+    z-index: 1;
+}
+
+.section-quote .section-eyebrow {
+    margin-bottom: 10px;
+    color: var(--peach);
+}
+
+.section-quote-title {
+    margin-bottom: 9px !important;
+    color: #FFFFFF;
+    font-size: clamp(1.5rem, 3vw, 2.1rem) !important;
+    font-weight: 850 !important;
+    line-height: 1.25 !important;
+}
+
+.section-quote-title span {
+    color: var(--peach);
+}
+
+.section-quote-description {
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.92rem !important;
+    line-height: 1.7 !important;
+}
+
+.section-quote-decoration {
+    position: absolute;
+    right: 30px;
+    bottom: -35px;
+
+    color: rgba(255, 255, 255, 0.08);
+    font-size: 170px !important;
+
+    transform: rotate(-20deg);
+    pointer-events: none;
+}
+
+/* =========================================
+   RESPONSIVIDADE - TABLETS
+========================================= */
+
+@media (max-width: 1000px) {
+    .section-content-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr);
+        gap: 35px;
+    }
+
+    .section-highlight {
+        padding: 40px !important;
+    }
+
+    .section-highlight-decoration {
+        width: 145px;
+        height: 145px;
+    }
+}
+
+/* =========================================
+   RESPONSIVIDADE - CELULARES
+========================================= */
+
+@media (max-width: 760px) {
+    .section-content {
+        padding: 35px 0 45px;
+    }
+
+    .section-heading {
+        margin-bottom: 35px;
+    }
+
+    .section-main-title {
+        letter-spacing: -1px !important;
+    }
+
+    .section-highlight {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+
+        margin-bottom: 55px;
+        padding: 30px 25px !important;
+
+        border-radius: 22px !important;
+    }
+
+    .section-highlight-decoration {
+        align-self: flex-end;
+        width: 125px;
+        height: 125px;
+    }
+
+    .section-highlight-decoration svg {
+        font-size: 30px;
+    }
+
+    .section-highlight-decoration span {
+        font-size: 0.68rem;
+    }
+
+    .section-content-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .section-story-title {
+        margin-bottom: 27px !important;
+    }
+
+    .section-quote {
+        align-items: flex-start;
+        gap: 17px;
+
+        margin-top: 55px;
+        padding: 28px 24px !important;
+    }
+
+    .section-quote-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .section-quote-icon svg {
+        font-size: 22px;
+    }
+
+    .section-quote-decoration {
+        right: -15px;
+        font-size: 120px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-main-title {
+        font-size: 2.15rem !important;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem !important;
+    }
+
+    .section-highlight {
+        padding: 25px 20px !important;
+    }
+
+    .section-highlight-title {
+        font-size: 1.55rem !important;
+    }
+
+    .section-story-item {
+        grid-template-columns: 34px minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .section-story-marker {
+        width: 32px;
+        height: 32px;
+        font-size: 0.68rem;
+    }
+
+    .section-story-text {
+        font-size: 0.9rem !important;
+    }
+
+    .section-pillar-card {
+        padding: 20px !important;
+    }
+
+    .section-quote {
+        flex-direction: column;
+    }
+
+    .section-quote-title {
+        font-size: 1.55rem !important;
+    }
+}
+/* =========================================
+   TEMA ESCURO
+========================================= */
+
+/* Destaque da essência */
+
+.dark-theme .section-highlight {
+    background:
+        radial-gradient(
+            circle at 95% 10%,
+            rgba(168, 181, 138, 0.08),
+            transparent 38%
+        ),
+        var(--surface-secondary) !important;
+
+    border-color: var(--border-color);
+}
+
+.dark-theme .section-highlight-decoration {
+    background: rgba(168, 181, 138, 0.05);
+}
+
+/* Cards dos pilares */
+
+.dark-theme .section-pillar-card {
+    background: var(--surface) !important;
+    border-color: var(--border-color);
+}
+
+.dark-theme .section-pillar-card:hover {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 14px 32px rgba(0, 0, 0, 0.22),
+        0 0 0 1px rgba(168, 181, 138, 0.10);
+}
+
+/* =========================================
+   CONVITE - MODO ESCURO
+========================================= */
+
+.dark-theme .section-quote {
+    background:
+        radial-gradient(
+            circle at 95% 5%,
+            rgba(233, 162, 59, 0.08),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #242B20 0%,
+            #303A29 100%
+        ) !important;
+
+    border: 1px solid #46513A;
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* Ícone */
+
+.dark-theme .section-quote-icon {
+    border-color: rgba(213, 217, 200, 0.25);
+    color: #D5D9C8;
+    background: rgba(213, 217, 200, 0.04);
+}
+
+/* Identificação */
+
+.dark-theme .section-quote .section-eyebrow {
+    color: #FED6A2;
+}
+
+/* Título */
+
+.dark-theme .section-quote-title {
+    color: #F2F0E6;
+}
+
+.dark-theme .section-quote-title span {
+    color: #E9A23B;
+}
+
+/* Descrição */
+
+.dark-theme .section-quote-description {
+    color: #C2C8B3;
+}
+
+/* Elemento decorativo */
+
+.dark-theme .section-quote-decoration {
+    color: rgba(168, 181, 138, 0.07);
+}
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
+
+.section-pillar-card:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* =========================================
+   MOVIMENTO REDUZIDO
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .section-content *,
+    .section-content *::before,
+    .section-content *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

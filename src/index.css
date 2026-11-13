@@ -20,10 +20,10 @@
 
 html {
     box-sizing: border-box;
+    min-height: 100%;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
     font-family: 'Inter', sans-serif;
 }
 
@@ -41,6 +41,17 @@ body {
         color 0.3s ease;
 }
 
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+img {
+    max-width: 100%;
+}
+
 
 /* ========================================
    3. IDENTIDADE VISUAL - TEMA CLARO
@@ -49,7 +60,7 @@ body {
 :root {
     color-scheme: light;
 
-    /* Paleta principal */
+    /* Paleta institucional */
     --olive: #50552C;
     --sage: #7A8660;
     --wine: #782117;
@@ -73,14 +84,19 @@ body {
     /* Bordas */
     --border-color: #D5D9C8;
 
-    /* Cores de interação */
+    /* Interações */
     --primary: #50552C;
     --primary-hover: #3D4220;
 
     --accent: #E79321;
     --danger: #782117;
 
-    /* Sidebar: acompanha as superfícies e textos do tema */
+    /* Estados */
+    --success: #4F7045;
+    --warning: #A96713;
+    --info: #496A75;
+
+    /* Sidebar */
     --sidebar-bg: var(--surface);
     --sidebar-text: var(--text-color);
     --sidebar-hover: var(--surface-secondary);
@@ -93,12 +109,15 @@ body {
 
     /* Sombras */
     --card-shadow: 0 4px 16px rgba(36, 39, 25, 0.08);
+    --card-shadow-hover: 0 8px 24px rgba(36, 39, 25, 0.12);
 
     /* Bootstrap */
     --bs-body-bg: var(--background);
     --bs-body-color: var(--text-color);
 
+    --bs-emphasis-color: var(--text-color);
     --bs-secondary-color: var(--text-secondary);
+    --bs-tertiary-color: #858A73;
     --bs-tertiary-bg: var(--surface-secondary);
 
     --bs-primary: var(--primary);
@@ -107,67 +126,113 @@ body {
     --bs-secondary: var(--sage);
     --bs-secondary-rgb: 122, 134, 96;
 
+    --bs-success: var(--success);
+    --bs-success-rgb: 79, 112, 69;
+
+    --bs-danger: var(--danger);
+    --bs-danger-rgb: 120, 33, 23;
+
+    --bs-warning: var(--warning);
+    --bs-warning-rgb: 169, 103, 19;
+
+    --bs-info: var(--info);
+    --bs-info-rgb: 73, 106, 117;
+
     --bs-border-color: var(--border-color);
 
     --bs-link-color: var(--primary);
     --bs-link-hover-color: var(--primary-hover);
 
     --bs-border-radius: 8px;
+    --bs-border-radius-lg: 12px;
+    --bs-border-radius-sm: 6px;
 }
 
 
 /* ========================================
-   4. TEMA ESCURO
+   4. IDENTIDADE VISUAL - TEMA ESCURO
 ======================================== */
 
 .dark-theme {
     color-scheme: dark;
 
+    /* Paleta institucional adaptada */
+    --olive: #777F4D;
+    --sage: #A8B58A;
+    --wine: #C0786C;
+    --gold: #E9A23B;
+    --peach: #EBC99C;
+
+    /* Cores auxiliares */
+    --cream: #F2F0E6;
+    --dark-green: #191D17;
+    --soft-green: #C2CDAF;
+
     /* Superfícies */
-    --background: #242719;
-    --surface: #343923;
-    --surface-secondary: #414832;
+    --background: #191D17;
+    --surface: #242B20;
+    --surface-secondary: #303A29;
 
     /* Textos */
-    --text-color: #F4F1E8;
-    --text-secondary: #D5D9C8;
+    --text-color: #F2F0E6;
+    --text-secondary: #C2C8B3;
 
     /* Bordas */
-    --border-color: #50552C;
+    --border-color: #46513A;
 
-    /* Cores de interação */
-    --primary: #7A8660;
-    --primary-hover: #929F75;
+    /* Interações */
+    --primary: #A8B58A;
+    --primary-hover: #BCC99D;
 
-    --accent: #E79321;
-    --danger: #C45B45;
+    --accent: #E9A23B;
+    --danger: #D97863;
 
-    /* Sidebar: acompanha as superfícies e textos do tema */
+    /* Estados */
+    --success: #9AB58B;
+    --warning: #E9B45C;
+    --info: #8CB8C4;
+
+    /* Sidebar */
     --sidebar-bg: var(--surface);
     --sidebar-text: var(--text-color);
     --sidebar-hover: var(--surface-secondary);
 
     /* Header */
-    --header-bg: #343923;
-    --header-text: #F4F1E8;
-    --header-icon-bg: #242719;
-    --header-icon-color: #7A8660;
+    --header-bg: #242B20;
+    --header-text: #F2F0E6;
+    --header-icon-bg: #303A29;
+    --header-icon-color: #A8B58A;
 
     /* Sombras */
-    --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+    --card-shadow-hover: 0 8px 26px rgba(0, 0, 0, 0.32);
 
     /* Bootstrap */
     --bs-body-bg: var(--background);
     --bs-body-color: var(--text-color);
 
+    --bs-emphasis-color: var(--text-color);
     --bs-secondary-color: var(--text-secondary);
+    --bs-tertiary-color: #9DA58F;
     --bs-tertiary-bg: var(--surface-secondary);
 
     --bs-primary: var(--primary);
-    --bs-primary-rgb: 122, 134, 96;
+    --bs-primary-rgb: 168, 181, 138;
 
-    --bs-secondary: var(--sage);
-    --bs-secondary-rgb: 122, 134, 96;
+    --bs-secondary: #929F75;
+    --bs-secondary-rgb: 146, 159, 117;
+
+    --bs-success: var(--success);
+    --bs-success-rgb: 154, 181, 139;
+
+    --bs-danger: var(--danger);
+    --bs-danger-rgb: 217, 120, 99;
+
+    --bs-warning: var(--warning);
+    --bs-warning-rgb: 233, 180, 92;
+
+    --bs-info: var(--info);
+    --bs-info-rgb: 140, 184, 196;
 
     --bs-border-color: var(--border-color);
 
@@ -202,7 +267,10 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 8px;
 
-    transition: all 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
 }
 
 
@@ -218,7 +286,7 @@ body {
    aqui, pois elas podem sobrescrever o menu recolhível.
 */
 
-/* Classes antigas mantidas para componentes que ainda as utilizem. */
+/* Classes antigas mantidas para compatibilidade. */
 
 .logo {
     width: 60px;
@@ -238,17 +306,23 @@ body {
     background-color: var(--primary);
     color: #FFFFFF;
 
-    border: none;
+    border: 1px solid transparent;
     border-radius: 8px;
 
     transition:
         background-color 0.2s ease,
-        color 0.2s ease;
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .CorNavButtonLog:hover {
     background-color: var(--primary-hover);
     color: #FFFFFF;
+}
+
+.CorNavButtonLog:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
 }
 
 
@@ -270,6 +344,10 @@ body {
         background-color 0.3s ease,
         border-color 0.3s ease,
         box-shadow 0.3s ease;
+}
+
+.caixota:hover {
+    box-shadow: var(--card-shadow-hover);
 }
 
 .caixota2 {
@@ -325,12 +403,30 @@ body {
 
     --bs-table-hover-bg: var(--surface-secondary);
     --bs-table-hover-color: var(--text-color);
+
+    --bs-table-active-bg: var(--surface-secondary);
+    --bs-table-active-color: var(--text-color);
 }
 
 .table > :not(caption) > * > * {
     background-color: var(--bs-table-bg);
     color: var(--bs-table-color);
     border-color: var(--bs-table-border-color);
+}
+
+.table thead th {
+    color: var(--text-color);
+    background-color: var(--surface-secondary);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.table tbody tr:hover > * {
+    --bs-table-bg: var(--bs-table-hover-bg);
+    --bs-table-color: var(--bs-table-hover-color);
+}
+
+.table caption {
+    color: var(--text-secondary);
 }
 
 
@@ -348,7 +444,8 @@ body {
     transition:
         background-color 0.3s ease,
         color 0.3s ease,
-        border-color 0.3s ease;
+        border-color 0.3s ease,
+        box-shadow 0.2s ease;
 }
 
 .form-control:focus,
@@ -356,20 +453,60 @@ body {
     background-color: var(--surface);
     color: var(--text-color);
 
-    border-color: var(--sage);
+    border-color: var(--primary);
 
     box-shadow: 0 0 0 0.2rem rgba(122, 134, 96, 0.2);
 }
 
-.form-control::placeholder {
+.dark-theme .form-control:focus,
+.dark-theme .form-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(168, 181, 138, 0.2);
+}
+
+.form-control::placeholder,
+.form-select::placeholder {
     color: var(--text-secondary);
     opacity: 0.8;
 }
 
-/* Opções de formulários também acompanham o tema */
 .form-select option {
     background-color: var(--surface);
     color: var(--text-color);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+    background-color: var(--surface-secondary);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+    opacity: 0.7;
+}
+
+.form-control:disabled::placeholder {
+    color: var(--text-secondary);
+}
+
+.form-check-input {
+    background-color: var(--surface);
+    border-color: var(--border-color);
+}
+
+.form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.form-check-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(122, 134, 96, 0.2);
+}
+
+.form-label {
+    color: var(--text-color);
+}
+
+.invalid-feedback {
+    color: var(--danger);
 }
 
 
@@ -412,7 +549,132 @@ body {
 
 
 /* ========================================
-   14. TRANSIÇÕES GERAIS
+   14. ACESSIBILIDADE E INTERAÇÕES
+======================================== */
+
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
+a {
+    color: var(--bs-link-color);
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--bs-link-hover-color);
+}
+
+::selection {
+    background-color: var(--primary);
+    color: #FFFFFF;
+}
+
+
+/* ========================================
+   15. MATERIAL UI - TEMA GLOBAL
+======================================== */
+
+/* Textos e campos */
+
+.MuiInputBase-root {
+    color: var(--text-color);
+}
+
+.MuiInputBase-input {
+    color: var(--text-color);
+}
+
+.MuiInputLabel-root {
+    color: var(--text-secondary);
+}
+
+.MuiFormHelperText-root {
+    color: var(--text-secondary);
+}
+
+/* Bordas dos campos */
+
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: var(--border-color);
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: var(--primary);
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: var(--primary);
+    border-width: 2px;
+}
+
+.MuiInputLabel-root.Mui-focused {
+    color: var(--primary);
+}
+
+/* Campos desabilitados */
+
+.MuiInputBase-root.Mui-disabled {
+    color: var(--text-secondary);
+}
+
+.MuiInputBase-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
+    border-color: var(--border-color);
+}
+
+/* Selects */
+
+.MuiMenu-paper,
+.MuiPopover-paper {
+    background-color: var(--surface);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.MuiMenuItem-root {
+    color: var(--text-color);
+}
+
+.MuiMenuItem-root:hover {
+    background-color: var(--surface-secondary);
+}
+
+/* Checkboxes */
+
+.MuiCheckbox-root,
+.MuiRadio-root {
+    color: var(--text-secondary);
+}
+
+.MuiCheckbox-root.Mui-checked,
+.MuiRadio-root.Mui-checked {
+    color: var(--primary);
+}
+
+/* Cards e papéis */
+
+.MuiPaper-root {
+    color: var(--text-color);
+}
+
+/* Transições */
+
+.MuiInputBase-root,
+.MuiInputBase-input,
+.MuiInputLabel-root,
+.MuiOutlinedInput-notchedOutline,
+.MuiPaper-root,
+.MuiMenuItem-root {
+    transition:
+        color 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* ========================================
+   16. TRANSIÇÕES GERAIS
 ======================================== */
 
 body,
@@ -432,38 +694,49 @@ body,
         border-color 0.3s ease;
 }
 
-/* =========================================
-   MATERIAL UI - INTEGRAÇÃO COM TEMA GLOBAL
-========================================= */
 
-.MuiInputBase-root {
-    color: var(--text-color);
+/* ========================================
+   17. MOVIMENTO REDUZIDO
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
-.MuiInputBase-input {
-    color: var(--text-color);
-    -webkit-text-fill-color: var(--text-color);
+
+/* ========================================
+   18. RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 768px) {
+    .caixota,
+    .caixota2 {
+        padding: 20px;
+    }
+
+    #ContainerGraph {
+        height: 350px;
+    }
+
+    .table-wrapper {
+        max-height: 60vh;
+    }
 }
 
-.MuiInputLabel-root {
-    color: var(--text-secondary);
-}
+@media (max-width: 480px) {
+    .caixota,
+    .caixota2 {
+        padding: 16px;
+    }
 
-.MuiOutlinedInput-notchedOutline {
-    border-color: var(--border-color);
-}
-
-.MuiFormHelperText-root {
-    color: var(--text-secondary);
-}
-
-/* Transição entre os temas */
-.MuiInputBase-root,
-.MuiInputBase-input,
-.MuiInputLabel-root,
-.MuiOutlinedInput-notchedOutline {
-    transition:
-        color 0.3s ease,
-        background-color 0.3s ease,
-        border-color 0.3s ease;
+    #ContainerGraph {
+        height: 280px;
+    }
 }

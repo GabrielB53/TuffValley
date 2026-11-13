@@ -1,41 +1,97 @@
+
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import ExampleCarouselImage from '../../assets/images/salao.jpeg';
-import ExampleCarouselImage2 from '../../assets/images/SalaArtes.jpeg';
-import ExampleCarouselImage3 from '../../assets/images/recepcao.jpeg';
-import './CarouselStyle.css'
+
+import SalaoImage from '../../assets/images/salao.jpeg';
+import SalaArtesImage from '../../assets/images/SalaArtes.jpeg';
+import RecepcaoImage from '../../assets/images/recepcao.jpeg';
+
+import './CarouselStyle.css';
+
+const slides = [
+    {
+        imagem: SalaoImage,
+        alt: 'Ambiente do salão da TuffValley',
+        categoria: 'NOSSOS AMBIENTES',
+        titulo: 'Um espaço para desacelerar.',
+        descricao:
+            'Encontre um ambiente acolhedor para aproveitar o tempo, descansar e viver novas experiências.'
+    },
+    {
+        imagem: SalaArtesImage,
+        alt: 'Ambiente dedicado às atividades artísticas',
+        categoria: 'CRIATIVIDADE E EXPRESSÃO',
+        titulo: 'Descubra novas possibilidades.',
+        descricao:
+            'Explore sua criatividade, experimente atividades diferentes e permita-se aprender algo novo.'
+    },
+    {
+        imagem: RecepcaoImage,
+        alt: 'Recepção e entrada da TuffValley',
+        categoria: 'SEJA BEM-VINDO',
+        titulo: 'Sua experiência começa aqui.',
+        descricao:
+            'Um ambiente pensado para receber você e proporcionar momentos longe da rotina digital.'
+    }
+];
 
 function CustomCarousel() {
-  const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(0);
 
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
-  };
+    return (
+        <section className="tuff-carousel" aria-label="Conheça os ambientes da TuffValley">
 
-  return (
-    <div className='width-100 height-100'>
-    <Carousel activeIndex={index} onSelect={handleSelect}>
-      <Carousel.Item>
-        <img src={ExampleCarouselImage} alt="Slide 1"  className='img'/>
-        <Carousel.Caption>
+            <Carousel
+                activeIndex={index}
+                onSelect={setIndex}
+                interval={5000}
+                pause="hover"
+                wrap
+                touch
+                fade
+                indicators
+                controls
+                className="tuff-carousel-inner"
+            >
+                {slides.map((slide, i) => (
+                    <Carousel.Item key={slide.titulo}>
+                        <div className="tuff-carousel-image-wrapper">
+                            <img
+                                src={slide.imagem}
+                                alt={slide.alt}
+                                className="tuff-carousel-image"
+                            />
 
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img src={ExampleCarouselImage2} alt="Slide 2" className='img' />
-        <Carousel.Caption>
+                            <div className="tuff-carousel-overlay" />
 
-        </Carousel.Caption>
-      </Carousel.Item>
-            <Carousel.Item>
-        <img src={ExampleCarouselImage3} alt="Slide 3" className='img' />
-        <Carousel.Caption>
+                            <Carousel.Caption className="tuff-carousel-caption">
+                                <span className="tuff-carousel-category">
+                                    {slide.categoria}
+                                </span>
 
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-    </div>
-  );
+                                <h3>{slide.titulo}</h3>
+
+                                <p>{slide.descricao}</p>
+                            </Carousel.Caption>
+                        </div>
+                    </Carousel.Item>
+                ))}
+            </Carousel>
+
+            <div className="tuff-carousel-footer">
+                <span className="tuff-carousel-counter">
+                    <strong>0{index + 1}</strong>
+                    <span className="tuff-carousel-counter-divider">/</span>
+                    0{slides.length}
+                </span>
+
+                <span className="tuff-carousel-footer-text">
+                    DESCUBRA A TUFFVALLEY
+                </span>
+            </div>
+
+        </section>
+    );
 }
 
 export default CustomCarousel;

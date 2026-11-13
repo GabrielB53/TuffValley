@@ -1,7 +1,319 @@
-.img {
-  width: 100%;
-  height: 500px;
-  object-fit: contain; 
-  object-position: center;
-  background-color: #000; 
+
+/* CARROSSEL PRINCIPAL */
+
+.tuff-carousel {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 22px;
+    background: var(--surface, #F4F1E8);
+    border: 1px solid var(--border-color, rgba(80, 85, 44, 0.15));
+}
+
+.tuff-carousel-inner {
+    width: 100%;
+}
+
+.tuff-carousel .carousel-inner {
+    overflow: hidden;
+    border-radius: 22px 22px 0 0;
+}
+
+.tuff-carousel .carousel-item {
+    position: relative;
+    height: 480px;
+    background: var(--surface-secondary, #D5D9C8);
+}
+
+/* IMAGENS */
+
+.tuff-carousel-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.tuff-carousel-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* SOBREPOSIÇÃO */
+
+.tuff-carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(25, 29, 19, 0.82) 0%,
+        rgba(25, 29, 19, 0.55) 42%,
+        rgba(25, 29, 19, 0.08) 100%
+    );
+}
+
+/* TEXTOS */
+
+.tuff-carousel .carousel-caption {
+    position: absolute;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+
+    width: min(650px, 75%);
+    padding: 0 0 75px 65px;
+
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.tuff-carousel-category {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 18px;
+    padding: 8px 13px;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+
+    color: #F4F1E8;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    background: rgba(36, 39, 25, 0.2);
+    backdrop-filter: blur(6px);
+}
+
+.tuff-carousel-caption h3 {
+    max-width: 580px;
+    margin: 0 0 15px;
+
+    color: #FFFFFF;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -1.2px;
+}
+
+.tuff-carousel-caption p {
+    max-width: 500px;
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+/* SETAS */
+
+.tuff-carousel .carousel-control-prev,
+.tuff-carousel .carousel-control-next {
+    z-index: 3;
+    width: 55px;
+    height: 55px;
+
+    top: 50%;
+    bottom: auto;
+
+    margin: 0 22px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+
+    background: rgba(36, 39, 25, 0.35);
+    backdrop-filter: blur(8px);
+
+    opacity: 0.85;
+    transform: translateY(-50%);
+    transition: all 0.25s ease;
+}
+
+.tuff-carousel .carousel-control-prev:hover,
+.tuff-carousel .carousel-control-next:hover {
+    background: var(--primary, #50552C);
+    opacity: 1;
+}
+
+.tuff-carousel .carousel-control-prev-icon,
+.tuff-carousel .carousel-control-next-icon {
+    width: 19px;
+    height: 19px;
+}
+
+/* INDICADORES */
+
+.tuff-carousel .carousel-indicators {
+    z-index: 4;
+    right: auto;
+    bottom: 25px;
+    left: 65px;
+
+    display: flex;
+    justify-content: flex-start;
+    gap: 7px;
+
+    width: auto;
+    margin: 0;
+}
+
+.tuff-carousel .carousel-indicators [data-bs-target] {
+    width: 27px;
+    height: 4px;
+    margin: 0;
+
+    border: 0;
+    border-radius: 10px;
+
+    background-color: rgba(255, 255, 255, 0.55);
+    opacity: 1;
+
+    transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.tuff-carousel .carousel-indicators .active {
+    width: 48px;
+    background-color: #FED6A2;
+}
+
+/* RODAPÉ DO CARROSSEL */
+
+.tuff-carousel-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 17px 25px;
+
+    background: var(--surface, #F4F1E8);
+}
+
+.tuff-carousel-counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: var(--text-secondary, #77796C);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.tuff-carousel-counter strong {
+    color: var(--primary, #50552C);
+    font-size: 1rem;
+}
+
+.tuff-carousel-counter-divider {
+    opacity: 0.5;
+}
+
+.tuff-carousel-footer-text {
+    color: var(--text-secondary, #77796C);
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+/* TRANSIÇÃO */
+
+.tuff-carousel .carousel-item {
+    transition: opacity 0.7s ease-in-out;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 768px) {
+    .tuff-carousel .carousel-item {
+        height: 410px;
+    }
+
+    .tuff-carousel .carousel-caption {
+        width: 85%;
+        padding: 0 0 75px 30px;
+    }
+
+    .tuff-carousel-caption h3 {
+        font-size: 2.1rem;
+    }
+
+    .tuff-carousel-caption p {
+        font-size: 0.9rem;
+        line-height: 1.65;
+    }
+
+    .tuff-carousel .carousel-indicators {
+        left: 30px;
+        bottom: 22px;
+    }
+
+    .tuff-carousel .carousel-control-prev,
+    .tuff-carousel .carousel-control-next {
+        width: 42px;
+        height: 42px;
+        margin: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tuff-carousel,
+    .tuff-carousel .carousel-inner {
+        border-radius: 17px;
+    }
+
+    .tuff-carousel .carousel-item {
+        height: 370px;
+    }
+
+    .tuff-carousel .carousel-caption {
+        width: 88%;
+        padding: 0 0 72px 23px;
+    }
+
+    .tuff-carousel-category {
+        margin-bottom: 13px;
+        padding: 6px 10px;
+        font-size: 0.6rem;
+        letter-spacing: 1.4px;
+    }
+
+    .tuff-carousel-caption h3 {
+        font-size: 1.75rem;
+        letter-spacing: -0.5px;
+    }
+
+    .tuff-carousel-caption p {
+        font-size: 0.82rem;
+    }
+
+    .tuff-carousel .carousel-indicators {
+        left: 23px;
+        bottom: 20px;
+    }
+
+    .tuff-carousel-footer {
+        padding: 14px 17px;
+    }
+
+    .tuff-carousel-footer-text {
+        font-size: 0.58rem;
+        letter-spacing: 1px;
+    }
+}
+
+/* TEMA ESCURO */
+
+.dark-theme .tuff-carousel {
+    background: var(--surface, #292C22);
+    border-color: var(--border-color, rgba(213, 217, 200, 0.15));
+}
+
+.dark-theme .tuff-carousel-footer {
+    background: var(--surface, #292C22);
+}
+
+.dark-theme .tuff-carousel-counter strong {
+    color: var(--primary, #AAB58F);
 }

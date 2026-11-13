@@ -1,23 +1,1147 @@
 
-.opa {
-    min-height: 100vh;
+/* =========================================
+   TUFFVALLEY - PÁGINA INICIAL
+========================================= */
+
+.app-home {
     width: 100%;
-    background-color: var(--background);
-    color: var(--text-color);
+    min-height: 100vh;
+    overflow-x: clip;
+    background: var(--background, #F4F1E8);
+    color: var(--text-color, #242719);
+}
+
+
+/* =========================================
+   ELEMENTOS GERAIS
+========================================= */
+
+.home-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary, #50552C);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.home-eyebrow svg {
+    font-size: 1.1rem;
+}
+
+.home-section {
+    padding: 0;
+}
+
+.home-section-heading {
+    max-width: 790px;
+    margin: 0 auto 42px;
+    text-align: center;
+}
+
+.home-section-heading .home-eyebrow {
+    justify-content: center;
+}
+
+.home-section-heading h2 {
+    max-width: 760px;
+    margin: 16px auto;
+    color: var(--text-color, #242719);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 850;
+    line-height: 1.15;
+    letter-spacing: -1px;
+}
+
+.home-section-heading p {
+    max-width: 680px;
+    margin: 0 auto;
+    color: var(--text-secondary, #77796D);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.home-hero {
+    position: relative;
+    isolation: isolate;
+    padding: 85px 0 100px;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(122, 134, 96, 0.16),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            var(--background, #F4F1E8),
+            var(--surface-secondary, #D5D9C8)
+        );
+}
+
+.home-hero-content {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 55px;
+}
+
+.home-hero-text {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.home-hero-title {
+    max-width: 700px;
+    margin: 22px 0 !important;
+    color: var(--text-color, #242719);
+    font-size: clamp(2.6rem, 5vw, 4.4rem) !important;
+    font-weight: 900 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -2px !important;
+}
+
+.home-hero-title span {
+    display: block;
+    color: var(--primary, #50552C);
+}
+
+.home-hero-description {
+    max-width: 560px;
+    color: var(--text-secondary, #77796D);
+    font-size: 1.12rem !important;
+    line-height: 1.85 !important;
+}
+
+
+/* =========================================
+   AÇÕES DO HERO
+========================================= */
+
+.home-visitor-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 30px;
+}
+
+.home-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.home-primary-button,
+.home-secondary-button {
+    min-height: 50px !important;
+    padding: 12px 24px !important;
+    border-radius: 12px !important;
+    font-weight: 750 !important;
+    text-transform: none !important;
+
     transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease !important;
 }
 
-/* Evita que o carrossel ultrapasse seu painel */
-.opa .carousel {
-    max-width: 100%;
+.home-primary-button {
+    background-color: var(--primary, #50552C) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 7px 18px rgba(80, 85, 44, 0.2) !important;
+}
+
+.home-primary-button:hover {
+    background-color: var(--primary-hover, #3D4220) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(80, 85, 44, 0.22) !important;
+}
+
+.home-secondary-button {
+    border: 1px solid var(--primary, #50552C) !important;
+    color: var(--primary, #50552C) !important;
+}
+
+.home-secondary-button:hover {
+    background: rgba(80, 85, 44, 0.08) !important;
+    transform: translateY(-2px);
+}
+
+.home-plans-link {
+    min-height: 38px !important;
+    padding: 5px 4px !important;
+    color: var(--primary, #50552C) !important;
+    font-weight: 750 !important;
+    text-transform: none !important;
+}
+
+.home-plans-link:hover {
+    background: transparent !important;
+    color: var(--primary-hover, #3D4220) !important;
+}
+
+.home-plans-link .MuiButton-endIcon {
+    transition: transform 0.2s ease;
+}
+
+.home-plans-link:hover .MuiButton-endIcon {
+    transform: translateX(4px);
+}
+
+
+/* =========================================
+   USUÁRIO LOGADO
+========================================= */
+
+.home-logged-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.home-welcome {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary, #50552C);
+}
+
+.home-welcome svg {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+}
+
+.home-welcome strong {
+    font-weight: 800;
+}
+
+.home-logged-button {
+    margin-top: 0 !important;
+}
+
+
+/* =========================================
+   NOTA DO HERO
+========================================= */
+
+.home-hero-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 35px;
+    color: var(--text-secondary, #77796D);
+    font-size: 0.85rem;
+}
+
+.home-hero-note svg {
+    flex-shrink: 0;
+    color: var(--sage, #7A8660);
+    font-size: 1.1rem;
+}
+
+
+/* =========================================
+   ELEMENTO VISUAL DO HERO
+========================================= */
+
+.home-hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+    isolation: isolate;
+}
+
+.home-visual-circle {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: min(350px, 75vw);
+    aspect-ratio: 1;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #AAB594,
+            #7A8660 55%,
+            #50552C 100%
+        );
+
+    box-shadow:
+        0 25px 60px rgba(36, 39, 25, 0.18),
+        inset 0 0 35px rgba(255, 255, 255, 0.12);
+
+    transition: transform 0.4s ease;
+}
+
+.home-hero-visual:hover .home-visual-circle {
+    transform: scale(1.025);
+}
+
+.home-visual-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 72%;
+    aspect-ratio: 1;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+
+    color: #FFFFFF;
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+}
+
+.home-visual-inner svg {
+    margin-bottom: 15px;
+    font-size: 5rem;
+}
+
+.home-visual-inner span {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   CARDS FLUTUANTES
+========================================= */
+
+.home-floating-card {
+    position: absolute;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 14px 18px;
+
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
+    border-radius: 15px;
+
+    background: var(--surface, #FFFFFF);
+    color: var(--text-color, #242719);
+
+    box-shadow: 0 12px 30px rgba(36, 39, 25, 0.12);
+
+    font-size: 0.9rem;
+    font-weight: 750;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.home-floating-card svg {
+    color: var(--primary, #50552C);
+    font-size: 1.5rem;
+}
+
+.home-floating-top {
+    top: 55px;
+    right: 0;
+}
+
+.home-floating-bottom {
+    bottom: 55px;
+    left: 0;
+}
+
+.home-floating-top:hover {
+    transform: translateY(-4px) rotate(-2deg);
+}
+
+.home-floating-bottom:hover {
+    transform: translateY(-4px) rotate(2deg);
+}
+
+
+/* =========================================
+   ELEMENTOS DECORATIVOS
+========================================= */
+
+.home-decoration {
+    position: absolute;
+    color: var(--accent, #E79321);
+    opacity: 0.8;
+    pointer-events: none;
+    user-select: none;
+}
+
+.decoration-one {
+    top: 15px;
+    left: 12%;
+    font-size: 2.5rem;
+}
+
+.decoration-two {
+    right: 12%;
+    bottom: 20px;
+    font-size: 2rem;
+}
+
+.decoration-three {
+    top: 45%;
+    left: 0;
+    font-size: 1.5rem;
+}
+
+
+/* =========================================
+   CARROSSEL
+========================================= */
+
+.home-carousel-section {
+    position: relative;
+    padding: 80px 0;
     overflow: hidden;
+    background: var(--surface-secondary, #D5D9C8);
 }
 
-/* Ajustes para telas menores */
-@media (max-width: 768px) {
-    .opa {
-        overflow-x: hidden;
+.home-carousel-section .home-section-heading {
+    margin-bottom: 38px;
+}
+
+.home-carousel-paper {
+    padding: 0 !important;
+    overflow: hidden;
+
+    border: none !important;
+    border-radius: 22px !important;
+
+    background: transparent !important;
+    box-shadow: 0 18px 45px rgba(36, 39, 25, 0.08) !important;
+}
+
+
+/* =========================================
+   PLANOS
+========================================= */
+
+.home-plans-section {
+    position: relative;
+    padding: 90px 0;
+    background: var(--background, #F4F1E8);
+}
+
+.home-plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+}
+
+.home-plan-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    min-height: 365px;
+    padding: 32px 27px !important;
+
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+    border-radius: 20px !important;
+
+    background: var(--surface, #FFFFFF) !important;
+    color: var(--text-color, #242719);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.home-plan-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 18px 35px rgba(36, 39, 25, 0.1);
+}
+
+.home-plan-featured {
+    border: 2px solid var(--primary, #50552C);
+    box-shadow: 0 12px 30px rgba(80, 85, 44, 0.12);
+    transform: translateY(-8px);
+}
+
+.home-plan-featured:hover {
+    transform: translateY(-13px);
+}
+
+.home-plan-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    padding: 6px 11px;
+
+    border-radius: 20px;
+    background: var(--primary, #50552C);
+    color: #FFFFFF;
+
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+.home-plan-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 55px;
+    height: 55px;
+    margin-bottom: 22px;
+
+    border-radius: 16px;
+    background: var(--surface-secondary, #D5D9C8);
+    color: var(--primary, #50552C);
+}
+
+.home-plan-icon svg {
+    font-size: 2rem;
+}
+
+.home-plan-card h3 {
+    margin-bottom: 10px;
+    color: var(--text-color, #242719);
+    font-size: 1.7rem;
+    font-weight: 850;
+}
+
+.home-plan-card p {
+    max-width: 290px;
+    min-height: 52px;
+    color: var(--text-secondary, #77796D);
+    line-height: 1.6;
+}
+
+.home-plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin: 25px 0;
+}
+
+.home-plan-price strong {
+    color: var(--primary, #50552C);
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+
+.home-plan-price span {
+    color: var(--text-secondary, #77796D);
+    font-size: 0.85rem;
+}
+
+.home-plan-button {
+    width: 100%;
+    min-height: 45px !important;
+    margin-top: auto !important;
+
+    border-radius: 10px !important;
+
+    font-weight: 750 !important;
+    text-transform: none !important;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease !important;
+}
+
+.home-plan-button:hover {
+    transform: translateY(-2px);
+}
+
+.home-plan-card:not(.home-plan-featured) .home-plan-button {
+    border-color: var(--primary, #50552C) !important;
+    color: var(--primary, #50552C) !important;
+}
+
+.home-plan-featured .home-plan-button {
+    background: var(--primary, #50552C) !important;
+    color: #FFFFFF !important;
+}
+
+.home-plans-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.home-plans-footer button {
+    color: var(--primary, #50552C);
+    font-weight: 750;
+    text-transform: none;
+}
+
+.home-plans-footer button:hover {
+    background: rgba(80, 85, 44, 0.07);
+}
+
+
+/* =========================================
+   CHAMADA FINAL
+========================================= */
+
+.home-final-container {
+    width: 100%;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.home-final-cta {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 330px;
+    padding: 65px 35px !important;
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 25px !important;
+
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(255, 255, 255, 0.13),
+            transparent 30%
+        ),
+        var(--primary, #50552C) !important;
+
+    color: #FFFFFF !important;
+    text-align: center;
+}
+
+.home-final-cta .home-eyebrow {
+    color: var(--peach, #FED6A2);
+}
+
+.home-final-cta h2 {
+    max-width: 700px;
+    margin: 18px 0;
+
+    color: #FFFFFF;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -1px;
+}
+
+.home-final-cta p {
+    max-width: 620px;
+    margin-bottom: 28px;
+
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.8;
+}
+
+.home-cta-button {
+    min-height: 48px !important;
+    padding: 12px 28px !important;
+
+    border-radius: 12px !important;
+
+    background: var(--peach, #FED6A2) !important;
+    color: #242719 !important;
+
+    font-weight: 800 !important;
+    text-transform: none !important;
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease !important;
+}
+
+.home-cta-button:hover {
+    background: #FFFFFF !important;
+    transform: translateY(-2px);
+}
+
+.home-cta-decoration {
+    position: absolute;
+    top: -35px;
+    right: 25px;
+
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 10rem;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.home-footer {
+    position: relative;
+    padding: 35px 0;
+
+    border-top: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
+
+    background: var(--surface, #FFFFFF);
+    color: var(--text-secondary, #77796D);
+
+    text-align: center;
+}
+
+.home-footer-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 8px;
+
+    color: var(--primary, #50552C);
+    letter-spacing: 2px;
+}
+
+.home-footer-brand svg {
+    font-size: 1.5rem;
+}
+
+.home-footer-brand strong {
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.home-footer p {
+    margin-bottom: 12px;
+}
+
+.home-footer .MuiTypography-caption {
+    color: var(--text-secondary, #77796D);
+}
+
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
+
+.home-primary-button:focus-visible,
+.home-secondary-button:focus-visible,
+.home-plans-link:focus-visible,
+.home-plan-button:focus-visible,
+.home-cta-button:focus-visible {
+    outline: 3px solid var(--accent, #E79321);
+    outline-offset: 4px;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE - TABLETS
+========================================= */
+
+@media (max-width: 900px) {
+
+    .home-hero {
+        padding: 65px 0 75px;
+    }
+
+    .home-hero-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .home-hero-text {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .home-hero-description {
+        margin: 0 auto;
+    }
+
+    .home-visitor-actions {
+        align-items: center;
+    }
+
+    .home-hero-actions {
+        justify-content: center;
+    }
+
+    .home-logged-content {
+        align-items: center;
+    }
+
+    .home-welcome {
+        justify-content: center;
+    }
+
+    .home-hero-note {
+        justify-content: center;
+    }
+
+    .home-hero-visual {
+        min-height: 370px;
+    }
+
+    .home-plans-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-plan-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .home-plan-card {
+        min-height: 350px;
+    }
+
+    .home-plan-featured,
+    .home-plan-featured:hover {
+        transform: none;
+    }
+
+    .home-plan-featured:hover {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* =========================================
+   RESPONSIVIDADE - CELULARES
+========================================= */
+
+@media (max-width: 600px) {
+
+    .home-hero {
+        padding: 50px 0 60px;
+    }
+
+    .home-hero-title {
+        font-size: 2.45rem !important;
+        line-height: 1.13 !important;
+        letter-spacing: -1.3px !important;
+    }
+
+    .home-hero-description {
+        font-size: 1rem !important;
+    }
+
+    .home-visitor-actions {
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .home-hero-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .home-hero-actions button {
+        width: 100%;
+    }
+
+    .home-plans-link {
+        align-self: center;
+    }
+
+    .home-logged-content {
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .home-logged-button {
+        width: 100%;
+    }
+
+    .home-welcome {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .home-hero-note {
+        justify-content: center;
+        text-align: left;
+    }
+
+    .home-hero-visual {
+        min-height: 310px;
+    }
+
+    .home-visual-circle {
+        width: 250px;
+    }
+
+    .home-visual-inner svg {
+        font-size: 3.5rem;
+    }
+
+    .home-floating-card {
+        padding: 10px 12px;
+        font-size: 0.75rem;
+    }
+
+    .home-floating-top {
+        top: 25px;
+        right: -3px;
+    }
+
+    .home-floating-bottom {
+        bottom: 25px;
+        left: -3px;
+    }
+
+    .home-section {
+        padding: 0;
+    }
+
+    .home-carousel-section,
+    .home-plans-section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .home-section-heading {
+        margin-bottom: 30px;
+    }
+
+    .home-section-heading h2 {
+        font-size: 1.9rem;
+        letter-spacing: -0.6px;
+    }
+
+    .home-section-heading p {
+        font-size: 0.93rem;
+    }
+
+    .home-carousel-paper {
+        border-radius: 16px !important;
+    }
+
+    .home-plans-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-plan-card:last-child {
+        grid-column: auto;
+    }
+
+    .home-plan-card {
+        min-height: 330px;
+        padding: 27px 22px !important;
+    }
+
+    .home-final-container {
+        padding-top: 45px;
+        padding-bottom: 45px;
+    }
+
+    .home-final-cta {
+        min-height: 300px;
+        padding: 45px 22px !important;
+    }
+
+    .home-final-cta h2 {
+        font-size: 2rem;
+        letter-spacing: -0.5px;
+    }
+
+    .home-cta-decoration {
+        font-size: 7rem;
+    }
+}
+
+
+/* =========================================
+   TEMA ESCURO
+========================================= */
+
+.dark-theme .home-hero {
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(122, 134, 96, 0.13),
+            transparent 32%
+        ),
+        var(--background, #191D17);
+}
+
+/* Botões principais: contraste adequado */
+
+.dark-theme .home-primary-button {
+    color: #191D17 !important;
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark-theme .home-primary-button:hover {
+    color: #191D17 !important;
+}
+
+.dark-theme .home-secondary-button {
+    border-color: var(--primary, #A8B58A) !important;
+    color: var(--primary, #A8B58A) !important;
+}
+
+.dark-theme .home-secondary-button:hover {
+    background: rgba(168, 181, 138, 0.1) !important;
+}
+
+.dark-theme .home-plans-link {
+    color: var(--primary, #A8B58A) !important;
+}
+
+.dark-theme .home-plans-link:hover {
+    color: var(--primary-hover, #BCC99D) !important;
+}
+
+/* Seções */
+
+.dark-theme .home-carousel-section {
+    background: var(--surface-secondary, #303A29);
+}
+
+.dark-theme .home-section-heading h2 {
+    color: var(--text-color, #F2F0E6);
+}
+
+.dark-theme .home-section-heading p {
+    color: var(--text-secondary, #C2C8B3);
+}
+
+/* Elementos flutuantes */
+
+.dark-theme .home-floating-card {
+    border-color: var(--border-color, #46513A);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+.dark-theme .home-visual-circle {
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Planos */
+
+.dark-theme .home-plan-card {
+    border-color: var(--border-color, #46513A);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.dark-theme .home-plan-card:hover {
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.24);
+}
+
+.dark-theme .home-plan-featured {
+    border-color: var(--primary, #A8B58A);
+}
+
+.dark-theme .home-plan-badge {
+    background: var(--primary, #A8B58A);
+    color: #191D17;
+}
+
+.dark-theme .home-plan-icon {
+    background: var(--surface-secondary, #303A29);
+    color: var(--primary, #A8B58A);
+}
+
+.dark-theme .home-plan-price strong {
+    color: var(--primary, #A8B58A);
+}
+
+.dark-theme .home-plan-card:not(.home-plan-featured) .home-plan-button {
+    border-color: var(--primary, #A8B58A) !important;
+    color: var(--primary, #A8B58A) !important;
+}
+
+.dark-theme .home-plan-featured .home-plan-button {
+    background: var(--primary, #A8B58A) !important;
+    color: #191D17 !important;
+}
+
+.dark-theme .home-plans-footer button {
+    color: var(--primary, #A8B58A);
+}
+
+.dark-theme .home-plans-footer button:hover {
+    background: rgba(168, 181, 138, 0.1);
+}
+
+/* Chamada final */
+
+.dark-theme .home-final-cta {
+    color: #191D17 !important;
+}
+
+.dark-theme .home-final-cta h2 {
+    color: #191D17;
+}
+
+.dark-theme .home-final-cta p {
+    color: rgba(25, 29, 23, 0.82);
+}
+
+.dark-theme .home-final-cta .home-eyebrow {
+    color: #303A29;
+}
+
+.dark-theme .home-cta-button {
+    background: #191D17 !important;
+    color: #F2F0E6 !important;
+}
+
+.dark-theme .home-cta-button:hover {
+    background: #303A29 !important;
+    color: #FFFFFF !important;
+}
+
+/* Rodapé */
+
+.dark-theme .home-footer {
+    border-color: var(--border-color, #46513A);
+    background: var(--surface, #242B20);
+}
+
+.dark-theme .home-footer-brand {
+    color: var(--primary, #A8B58A);
+}
+
+
+/* =========================================
+   MOVIMENTO REDUZIDO
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .app-home *,
+    .app-home *::before,
+    .app-home *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }

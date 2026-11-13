@@ -579,6 +579,210 @@
 }
 
 /* ========================================
+   TUFFVALLEY - TEMA ESCURO
+======================================== */
+
+/* HERO */
+
+
+
+.dark-theme .planos-hero h1 span {
+    color: #A8B58A;
+}
+
+.dark-theme .planos-hero-button {
+    background: #A8B58A;
+    color: #191D17;
+}
+
+.dark-theme .planos-hero-button:hover {
+    background: #C2CCA9;
+    color: #191D17;
+}
+
+.dark-theme .planos-hero-circle {
+    background: #303A29;
+    color: #A8B58A;
+    border: 1px solid #46513A;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.dark-theme .decorative-leaf {
+    color: #E9A23B;
+    opacity: 0.75;
+}
+
+/* BENEFÍCIOS */
+
+.dark-theme .planos-benefits article {
+    background: #242B20;
+    border-color: #46513A;
+}
+
+.dark-theme .planos-benefit-icon {
+    background: #303A29;
+    color: #A8B58A;
+}
+
+/* SEÇÃO DOS PLANOS */
+
+.dark-theme .planos-section {
+    background: #20261D;
+    border-color: #46513A;
+}
+
+.dark-theme .planos-section-heading h2 {
+    color: #F2F0E6;
+}
+
+/* CARDS */
+
+.dark-theme .plano-card {
+    background: #191D17;
+    border-color: #46513A;
+}
+
+.dark-theme .plano-card:hover {
+    border-color: #A8B58A;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
+}
+
+.dark-theme .plano-destaque {
+    background: #293124;
+    border: 2px solid #A8B58A;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme .plano-recomendado {
+    background: #A8B58A;
+    color: #191D17;
+}
+
+.dark-theme .plano-icon {
+    background: #303A29;
+    color: #A8B58A;
+}
+
+.dark-theme .plano-destaque .plano-icon {
+    background: #A8B58A;
+    color: #191D17;
+}
+
+/* PREÇO E ÁREA */
+
+.dark-theme .plano-area {
+    background: #303A29;
+}
+
+.dark-theme .plano-area strong {
+    color: #A8B58A;
+}
+
+.dark-theme .plano-preco strong {
+    color: #F2F0E6;
+}
+
+.dark-theme .plano-divider {
+    background: #46513A;
+}
+
+/* RECURSOS */
+
+.dark-theme .plano-recursos svg {
+    color: #A8B58A;
+}
+
+/* BOTÕES */
+
+.dark-theme .plano-button {
+    border-color: #A8B58A;
+    color: #A8B58A;
+}
+
+.dark-theme .plano-button:hover {
+    background: #A8B58A;
+    color: #191D17;
+}
+
+.dark-theme .plano-button-featured {
+    background: #A8B58A;
+    color: #191D17;
+}
+
+.dark-theme .plano-button-featured:hover {
+    background: #C2CCA9;
+    color: #191D17;
+}
+
+/* DESTAQUE ADICIONAL */
+
+.dark-theme .planos-extra {
+    background: #293124;
+    border-color: #46513A;
+}
+
+.dark-theme .planos-extra-icon {
+    background: #A8B58A;
+    color: #191D17;
+}
+
+/* CONTATO */
+
+.dark-theme .planos-contact {
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(233, 162, 59, 0.09),
+            transparent 35%
+        ),
+        linear-gradient(
+            120deg,
+            #303A29,
+            #242B20
+        );
+
+    border: 1px solid #46513A;
+    color: #F2F0E6;
+}
+
+.dark-theme .planos-contact .planos-eyebrow {
+    color: #FED6A2;
+}
+
+.dark-theme .planos-contact h2 {
+    color: #F2F0E6;
+}
+
+.dark-theme .planos-contact p {
+    color: #C2C8B3;
+}
+
+.dark-theme .planos-contact-button {
+    background: #E9A23B;
+    color: #191D17;
+}
+
+.dark-theme .planos-contact-button:hover {
+    background: #FED6A2;
+    color: #191D17;
+}
+
+/* RODAPÉ */
+
+.dark-theme .planos-footer > span {
+    color: #A8B58A;
+}
+
+/* ACESSIBILIDADE */
+
+.dark-theme .planos-hero-button:focus-visible,
+.dark-theme .plano-button:focus-visible,
+.dark-theme .planos-contact-button:focus-visible {
+    outline: 2px solid #E9A23B;
+    outline-offset: 4px;
+}
+
+/* ========================================
    RODAPÉ
 ======================================== */
 
