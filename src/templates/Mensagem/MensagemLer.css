@@ -1,0 +1,303 @@
+
+.mensagem-ler-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--background);
+    color: var(--text-color);
+}
+
+.mensagem-ler-content {
+    flex: 1;
+    min-width: 0;
+    padding: 15px 22px;
+}
+
+.mensagem-ler-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 18px;
+}
+
+/* Cabeçalho */
+
+.mensagem-ler-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 25px 28px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+}
+
+.mensagem-ler-overline {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--primary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.mensagem-ler-heading h1 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.65rem;
+    font-weight: 700;
+}
+
+.mensagem-ler-heading p {
+    margin: 7px 0 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.mensagem-ler-heading-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    background: var(--surface-secondary);
+    color: var(--primary);
+    font-size: 1.6rem;
+}
+
+/* Card principal */
+
+.mensagem-ler-card {
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+}
+
+.mensagem-ler-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.mensagem-ler-card-overline {
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.mensagem-ler-card-header h2 {
+    margin: 7px 0 0;
+    color: var(--text-color);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.mensagem-ler-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 13px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.mensagem-ler-status.status-lida {
+    background: var(--surface-secondary);
+    color: var(--primary);
+}
+
+.mensagem-ler-status.status-pendente {
+    background: rgba(231, 147, 33, 0.14);
+    color: var(--accent);
+}
+
+.mensagem-ler-divider {
+    height: 1px;
+    margin: 23px 0;
+    background: var(--border-color);
+}
+
+/* Informações */
+
+.mensagem-ler-informacoes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.mensagem-ler-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.mensagem-ler-info-item span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+}
+
+.mensagem-ler-info-item span i {
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.mensagem-ler-info-item strong {
+    overflow-wrap: anywhere;
+    color: var(--text-color);
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+/* Texto da mensagem */
+
+.mensagem-ler-texto-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.mensagem-ler-texto-heading i {
+    color: var(--primary);
+    font-size: 1.15rem;
+}
+
+.mensagem-ler-texto-heading h3 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.mensagem-ler-texto-content {
+    min-height: 160px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--surface-secondary);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* Botões */
+
+.mensagem-ler-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.mensagem-ler-actions .mensagem-ler-btn-voltar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-color: var(--border-color);
+    color: var(--text-color);
+    text-transform: none;
+    font-weight: 600;
+}
+
+.mensagem-ler-actions .mensagem-ler-btn-voltar:hover {
+    background: var(--surface-secondary);
+    border-color: var(--primary);
+}
+
+.mensagem-ler-actions .mensagem-ler-btn-lida {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: white;
+    text-transform: none;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.mensagem-ler-actions .mensagem-ler-btn-lida:hover {
+    background: var(--primary-hover);
+    box-shadow: none;
+}
+
+.mensagem-ler-actions .mensagem-ler-btn-lida:disabled {
+    opacity: 0.7;
+}
+
+/* Carregamento */
+
+.mensagem-ler-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-height: 300px;
+    color: var(--text-secondary);
+}
+
+.mensagem-ler-loading p {
+    margin: 0;
+}
+
+/* Responsividade */
+
+@media (max-width: 768px) {
+    .mensagem-ler-content {
+        padding: 12px;
+    }
+
+    .mensagem-ler-heading,
+    .mensagem-ler-card {
+        padding: 20px;
+    }
+
+    .mensagem-ler-heading h1 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .mensagem-ler-heading-icon {
+        display: none;
+    }
+
+    .mensagem-ler-informacoes {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .mensagem-ler-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .mensagem-ler-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .mensagem-ler-actions button {
+        width: 100%;
+    }
+}

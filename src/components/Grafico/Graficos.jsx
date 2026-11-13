@@ -1,48 +1,154 @@
-import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const data = [
-    { name: 'Segunda', Manha: 4000, Tarde: 2400, Noite: 2300 },
-    { name: 'Terça', Manha: 3000, Tarde: 1398, Noite: 2210 },
-    { name: 'Quarta', Manha: 2000, Tarde: 9800, Noite: 2290 },
-    { name: 'Quinta', Manha: 2780, Tarde: 3908, Noite: 2000 },
-    { name: 'Sexta', Manha: 1890, Tarde: 4800, Noite: 2181 }
+import React from "react";
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    ResponsiveContainer
+} from "recharts";
+
+import "./GraficoComTema.css";
+
+// Dados demonstrativos: total de 20 áreas na estufa.
+const dadosOcupacao = [
+    { semana: "Sem. 1", ocupadas: 8, disponiveis: 12 },
+    { semana: "Sem. 2", ocupadas: 10, disponiveis: 10 },
+    { semana: "Sem. 3", ocupadas: 9, disponiveis: 11 },
+    { semana: "Sem. 4", ocupadas: 12, disponiveis: 8 },
+    { semana: "Sem. 5", ocupadas: 14, disponiveis: 6 },
+    { semana: "Sem. 6", ocupadas: 16, disponiveis: 4 }
 ];
-/* */
+
 const GraficoComTema = () => {
-    const [theme, setTheme] = useState('Claro'); // Estado para armazenar o tema
-
-    // Recupera o tema do localStorage ao montar o componente
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('tema') || 'Claro'; // Pega o tema salvo
-        setTheme(savedTheme); // Atualiza o estado com o tema salvo
-    }, []);
-
-    // Definindo as cores com base no tema
-    const eixoColor = theme === 'Claro' ? '#000' : '#fff'; // Preto no tema claro, branco no escuro
-    const gridColor = theme === 'Claro' ? '#ccc' : '#444'; // Cores da grade
-
     return (
-        <ResponsiveContainer width="100%" height={400}>
-            <LineChart width={500} height={300} data={data}>
-                <CartesianGrid stroke={gridColor} strokeDasharray="3 3" />
-                <XAxis
-                    dataKey="name"
-                    padding={{ left: 30, right: 30 }}
-                    tick={{ fill: eixoColor }} // Cor dos labels do eixo X
-                    stroke={eixoColor} // Cor da linha do eixo X
-                />
-                <YAxis
-                    tick={{ fill: eixoColor }} // Cor dos labels do eixo Y
-                    stroke={eixoColor} // Cor da linha do eixo Y
-                />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="Manha" stroke="#8884d8" />
-                <Line type="monotone" dataKey="Tarde" stroke="#82ca9d" />
-                <Line type="monotone" dataKey="Noite" stroke="#0000ff" />
-            </LineChart>
-        </ResponsiveContainer>
+        <section className="grafico-ocupacao-card">
+            <div className="grafico-ocupacao-header">
+                <div>
+                    <span className="grafico-ocupacao-overline">
+                        DESEMPENHO DA ESTUFA
+                    </span>
+
+                    <h2>Ocupação das áreas</h2>
+
+                    <p>
+                        Acompanhe a evolução das áreas ocupadas e disponíveis.
+                    </p>
+                </div>
+
+                <div className="grafico-ocupacao-icon">
+                    <i className="bi bi-graph-up-arrow"></i>
+                </div>
+            </div>
+
+            <div className="grafico-ocupacao-legenda">
+                <div className="grafico-ocupacao-indicador">
+                    <span className="indicador-ponto ocupadas"></span>
+                    <span>Áreas ocupadas</span>
+                </div>
+
+                <div className="grafico-ocupacao-indicador">
+                    <span className="indicador-ponto disponiveis"></span>
+                    <span>Áreas disponíveis</span>
+                </div>
+            </div>
+
+            <div className="grafico-ocupacao-chart">
+                <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                        data={dadosOcupacao}
+                        margin={{
+                            top: 10,
+                            right: 15,
+                            left: -15,
+                            bottom: 5
+                        }}
+                    >
+                        <CartesianGrid
+                            stroke="var(--border-color)"
+                            strokeDasharray="4 4"
+                            vertical={false}
+                        />
+
+                        <XAxis
+                            dataKey="semana"
+                            tick={{
+                                fill: "var(--text-secondary)",
+                                fontSize: 12
+                            }}
+                            axisLine={{ stroke: "var(--border-color)" }}
+                            tickLine={false}
+                        />
+
+                        <YAxis
+                            domain={[0, 20]}
+                            allowDecimals={false}
+                            tick={{
+                                fill: "var(--text-secondary)",
+                                fontSize: 12
+                            }}
+                            axisLine={false}
+                            tickLine={false}
+                        />
+
+                        <Tooltip
+                            contentStyle={{
+                                backgroundColor: "var(--surface)",
+                                border: "1px solid var(--border-color)",
+                                borderRadius: "10px",
+                                color: "var(--text-color)",
+                                boxShadow: "var(--card-shadow)"
+                            }}
+                            labelStyle={{
+                                color: "var(--text-color)",
+                                fontWeight: 600
+                            }}
+                            formatter={(value) => [`${value} áreas`]}
+                        />
+
+                        <Line
+                            type="monotone"
+                            dataKey="ocupadas"
+                            name="Áreas ocupadas"
+                            stroke="var(--primary)"
+                            strokeWidth={3}
+                            dot={{
+                                r: 4,
+                                fill: "var(--primary)",
+                                strokeWidth: 2,
+                                stroke: "var(--surface)"
+                            }}
+                            activeDot={{ r: 7 }}
+                        />
+
+                        <Line
+                            type="monotone"
+                            dataKey="disponiveis"
+                            name="Áreas disponíveis"
+                            stroke="var(--accent)"
+                            strokeWidth={3}
+                            dot={{
+                                r: 4,
+                                fill: "var(--accent)",
+                                strokeWidth: 2,
+                                stroke: "var(--surface)"
+                            }}
+                            activeDot={{ r: 7 }}
+                        />
+                    </LineChart>
+                </ResponsiveContainer>
+            </div>
+
+            <div className="grafico-ocupacao-footer">
+                <i className="bi bi-info-circle"></i>
+                <span>
+                    Dados ilustrativos para demonstração da ocupação da estufa.
+                </span>
+            </div>
+        </section>
     );
 };
 

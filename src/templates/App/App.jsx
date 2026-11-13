@@ -7,6 +7,7 @@ import SectionContent from '../../components/Secoes/SectionContent';
 import CustomCarousel from '../../components/Carousel/Carousel';
 
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../contexts/UserContext';
 
 import {
     Box,
@@ -17,11 +18,21 @@ import {
     Stack
 } from '@mui/material';
 
+import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
+import SpaRoundedIcon from '@mui/icons-material/SpaRounded';
+
 function App() {
     const navigate = useNavigate();
+    const { currentUser } = useUser();
 
-    const login = () => {
-        navigate('/newuser');
+    const usuarioLogado = !!currentUser;
+
+    const irParaLogin = () => {
+        navigate('/login');
+    };
+
+    const irParaPlanos = () => {
+        navigate('/planos');
     };
 
     return (
@@ -64,6 +75,7 @@ function App() {
                         >
                             Desconecte-se um pouco.
                             <br />
+
                             <Box
                                 component="span"
                                 sx={{ color: 'primary.main' }}
@@ -85,6 +97,43 @@ function App() {
                             as experiências ganham espaço e as conexões
                             acontecem além das telas.
                         </Typography>
+
+                        {/* BOTÃO DE LOGIN */}
+                        {!usuarioLogado && (
+                            <Button
+                                onClick={irParaLogin}
+                                variant="contained"
+                                color="primary"
+                                startIcon={<LoginRoundedIcon />}
+                                sx={{
+                                    mt: 3,
+                                    px: 3,
+                                    py: 1.3,
+                                    borderRadius: 2,
+                                    fontWeight: 700
+                                }}
+                            >
+                                Entrar na minha conta
+                            </Button>
+                        )}
+
+                        {/* MENSAGEM PARA USUÁRIO LOGADO */}
+                        {usuarioLogado && (
+                            <Typography
+                                variant="body1"
+                                color="primary.main"
+                                fontWeight={700}
+                                sx={{ mt: 3 }}
+                            >
+                                <SpaRoundedIcon
+                                    sx={{
+                                        verticalAlign: 'middle',
+                                        mr: 1
+                                    }}
+                                />
+                                Bem-vindo de volta, {currentUser.nome}!
+                            </Typography>
+                        )}
                     </Box>
 
                     {/* CARROSSEL */}
@@ -150,7 +199,7 @@ function App() {
                         </Typography>
 
                         <Button
-                            onClick={login}
+                            onClick={irParaPlanos}
                             variant="contained"
                             color="secondary"
                             size="large"

@@ -39,37 +39,37 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/planos" element={<Planos />} />
-          <Route path="/home" element={<RotaProtegida><Home /></RotaProtegida>} />
+          <Route path="/home" element={<Home />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/newpass/:id" element={<LoginNewPass />}></Route>
           <Route path="/newuser" element={<NewUser />} />
           <Route path="/forgotpass" element={<ForgotPass />} />
 
-          <Route path="/mensagem" element={<RotaProtegida><Mensagem /></RotaProtegida>} />
-          <Route path="/mensagemler/:id" element={<RotaProtegida><MensagemLer /></RotaProtegida>} />
-          <Route path="/mensagemlista" element={<RotaProtegida><MensagemLista /></RotaProtegida>} />
-          <Route path="/sendmessage" element={<RotaProtegida><SendMessage /></RotaProtegida>} />
+          <Route path="/mensagem" element={<Mensagem />} />
+          <Route path="/mensagemler/:id" element={<MensagemLer />} />
+          <Route path="/mensagemlista" element={<MensagemLista />} />
+          <Route path="/sendmessage" element={<SendMessage />} />
 
 
-          <Route path="/usuario" element={<RotaProtegida><Usuario /></RotaProtegida>} />
-          <Route path="/usuarioperfil/:id" element={<RotaProtegida><UsuarioPerfil /></RotaProtegida>} />
-          <Route path="/usuarioalterarsenha/:id" element={<RotaProtegida><UsuarioAlterarSenha /></RotaProtegida>} />
-          <Route path="/usuarioslista" element={<RotaProtegida><UsuariosLista /></RotaProtegida>} />
-          <Route path="/usuarionovo" element={<RotaProtegida><UsuarioNovo /></RotaProtegida>} />
-          <Route path="/usuarioeditar/:id" element={<RotaProtegida><UsuarioEditar /></RotaProtegida>} />
+          <Route path="/usuario" element={<Usuario />} />
+          <Route path="/usuarioperfil/:id" element={<UsuarioPerfil />} />
+          <Route path="/usuarioalterarsenha/:id" element={<UsuarioAlterarSenha />} />
+          <Route path="/usuarioslista" element={<UsuariosLista />} />
+          <Route path="/usuarionovo" element={<UsuarioNovo />} />
+          <Route path="/usuarioeditar/:id" element={<UsuarioEditar />} />
 
-          <Route path="/grafico" element={<RotaProtegida><Grafico /></RotaProtegida>} />
+          <Route path="/grafico" element={<Grafico />} />
 
-          <Route path="/addcardapio" element={<RotaProtegida><AddCardapio /></RotaProtegida>} />
-          <Route path="/addcategoria" element={<RotaProtegida>< AddCategoria /></RotaProtegida>} />
-          <Route path="/addprato" element={<RotaProtegida>< AddPrato /></RotaProtegida>} />
-          <Route path="/addproduto" element={<RotaProtegida>< AddProduto /></RotaProtegida>} />
-          <Route path="/alterarprato/:id" element={<RotaProtegida>< AlterarPrato /></RotaProtegida>} />
-          <Route path="/alterarcardapio/:id" element={<RotaProtegida><AlterarCardapio /></RotaProtegida>} />
-          <Route path="/cardapio" element={<RotaProtegida><Cardapio /></RotaProtegida>} />
-          <Route path="/cardapiolista" element={<RotaProtegida><CardapioLista /></RotaProtegida>} />
-          <Route path="/pratolista" element={<RotaProtegida><PratoLista /></RotaProtegida>} />
+          <Route path="/addcardapio" element={<AddCardapio />} />
+          <Route path="/addcategoria" element={< AddCategoria />} />
+          <Route path="/addprato" element={< AddPrato />} />
+          <Route path="/addproduto" element={< AddProduto />} />
+          <Route path="/alterarprato/:id" element={< AlterarPrato />} />
+          <Route path="/alterarcardapio/:id" element={<AlterarCardapio />} />
+          <Route path="/cardapio" element={<Cardapio />} />
+          <Route path="/cardapiolista" element={<CardapioLista />} />
+          <Route path="/pratolista" element={<PratoLista />} />
         </Routes>
 
       </div>

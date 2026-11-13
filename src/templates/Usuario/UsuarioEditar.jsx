@@ -188,7 +188,7 @@ const UsuarioEditar = () => {
 
             <main className="usuario-editar-main">
                 <Header
-                    goto="/usuario"
+                    goto="/usuarioslista"
                     title="Editar usuário"
                     logo={logo}
                 />

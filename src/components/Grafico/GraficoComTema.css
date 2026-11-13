@@ -1,0 +1,130 @@
+
+.grafico-ocupacao-card {
+    width: 100%;
+    padding: 25px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    color: var(--text-color);
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.grafico-ocupacao-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.grafico-ocupacao-overline {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--primary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.grafico-ocupacao-header h2 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.grafico-ocupacao-header p {
+    margin: 7px 0 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.grafico-ocupacao-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: var(--surface-secondary);
+    color: var(--primary);
+    font-size: 1.3rem;
+}
+
+.grafico-ocupacao-legenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 12px;
+}
+
+.grafico-ocupacao-indicador {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.83rem;
+}
+
+.indicador-ponto {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.indicador-ponto.ocupadas {
+    background: var(--primary);
+}
+
+.indicador-ponto.disponiveis {
+    background: var(--accent);
+}
+
+.grafico-ocupacao-chart {
+    width: 100%;
+    height: 320px;
+    min-width: 0;
+}
+
+.grafico-ocupacao-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+}
+
+.grafico-ocupacao-footer i {
+    color: var(--primary);
+}
+
+@media (max-width: 600px) {
+    .grafico-ocupacao-card {
+        padding: 18px 14px;
+    }
+
+    .grafico-ocupacao-header h2 {
+        font-size: 1.15rem;
+    }
+
+    .grafico-ocupacao-header p {
+        font-size: 0.82rem;
+    }
+
+    .grafico-ocupacao-chart {
+        height: 260px;
+    }
+
+    .grafico-ocupacao-legenda {
+        gap: 12px;
+    }
+
+    .grafico-ocupacao-indicador {
+        font-size: 0.75rem;
+    }
+}

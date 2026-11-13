@@ -1,0 +1,142 @@
+
+.grafico-page {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--background);
+    color: var(--text-color);
+}
+
+.grafico-main {
+    flex: 1;
+    min-width: 0;
+    padding: 15px 22px;
+}
+
+.grafico-page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-top: 18px;
+}
+
+/* Apresentação */
+
+.grafico-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 28px 30px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+}
+
+.grafico-intro-text {
+    max-width: 750px;
+}
+
+.grafico-overline {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+}
+
+.grafico-intro h1 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.grafico-intro p {
+    margin: 10px 0 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.grafico-intro-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 65px;
+    height: 65px;
+    border-radius: 18px;
+    background: var(--surface-secondary);
+    color: var(--primary);
+    font-size: 1.9rem;
+}
+
+/* Área do gráfico */
+
+.grafico-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.grafico-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.grafico-section-heading h2 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.grafico-section-heading p {
+    margin: 5px 0 0;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+}
+
+/* Responsividade */
+
+@media (max-width: 768px) {
+    .grafico-main {
+        padding: 12px;
+    }
+
+    .grafico-intro {
+        padding: 22px;
+    }
+
+    .grafico-intro h1 {
+        font-size: 1.45rem;
+    }
+
+    .grafico-intro-icon {
+        width: 52px;
+        height: 52px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .grafico-intro {
+        padding: 18px;
+    }
+
+    .grafico-intro-icon {
+        display: none;
+    }
+
+    .grafico-intro h1 {
+        font-size: 1.3rem;
+    }
+
+    .grafico-intro p {
+        font-size: 0.85rem;
+    }
+}

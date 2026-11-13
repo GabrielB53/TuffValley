@@ -1,17 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
+
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Menu/Sidebar";
 import MensagemService from "../../services/MensagemService";
 import logo from "../../assets/images/home.png";
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-import Button from '@mui/material/Button';
-import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
+
+import {
+    Alert,
+    Button,
+    CircularProgress
+} from "@mui/material";
+
 import { ThemeContext } from "../../contexts/ThemeContext";
+
+import "./MensagemLer.css";
 
 const MensagemLer = () => {
     const navigate = useNavigate();
@@ -30,204 +34,258 @@ const MensagemLer = () => {
 
     const [alerta, setAlerta] = useState({
         show: false,
-        message: '',
-        type: '', // 'success', 'error', 'warning', 'info'
+        message: "",
+        type: "info"
     });
+
+    const [carregando, setCarregando] = useState(true);
+    const [processando, setProcessando] = useState(false);
 
     useEffect(() => {
         carregarMensagem();
-    }, []);
+    }, [id]);
 
     const carregarMensagem = async () => {
         try {
+            setCarregando(true);
+
             const response = await MensagemService.findById(id);
             setMensagem(response.data);
+
         } catch (error) {
-            exibirAlerta("Erro ao carregar a mensagem.", "error");
+            setAlerta({
+                show: true,
+                message: "Não foi possível carregar a mensagem.",
+                type: "error"
+            });
+        } finally {
+            setCarregando(false);
         }
     };
 
-    const exibirAlerta = (message, type = 'info') => {
-        setAlerta({ show: true, message, type });
-        setTimeout(() => {
-            setAlerta({ show: false, message: '', type: '' });
-            navigate("/mensagem")
-        }, 2000);
+    const formatarData = (data) => {
+        if (!data) return "Não informada";
+
+        const dataFormatada = new Date(data);
+
+        if (isNaN(dataFormatada.getTime())) return data;
+
+        return dataFormatada.toLocaleString("pt-BR", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        });
     };
 
-    const inativarMensagem = async () => {
+    const marcarComoLida = async () => {
         try {
+            setProcessando(true);
+
             const response = await MensagemService.inativar(id);
-            exibirAlerta(response.data.message, "info");
-            carregarMensagem();
+
+            setAlerta({
+                show: true,
+                message: response.data.message || "Mensagem marcada como lida!",
+                type: "success"
+            });
+
+            setTimeout(() => {
+                navigate("/mensagem");
+            }, 1500);
+
         } catch (error) {
-            const msg = error.response?.data?.message || "Erro ao inativar a mensagem.";
-            exibirAlerta(msg, "error");
+            setAlerta({
+                show: true,
+                message: error.response?.data?.message ||
+                    "Não foi possível atualizar a mensagem.",
+                type: "error"
+            });
+        } finally {
+            setProcessando(false);
         }
     };
 
-    const textColor = theme === 'Claro' ? '' : 'white';
-    const background = theme === 'Claro' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.733)';
+    const mensagemLida =
+        mensagem.statusMensagem?.toUpperCase() === "LIDA";
 
     return (
-        <div className="d-flex">
+        <div className="mensagem-ler-layout">
             <Sidebar />
-            <div className="p-3 w-100">
+
+            <main className="mensagem-ler-content">
                 <Header
-                    goto={'/mensagem'}
-                    title={"Ler Mensagem"}
+                    goto="/mensagem"
+                    title="Visualizar Mensagem"
                     logo={logo}
                 />
 
-                <section className="m-2 p-2">
+                <div className="mensagem-ler-container">
+
+                    <section className="mensagem-ler-heading">
+                        <div>
+                            <span className="mensagem-ler-overline">
+                                CENTRAL DE COMUNICAÇÃO
+                            </span>
+
+                            <h1>Detalhes da mensagem</h1>
+
+                            <p>
+                                Consulte as informações e o conteúdo
+                                enviado pelo remetente.
+                            </p>
+                        </div>
+
+                        <div className="mensagem-ler-heading-icon">
+                            <i className="bi bi-envelope-open"></i>
+                        </div>
+                    </section>
+
                     {alerta.show && (
                         <Alert
-                            icon={alerta.type === 'success' ? <CheckIcon fontSize="inherit" /> : null}
                             severity={alerta.type}
-                            sx={{
-                                position: 'absolute',
-                                bottom: 10,
-                                right: 16,
-                                zIndex: 1000,
-                            }}
-                            onClose={() => setAlerta({ show: false, message: '', type: '' })}
+                            onClose={() => setAlerta({
+                                show: false,
+                                message: "",
+                                type: "info"
+                            })}
                         >
                             {alerta.message}
                         </Alert>
                     )}
 
-                    <form noValidate autoComplete="off">
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={2}>
-                                <TextField
-                                    fullWidth
-                                    label="ID"
-                                    value={mensagem.id || ""}
-                                    InputProps={{ readOnly: true, style: { color: textColor } }}
-                                    InputLabelProps={{ style: { color: textColor } }}
-                                    sx={{
-                                        backgroundColor: background,
-                                        borderRadius: 1,
-                                        '& .MuiOutlinedInput-root': {
-                                            '& fieldset': { borderColor: textColor },
-                                            '&:hover fieldset': { borderColor: textColor },
-                                            '&.Mui-focused fieldset': { borderColor: textColor },
-                                        }
-                                    }}
-                                />
-                            </Grid>
+                    {carregando ? (
+                        <div className="mensagem-ler-loading">
+                            <CircularProgress />
+                            <p>Carregando mensagem...</p>
+                        </div>
+                    ) : (
+                        <section className="mensagem-ler-card">
 
-                            <Grid item xs={12} sm={5}>
-                                <TextField
-                                    fullWidth
-                                    label="Data"
-                                    value={mensagem.dataMensagem || ""}
-                                    InputProps={{ readOnly: true, style: { color: textColor } }}
-                                    InputLabelProps={{ style: { color: textColor } }}
-                                    sx={{
-                                        backgroundColor: background,
-                                        borderRadius: 1,
-                                        '& .MuiOutlinedInput-root': {
-                                            '& fieldset': { borderColor: textColor },
-                                            '&:hover fieldset': { borderColor: textColor },
-                                            '&.Mui-focused fieldset': { borderColor: textColor },
-                                        }
-                                    }}
-                                />
-                            </Grid>
+                            <div className="mensagem-ler-card-header">
+                                <div>
+                                    <span className="mensagem-ler-card-overline">
+                                        MENSAGEM #{mensagem.id}
+                                    </span>
 
-                            <Grid item xs={12} sm={5}>
-                                <TextField
-                                    fullWidth
-                                    label="Status"
-                                    value={mensagem.statusMensagem || ""}
-                                    InputProps={{ readOnly: true, style: { color: textColor } }}
-                                    InputLabelProps={{ style: { color: textColor } }}
-                                    sx={{
-                                        backgroundColor: background,
-                                        borderRadius: 1,
-                                        '& .MuiOutlinedInput-root': {
-                                            '& fieldset': { borderColor: textColor },
-                                            '&:hover fieldset': { borderColor: textColor },
-                                            '&.Mui-focused fieldset': { borderColor: textColor },
-                                        }
-                                    }}
-                                />
-                            </Grid>
+                                    <h2>
+                                        {mensagem.emissor || "Remetente não identificado"}
+                                    </h2>
+                                </div>
 
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Emissor"
-                                    value={mensagem.emissor || ""}
-                                    InputProps={{ readOnly: true, style: { color: textColor } }}
-                                    InputLabelProps={{ style: { color: textColor } }}
-                                    sx={{
-                                        backgroundColor: background,
-                                        borderRadius: 1,
-                                        '& .MuiOutlinedInput-root': {
-                                            '& fieldset': { borderColor: textColor },
-                                            '&:hover fieldset': { borderColor: textColor },
-                                            '&.Mui-focused fieldset': { borderColor: textColor },
-                                        }
-                                    }}
-                                />
-                            </Grid>
+                                <span className={`mensagem-ler-status ${
+                                    mensagemLida ? "status-lida" : "status-pendente"
+                                }`}>
+                                    <i className={`bi ${
+                                        mensagemLida
+                                            ? "bi-check-circle-fill"
+                                            : "bi-envelope-fill"
+                                    }`}></i>
 
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Email"
-                                    value={mensagem.email || ""}
-                                    InputProps={{ readOnly: true, style: { color: textColor } }}
-                                    InputLabelProps={{ style: { color: textColor } }}
-                                    sx={{
-                                        backgroundColor: background,
-                                        borderRadius: 1,
-                                        '& .MuiOutlinedInput-root': {
-                                            '& fieldset': { borderColor: textColor },
-                                            '&:hover fieldset': { borderColor: textColor },
-                                            '&.Mui-focused fieldset': { borderColor: textColor },
-                                        }
-                                    }}
-                                />
-                            </Grid>
+                                    {mensagemLida ? "Lida" : "Não lida"}
+                                </span>
+                            </div>
 
-                            <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    label="Mensagem"
-                                    multiline
-                                    rows={6}
-                                    value={mensagem.texto || ""}
-                                    InputProps={{ readOnly: true, style: { color: textColor } }}
-                                    InputLabelProps={{ style: { color: textColor } }}
-                                    sx={{
-                                        backgroundColor: background,
-                                        borderRadius: 1,
-                                        '& .MuiOutlinedInput-root': {
-                                            '& fieldset': { borderColor: textColor },
-                                            '&:hover fieldset': { borderColor: textColor },
-                                            '&.Mui-focused fieldset': { borderColor: textColor },
-                                        }
-                                    }}
-                                />
-                            </Grid>
+                            <div className="mensagem-ler-divider"></div>
 
-                            <Grid item xs={12} container justifyContent="space-around" sx={{ mt: 2 }}>
+                            <div className="mensagem-ler-informacoes">
+
+                                <div className="mensagem-ler-info-item">
+                                    <span>
+                                        <i className="bi bi-person"></i>
+                                        Remetente
+                                    </span>
+
+                                    <strong>
+                                        {mensagem.emissor || "Não informado"}
+                                    </strong>
+                                </div>
+
+                                <div className="mensagem-ler-info-item">
+                                    <span>
+                                        <i className="bi bi-envelope"></i>
+                                        E-mail
+                                    </span>
+
+                                    <strong>
+                                        {mensagem.email || "Não informado"}
+                                    </strong>
+                                </div>
+
+                                <div className="mensagem-ler-info-item">
+                                    <span>
+                                        <i className="bi bi-telephone"></i>
+                                        Telefone
+                                    </span>
+
+                                    <strong>
+                                        {mensagem.telefone || "Não informado"}
+                                    </strong>
+                                </div>
+
+                                <div className="mensagem-ler-info-item">
+                                    <span>
+                                        <i className="bi bi-calendar-event"></i>
+                                        Data de envio
+                                    </span>
+
+                                    <strong>
+                                        {formatarData(mensagem.dataMensagem)}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                            <div className="mensagem-ler-divider"></div>
+
+                            <div className="mensagem-ler-texto">
+                                <div className="mensagem-ler-texto-heading">
+                                    <i className="bi bi-chat-left-text"></i>
+                                    <h3>Conteúdo da mensagem</h3>
+                                </div>
+
+                                <div className="mensagem-ler-texto-content">
+                                    {mensagem.texto || "Esta mensagem não possui conteúdo."}
+                                </div>
+                            </div>
+
+                            <div className="mensagem-ler-actions">
                                 <Button
-                                    variant="contained"
-                                    color="warning"
-                                    onClick={inativarMensagem}
+                                    variant="outlined"
+                                    onClick={() => navigate("/mensagem")}
+                                    className="mensagem-ler-btn-voltar"
                                 >
-                                    Marcar como Lida
+                                    <i className="bi bi-arrow-left"></i>
+                                    Voltar
                                 </Button>
 
-                            </Grid>
-                        </Grid>
-                    </form>
-                </section>
-            </div>
+                                {!mensagemLida && (
+                                    <Button
+                                        variant="contained"
+                                        onClick={marcarComoLida}
+                                        disabled={processando}
+                                        className="mensagem-ler-btn-lida"
+                                    >
+                                        {processando ? (
+                                            <CircularProgress
+                                                size={18}
+                                                color="inherit"
+                                            />
+                                        ) : (
+                                            <>
+                                                <i className="bi bi-check2-circle"></i>
+                                                Marcar como lida
+                                            </>
+                                        )}
+                                    </Button>
+                                )}
+                            </div>
+
+                        </section>
+                    )}
+                </div>
+            </main>
         </div>
     );
 };

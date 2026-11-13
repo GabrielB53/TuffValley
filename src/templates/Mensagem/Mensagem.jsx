@@ -1,125 +1,328 @@
+
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
-import Sidebar from '../../components/Menu/Sidebar';
-import logo from '../../assets/images/home.png';
-import { useContext, useEffect, useState } from "react";
+import Sidebar from "../../components/Menu/Sidebar";
+import logo from "../../assets/images/home.png";
+
+import { useEffect, useState } from "react";
 import MensagemService from "../../services/MensagemService";
-import { Button, Badge, Box } from '@mui/material';
-import { ThemeContext } from "../../contexts/ThemeContext";
+
+import Button from "@mui/material/Button";
+import Badge from "@mui/material/Badge";
+
+import "./Mensagem.css";
 
 const Mensagem = () => {
     const navigate = useNavigate();
-    const [mensagens, setMensagens] = useState([]);
-    const [mostrarLidas, setMostrarLidas] = useState(false); // 👈 novo estado
-    const { theme } = useContext(ThemeContext);
-    const buttonColor = theme === 'Claro' ? 'primary' : 'error';
 
+    const [mensagens, setMensagens] = useState([]);
+    const [mostrarLidas, setMostrarLidas] = useState(false);
+    const [erro, setErro] = useState(false);
 
     useEffect(() => {
-        MensagemService.findAll().then(
-            (response) => {
-                setMensagens(response.data);
-            }
-        ).catch((error) => {
-            console.log(error);
-        });
+        MensagemService.findAll()
+            .then((response) => {
+                setMensagens(response.data || []);
+                setErro(false);
+            })
+            .catch((error) => {
+                console.error("Erro ao carregar mensagens:", error);
+                setErro(true);
+            });
     }, []);
 
     const lerMensagem = (id) => {
         navigate(`/mensagemler/${id}`);
     };
 
+    const mensagensFiltradas = mensagens.filter(
+        (mensagem) => mostrarLidas || mensagem.statusMensagem !== "LIDA"
+    );
+
+    const mensagensNaoLidas = mensagens.filter(
+        (mensagem) => mensagem.statusMensagem !== "LIDA"
+    ).length;
+
+    const formatarData = (data) => {
+        if (!data) return "Não informada";
+
+        const dataObj = new Date(data);
+
+        if (Number.isNaN(dataObj.getTime())) return "Data inválida";
+
+        return dataObj.toLocaleDateString("pt-BR");
+    };
+
     return (
-        <div className="d-flex">
+        <div className="mensagem-layout d-flex">
             <Sidebar />
-            <div className="p-3 w-100">
+
+            <main className="mensagem-content w-100">
+
                 <Header
-                    goto={'/home'}
-                    title={'Mensagem'}
+                    goto="/home"
+                    title="Central de Mensagens"
                     logo={logo}
                 />
 
-                <section className="p-2 m-2">
-                    <Box m={2} display="flex" alignItems="center">
-                        <Button variant="contained" sx={{ position: 'relative', color: 'white', backgroundColor: 'black', }}>
-                            Total
+                <section className="mensagem-container">
+
+                    {/* Cabeçalho */}
+                    <div className="mensagem-heading">
+                        <div>
+                            <span className="mensagem-overline">
+                                COMUNICAÇÃO
+                            </span>
+
+                            <h2>Central de mensagens</h2>
+
+                            <p>
+                                Acompanhe as mensagens recebidas e mantenha
+                                a comunicação com os usuários.
+                            </p>
+                        </div>
+
+                        <div className="mensagem-heading-icon">
+                            <i className="bi bi-envelope-paper"></i>
+                        </div>
+                    </div>
+
+                    {/* Indicadores */}
+                    <div className="mensagem-stats">
+
+                        <div className="mensagem-stat-card">
+                            <div className="mensagem-stat-icon total-icon">
+                                <i className="bi bi-envelope"></i>
+                            </div>
+
+                            <div>
+                                <span>Total de mensagens</span>
+                                <strong>{mensagens.length}</strong>
+                            </div>
+                        </div>
+
+                        <div className="mensagem-stat-card">
+                            <div className="mensagem-stat-icon pending-icon">
+                                <i className="bi bi-envelope-exclamation"></i>
+                            </div>
+
+                            <div>
+                                <span>Não lidas</span>
+                                <strong>{mensagensNaoLidas}</strong>
+                            </div>
+                        </div>
+
+                        <div className="mensagem-stat-card">
+                            <div className="mensagem-stat-icon read-icon">
+                                <i className="bi bi-envelope-check"></i>
+                            </div>
+
+                            <div>
+                                <span>Lidas</span>
+                                <strong>{mensagens.length - mensagensNaoLidas}</strong>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* Ações */}
+                    <div className="mensagem-actions-card">
+
+                        <div className="mensagem-actions-description">
+                            <h3>Gerenciar mensagens</h3>
+                            <span>Escolha uma ação para continuar.</span>
+                        </div>
+
+                        <div className="mensagem-actions">
+
+                            <Link
+                                to="/mensagemlista"
+                                className="mensagem-action-button action-list"
+                            >
+                                <i className="bi bi-list-ul"></i>
+                                <span>Lista completa</span>
+                            </Link>
+
+                            <Button
+                                variant="contained"
+                                className="mensagem-action-button action-filter"
+                                onClick={() => setMostrarLidas(!mostrarLidas)}
+                            >
+                                <i className={`bi ${mostrarLidas
+                                    ? "bi-envelope"
+                                    : "bi-envelope-check"
+                                }`}></i>
+
+                                <span>
+                                    {mostrarLidas
+                                        ? "Ocultar lidas"
+                                        : "Mostrar lidas"
+                                    }
+                                </span>
+                            </Button>
+
+                            <Link
+                                to="/sendmessage"
+                                className="mensagem-action-button action-send"
+                            >
+                                <i className="bi bi-send"></i>
+                                <span>Enviar mensagem</span>
+                            </Link>
+
+                        </div>
+                    </div>
+
+                    {/* Tabela */}
+                    <div className="mensagem-table-card">
+
+                        <div className="mensagem-table-header">
+                            <div>
+                                <h3>
+                                    <i className="bi bi-inbox"></i>
+                                    Caixa de entrada
+                                </h3>
+
+                                <span>
+                                    {mostrarLidas
+                                        ? "Exibindo todas as mensagens."
+                                        : "Exibindo apenas mensagens não lidas."
+                                    }
+                                </span>
+                            </div>
+
                             <Badge
-                                badgeContent={mensagens.length}
-                                color="error"
-                                sx={{
-                                    position: 'absolute',
-                                    top: -1,
-                                    right: -1,
-                                    transform: 'translate(50%, -50%)',
-                                }}
-                            />
-                        </Button>
+                                badgeContent={mensagensFiltradas.length}
+                                color="success"
+                                max={999}
+                            >
+                                <span className="mensagem-table-badge">
+                                    Registros
+                                </span>
+                            </Badge>
+                        </div>
 
-                        <Link to={'/mensagemlista'} style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" color={buttonColor} sx={{ ml: 2 }}>
-                                Lista
-                            </Button>
-                        </Link>
+                        {erro ? (
+                            <div className="mensagem-empty">
+                                <i className="bi bi-exclamation-circle"></i>
+                                <strong>Não foi possível carregar as mensagens.</strong>
+                                <span>Tente atualizar a página.</span>
+                            </div>
+                        ) : (
+                            <div className="table-responsive">
+                                <table className="mensagem-table">
 
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            onClick={() => setMostrarLidas(!mostrarLidas)}
-                            sx={{ ml: 2 }}
-                        >
-                            {mostrarLidas ? 'Ocultar Lidas' : 'Mostrar Lidas'}
-                        </Button>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Data</th>
+                                            <th>Emissor</th>
+                                            <th>Email</th>
+                                            <th>Status</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </thead>
 
-                        <Link to={'/sendmessage'} style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" color={buttonColor} sx={{ ml: 2 }}>
-                                Enviar mensagem
-                            </Button>
-                        </Link>
-                    </Box>
+                                    <tbody>
+                                        {mensagensFiltradas.length > 0 ? (
+                                            mensagensFiltradas.map((mensagem) => {
+                                                const lida =
+                                                    mensagem.statusMensagem === "LIDA";
 
-                    <div className="table-wrapper">
-                        <table className="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Data</th>
-                                    <th scope="col">Emissor</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Abrir</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {mensagens
-                                    .filter(m => mostrarLidas || m.statusMensagem !== 'LIDA')
-                                    .map((mensagem) => {
-                                        const dataFormatada = new Date(mensagem.dataMensagem).toLocaleDateString('pt-BR');
-                                        return (
-                                            <tr key={mensagem.id}>
-                                                <td scope="row">{mensagem.id}</td>
-                                                <td>{dataFormatada}</td>
-                                                <td>{mensagem.emissor}</td>
-                                                <td>{mensagem.email}</td>
-                                                <td>{mensagem.statusMensagem}</td>
-                                                <td>
-                                                    <Button
-                                                        variant="contained"
-                                                        color="warning"
-                                                        onClick={() => lerMensagem(mensagem.id)}
-                                                        size="small"
-                                                        sx={{ display: 'flex', alignItems: 'center' }}
-                                                    >
-                                                        <i className="bi bi-envelope-open me-2"></i>Abrir
-                                                    </Button>
+                                                return (
+                                                    <tr key={mensagem.id}>
+
+                                                        <td className="mensagem-id">
+                                                            #{mensagem.id}
+                                                        </td>
+
+                                                        <td>
+                                                            {formatarData(mensagem.dataMensagem)}
+                                                        </td>
+
+                                                        <td>
+                                                            <div className="mensagem-emissor">
+                                                                <div className="mensagem-avatar">
+                                                                    <i className="bi bi-person"></i>
+                                                                </div>
+
+                                                                <span>
+                                                                    {mensagem.emissor}
+                                                                </span>
+                                                            </div>
+                                                        </td>
+
+                                                        <td className="mensagem-email">
+                                                            {mensagem.email}
+                                                        </td>
+
+                                                        <td>
+                                                            <span className={`mensagem-status ${
+                                                                lida
+                                                                    ? "mensagem-lida"
+                                                                    : "mensagem-nao-lida"
+                                                            }`}>
+                                                                <i className={`bi ${
+                                                                    lida
+                                                                        ? "bi-check-circle"
+                                                                        : "bi-circle-fill"
+                                                                }`}></i>
+
+                                                                {mensagem.statusMensagem}
+                                                            </span>
+                                                        </td>
+
+                                                        <td>
+                                                            <button
+                                                                type="button"
+                                                                className="mensagem-open-button"
+                                                                onClick={() => lerMensagem(mensagem.id)}
+                                                                title={`Abrir mensagem ${mensagem.id}`}
+                                                            >
+                                                                <i className="bi bi-folder2-open"></i>
+                                                                Abrir
+                                                            </button>
+                                                        </td>
+
+                                                    </tr>
+                                                );
+                                            })
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="6">
+                                                    <div className="mensagem-empty">
+                                                        <i className="bi bi-inbox"></i>
+
+                                                        <strong>
+                                                            Nenhuma mensagem encontrada
+                                                        </strong>
+
+                                                        <span>
+                                                            {mostrarLidas
+                                                                ? "Não existem mensagens cadastradas."
+                                                                : "Não há mensagens não lidas no momento."
+                                                            }
+                                                        </span>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                        );
-                                    })}
-                            </tbody>
-                        </table>
+                                        )}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        )}
+
+                        <div className="mensagem-table-footer">
+                            <span>
+                                Exibindo <strong>{mensagensFiltradas.length}</strong> de{" "}
+                                <strong>{mensagens.length}</strong> mensagens.
+                            </span>
+                        </div>
+
                     </div>
+
                 </section>
-            </div>
+            </main>
         </div>
     );
 };

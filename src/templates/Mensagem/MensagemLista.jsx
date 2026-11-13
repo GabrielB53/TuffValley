@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import MensagemService from '../../services/MensagemService';
 import Sidebar from '../../components/Menu/Sidebar';
@@ -8,41 +9,51 @@ import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import { useNavigate } from 'react-router-dom';
 
+import './MensagensLista.css';
+
 const MensagensLista = () => {
   const recordsPerPage = [6, 8, 10];
+
   const [records, setRecords] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(recordsPerPage[0]);
-  const [pages, setPages] = useState(0);
   const [search, setSearch] = useState('');
+  const [alerta, setAlerta] = useState({
+    show: false,
+    message: '',
+    type: ''
+  });
+
   const navigate = useNavigate();
+
+  const pages = Math.ceil(records.length / rowsPerPage);
+  const totalPages = Math.max(pages, 1);
+
+  const registrosExibidos = records.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
 
   const lerMensagem = (id) => {
     navigate(`/mensagemler/${id}`);
-  };
-  // Estado do alerta
-  const [alerta, setAlerta] = useState({ show: false, message: '', type: '' });
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
   };
 
   const findAll = () => {
     MensagemService.findAll()
       .then((response) => {
-        const data = response.data || [];
-        setRecords(data);
+        setRecords(response.data || []);
         setPage(0);
-        setPages(Math.ceil(data.length / rowsPerPage));
         setAlerta({ show: false, message: '', type: '' });
       })
       .catch((error) => {
         console.error('Erro ao buscar todas as mensagens:', error);
         setRecords([]);
-        setPages(0);
         setPage(0);
-        setAlerta({ show: true, message: 'Erro ao carregar mensagens.', type: 'error' });
+        setAlerta({
+          show: true,
+          message: 'Erro ao carregar mensagens.',
+          type: 'error'
+        });
       });
   };
 
@@ -52,30 +63,36 @@ const MensagensLista = () => {
 
   const findByEmail = () => {
     const trimmedEmail = search.trim();
-  
+
     if (!trimmedEmail) {
       findAll();
       return;
     }
-  
+
     MensagemService.findByEmail(trimmedEmail)
       .then((response) => {
         const data = response.data || [];
-        if (data.length === 0) {
-          setAlerta({ show: true, message: 'Nenhuma mensagem encontrada para esse email.', type: 'warning' });
-        } else {
-          setAlerta({ show: true, message: 'Mensagens encontradas com sucesso!', type: 'success' });
-        }
+
         setRecords(data);
         setPage(0);
-        setPages(Math.ceil(data.length / rowsPerPage));
+
+        setAlerta({
+          show: true,
+          message: data.length === 0
+            ? 'Nenhuma mensagem encontrada para esse email.'
+            : 'Mensagens encontradas com sucesso!',
+          type: data.length === 0 ? 'warning' : 'success'
+        });
       })
       .catch((error) => {
         console.error('Erro ao buscar mensagens:', error);
         setRecords([]);
-        setPages(0);
         setPage(0);
-        setAlerta({ show: true, message: 'Erro ao buscar mensagens. Tente novamente.', type: 'error' });
+        setAlerta({
+          show: true,
+          message: 'Erro ao buscar mensagens. Tente novamente.',
+          type: 'error'
+        });
       });
   };
 
@@ -84,162 +101,226 @@ const MensagensLista = () => {
     findByEmail();
   };
 
+  const limparBusca = () => {
+    setSearch('');
+    findAll();
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(Number(event.target.value));
+    setPage(0);
+  };
+
   useEffect(() => {
     findAll();
   }, []);
 
   useEffect(() => {
-    setPages(Math.ceil(records.length / rowsPerPage));
-    if (page > Math.ceil(records.length / rowsPerPage) - 1) {
-      setPage(0);
+    if (page > pages - 1) {
+      setPage(Math.max(pages - 1, 0));
     }
-  }, [rowsPerPage, records]);
-
-  const listItems = () => {
-    let items = [];
-    for (let i = 1; i <= pages; i++) {
-      items.push(
-        <li className="page-item" key={i}>
-          <button
-            className="page-link"
-            type="button"
-            value={i}
-            onClick={(e) => setPage(e.target.value - 1)}
-          >
-            {i}
-          </button>
-        </li>
-      );
-    }
-    return (
-      <nav aria-label="Page navigation example">
-        <ul className="pagination pt-3">
-          <li className="page-item">
-            <button
-              className="page-link"
-              type="button"
-              aria-label="Previous"
-              onClick={() => setPage((p) => (p > 0 ? p - 1 : p))}
-            >
-              <span aria-hidden="true">&laquo;</span>
-            </button>
-          </li>
-          {items}
-          <li className="page-item">
-            <button
-              className="page-link"
-              type="button"
-              aria-label="Next"
-              onClick={() => setPage((p) => (p < pages - 1 ? p + 1 : p))}
-            >
-              <span aria-hidden="true">&raquo;</span>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    );
-  };
+  }, [page, pages]);
 
   return (
-    <div className="d-flex">
+    <div className="mensagens-layout d-flex">
       <Sidebar />
-      <div className="p-3 w-100">
-        <Header goto={'/mensagem'} title={'Lista de Mensagens'} logo={logo} />
 
-        <section>
-          <form className="shadow m-2 row py-4 rounded-2" onSubmit={onSearchSubmit}>
-            <label htmlFor="inputSearch" className="col-lg-3 col-form-label fs-5 mt-1">
-              Pesquise por email:
-            </label>
-            <div className="col-lg-8">
-              <input
-                type="text"
-                className="form-control fs-5 mt-1"
-                id="inputSearch"
-                placeholder="Pesquise aqui..."
-                value={search}
-                onChange={onChangeSearch}
-                aria-label="Campo de busca por email"
-              />
+      <main className="mensagens-content w-100">
+        <Header
+          goto="/mensagem"
+          title="Lista de Mensagens"
+          logo={logo}
+        />
+
+        <section className="mensagens-container">
+
+          {/* Cabeçalho da página */}
+          <div className="mensagens-heading">
+            <div>
+              <span className="mensagens-overline">
+                CENTRAL DE ATENDIMENTO
+              </span>
+
+              <h2>Mensagens recebidas</h2>
+
+              <p>
+                Consulte, pesquise e acompanhe as mensagens enviadas
+                pelos usuários.
+              </p>
             </div>
-            <div className="col-lg-1 d-flex flex-row-reverse mt-1">
-              <button type="submit" className="btn btn-primary" aria-label="Buscar por email">
-                <i className="bi bi-search fs-5"></i>
+
+            <div className="mensagens-total-card">
+              <i className="bi bi-envelope-paper"></i>
+              <div>
+                <strong>{records.length}</strong>
+                <span>Mensagens cadastradas</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Busca */}
+          <div className="mensagens-search-card">
+            <form onSubmit={onSearchSubmit}>
+              <div className="mensagens-search-field">
+                <i className="bi bi-search"></i>
+
+                <input
+                  type="text"
+                  placeholder="Pesquisar mensagens por email..."
+                  value={search}
+                  onChange={onChangeSearch}
+                  aria-label="Pesquisar por email"
+                />
+
+                {search && (
+                  <button
+                    type="button"
+                    className="mensagens-clear-button"
+                    onClick={limparBusca}
+                    title="Limpar pesquisa"
+                  >
+                    <i className="bi bi-x-lg"></i>
+                  </button>
+                )}
+              </div>
+
+              <button type="submit" className="mensagens-search-button">
+                <i className="bi bi-search"></i>
+                <span>Pesquisar</span>
               </button>
-            </div>
-          </form>
+            </form>
+          </div>
 
-          {/* Alerta condicional */}
+          {/* Alertas */}
           {alerta.show && (
             <Alert
-              icon={alerta.type === 'success' ? <CheckIcon fontSize="inherit" /> : null}
+              icon={
+                alerta.type === 'success'
+                  ? <CheckIcon fontSize="inherit" />
+                  : undefined
+              }
               severity={alerta.type}
-              className="alert-position mb-3"
-              onClose={() => setAlerta({ show: false, message: '', type: '' })}
+              className="mensagens-alert"
+              onClose={() =>
+                setAlerta({ show: false, message: '', type: '' })
+              }
             >
               {alerta.message}
             </Alert>
           )}
 
-          <div className="table-responsive">
-            <table className="table table-striped table-hover table-bordered shadow">
-              <thead className="table-warning text-center">
-                <tr>
-                  <th>ID</th>
-                  <th>Data</th>
-                  <th>Remetente</th>
-                  <th>Email</th>
-                  <th>Telefone</th>
-                  <th>Status</th>
-                  <th>Abrir</th>
-                </tr>
-              </thead>
-              <tbody>
-                {(rowsPerPage > 0
-                  ? records.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  : records
-                ).map((mensagem) => (
-                  <tr key={mensagem.id}>
-                    <td scope="row" className="text-center">
-                      {mensagem.id}
-                    </td>
-                    <td>{mensagem.dataMensagem}</td>
-                    <td>{mensagem.emissor}</td>
-                    <td>{mensagem.email}</td>
-                    <td>{mensagem.telefone}</td>
-                    <td className="text-center">{mensagem.statusMensagem}</td>
-                    <td className="text-center">
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-success"
-                        aria-label={`Abrir mensagem ${mensagem.id}`}
-                        title={`Abrir mensagem ${mensagem.id}`}
-                        onClick={() => lerMensagem(mensagem.id)}
-                      >
-                        <i className="bi bi-folder2-open"></i>
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <hr />
-            <div className=" bg-opacity-25 d-flex justify-content-between align-items-center px-2 rounded-2">
-              <div className="me-1 fw-bold">
-                <span>Quantidade de Registros: </span>
-                <span>{records.length}</span>
+          {/* Tabela */}
+          <div className="mensagens-table-card">
+            <div className="mensagens-table-heading">
+              <div>
+                <h3>Caixa de entrada</h3>
+                <span>Gerencie as mensagens recebidas</span>
               </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <label htmlFor="itensPorPagina" className="me-2 fw-bold">
-                  Registros por página:
+
+              <span className="mensagens-count">
+                {records.length} registro(s)
+              </span>
+            </div>
+
+            <div className="table-responsive">
+              <table className="mensagens-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Remetente</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {registrosExibidos.length > 0 ? (
+                    registrosExibidos.map((mensagem) => (
+                      <tr key={mensagem.id}>
+                        <td className="mensagem-id">
+                          #{mensagem.id}
+                        </td>
+
+                        <td>{mensagem.dataMensagem}</td>
+
+                        <td className="mensagem-remetente">
+                          <div className="mensagem-avatar">
+                            <i className="bi bi-person"></i>
+                          </div>
+                          {mensagem.emissor}
+                        </td>
+
+                        <td>{mensagem.email}</td>
+
+                        <td>{mensagem.telefone}</td>
+
+                        <td>
+                          <span className={`mensagem-status ${
+                            String(mensagem.statusMensagem || '')
+                              .toUpperCase() === 'LIDA'
+                              ? 'status-lida'
+                              : 'status-pendente'
+                          }`}>
+                            {mensagem.statusMensagem || 'Não informado'}
+                          </span>
+                        </td>
+
+                        <td>
+                          <button
+                            type="button"
+                            className="mensagem-open-button"
+                            title={`Abrir mensagem ${mensagem.id}`}
+                            aria-label={`Abrir mensagem ${mensagem.id}`}
+                            onClick={() => lerMensagem(mensagem.id)}
+                          >
+                            <i className="bi bi-folder2-open"></i>
+                            <span>Abrir</span>
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="7">
+                        <div className="mensagens-empty">
+                          <i className="bi bi-inbox"></i>
+                          <strong>Nenhuma mensagem encontrada</strong>
+                          <span>
+                            Tente pesquisar com outro email ou limpe
+                            o campo de busca.
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Rodapé e paginação */}
+            <div className="mensagens-table-footer">
+              <div className="mensagens-pagination-info">
+                Exibindo{' '}
+                <strong>
+                  {records.length === 0 ? 0 : page * rowsPerPage + 1}
+                  {' - '}
+                  {Math.min((page + 1) * rowsPerPage, records.length)}
+                </strong>
+                {' '}de <strong>{records.length}</strong> mensagens
+              </div>
+
+              <div className="mensagens-pagination-controls">
+                <label htmlFor="itensPorPagina">
+                  Por página:
                 </label>
+
                 <select
                   id="itensPorPagina"
-                  className="form-select me-2"
                   value={rowsPerPage}
                   onChange={handleChangeRowsPerPage}
-                  aria-label="Selecionar quantidade de registros por página"
-                  style={{ width: '70px' }}
                 >
                   {recordsPerPage.map((r) => (
                     <option value={r} key={r}>
@@ -247,12 +328,36 @@ const MensagensLista = () => {
                     </option>
                   ))}
                 </select>
-                <div>{listItems()}</div>
+
+                <div className="mensagens-pagination">
+                  <button
+                    type="button"
+                    disabled={page === 0 || pages === 0}
+                    onClick={() => setPage((p) => p - 1)}
+                    aria-label="Página anterior"
+                  >
+                    <i className="bi bi-chevron-left"></i>
+                  </button>
+
+                  <span>
+                    {pages === 0 ? 0 : page + 1} / {pages}
+                  </span>
+
+                  <button
+                    type="button"
+                    disabled={page >= totalPages - 1 || pages === 0}
+                    onClick={() => setPage((p) => p + 1)}
+                    aria-label="Próxima página"
+                  >
+                    <i className="bi bi-chevron-right"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+
         </section>
-      </div>
+      </main>
     </div>
   );
 };

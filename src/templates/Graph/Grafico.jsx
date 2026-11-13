@@ -1,34 +1,55 @@
-import Header from "../../components/Header/Header"
-import Sidebar from '../../components/Menu/Sidebar'
-import logo from '../../assets/images/home.png'
-import Comp from '../../components/Grafico/Graficos'
 
+import Header from "../../components/Header/Header";
+import Sidebar from "../../components/Menu/Sidebar";
+import logo from "../../assets/images/home.png";
+import Comp from "../../components/Grafico/Graficos";
+
+import "./Grafico.css";
 
 const Grafico = () => {
-   
     return (
-        <div className="d-flex">
-           <Sidebar />
-           <div className="p-3 w-100">
-                <Header 
-                    goto={'/home'}
-                    title={'Gráfico'}
-                    logo={logo}
-                    />
-            <section className=" caixota mt-2 mb-2">
-                <h2>Análise de Dados Semanais</h2>
-                <p>Nesta seção, você pode visualizar as tendências de uso/consumo em diferentes turnos ao longo da semana. 
-                    Este gráfico ajuda a identificar padrões que podem ser usados para otimizar recursos, ajustar 
-                    planejamentos e garantir que a gestão escolar esteja alinhada com as necessidades reais
-                     dos alunos e da instituição.</p>
-            </section>
-                <div id="ContainerGraph" className="caixota">
-                    <Comp/>
-                </div>
-             
-           </div>
-        </div>
-    )
-}
+        <div className="grafico-page">
+            <Sidebar />
 
-export default Grafico
+            <main className="grafico-main">
+                <Header
+                    goto="/home"
+                    title="Análise de Dados"
+                    logo={logo}
+                />
+
+                <div className="grafico-page-content">
+
+                    <section className="grafico-intro">
+                        <div className="grafico-intro-text">
+                            <span className="grafico-overline">
+                                PAINEL DE GESTÃO
+                            </span>
+
+                            <h1>Análise de desempenho</h1>
+
+                            <p>
+                                Acompanhe a ocupação das áreas da estufa,
+                                visualize tendências e obtenha informações
+                                que auxiliam no planejamento e na gestão
+                                dos espaços disponíveis.
+                            </p>
+                        </div>
+
+                        <div className="grafico-intro-icon">
+                            <i className="bi bi-bar-chart-line"></i>
+                        </div>
+                    </section>
+
+                    <section className="grafico-section">
+
+                        <Comp />
+                    </section>
+
+                </div>
+            </main>
+        </div>
+    );
+};
+
+export default Grafico;
