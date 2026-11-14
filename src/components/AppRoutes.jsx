@@ -1,79 +1,172 @@
-import { Routes, Route } from "react-router-dom"
-import App from "../templates/App/App"
-import Home from "../templates/Home/Home"
 
-import ForgotPass from "../templates/Login/ForgotPass"
-import Login from "../templates/Login/Login"
+import { Routes, Route } from "react-router-dom";
 
-import Mensagem from "../templates/Mensagem/Mensagem"
-import MensagemLer from "../templates/Mensagem/MensagemLer"
+import App from "../templates/App/App";
+import Home from "../templates/Home/Home";
 
-import Usuario from "../templates/Usuario/Usuario"
-import UsuarioEditar from "../templates/Usuario/UsuarioEditar"
-import UsuarioNovo from "../templates/Usuario/UsuarioNovo"
-import UsuariosLista from "../templates/Usuario/UsuariosLista"
+import ForgotPass from "../templates/Login/ForgotPass";
+import Login from "../templates/Login/Login";
+import LoginNewPass from "../templates/Login/LoginNewPass";
+import NewUser from "../templates/Login/NewUser";
 
-import Grafico from "../templates/Graph/Grafico"
-import AddCardapio from "../templates/Cardapio/AddCardapio"
-import AlterarCardapio from "../templates/Cardapio/AlterarCardapio"
-import Cardapio from "../templates/Cardapio/Cardapio"
-import { ThemeProvider } from "../contexts/ThemeContext"
-import CardapioLista from "../templates/Cardapio/CardapioLista"
-import MensagemLista from "../templates/Mensagem/MensagemLista"
-import LoginNewPass from "../templates/Login/LoginNewPass"
-import UsuarioPerfil from "../templates/Usuario/UsuarioPerfil"
-import UsuarioAlterarSenha from "../templates/Usuario/UsuarioAlterarSenha"
-import RotaProtegida from "./Acesso/RotaProtegida"
-import SendMessage from "../templates/Mensagem/SendMessage"
-import AddCategoria from "../templates/Cardapio/AddCategoria"
-import AddPrato from "../templates/Cardapio/AddPratos"
-import AddProduto from "../templates/Cardapio/AddProdutos"
-import AlterarPrato from "../templates/Cardapio/AlterarPrato"
-import PratoLista from "../templates/Cardapio/Pratos"
-import NewUser from "../templates/Login/NewUser"
-import Planos from "../templates/App/Planos"
+import RotaProtegida from "./Acesso/RotaProtegida";
+
+import Mensagem from "../templates/Mensagem/Mensagem";
+import MensagemLer from "../templates/Mensagem/MensagemLer";
+import MensagemLista from "../templates/Mensagem/MensagemLista";
+import SendMessage from "../templates/Mensagem/SendMessage";
+
+import Usuario from "../templates/Usuario/Usuario";
+import UsuarioEditar from "../templates/Usuario/UsuarioEditar";
+import UsuarioNovo from "../templates/Usuario/UsuarioNovo";
+import UsuariosLista from "../templates/Usuario/UsuariosLista";
+import UsuarioPerfil from "../templates/Usuario/UsuarioPerfil";
+import UsuarioAlterarSenha from "../templates/Usuario/UsuarioAlterarSenha";
+
+import Grafico from "../templates/Graph/Grafico";
+import Planos from "../templates/App/Planos";
+
+import { ThemeProvider } from "../contexts/ThemeContext";
+
 const AppRoutes = () => {
-  return (
-    <ThemeProvider>
-      <div>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/planos" element={<Planos />} />
-          <Route path="/home" element={<Home />} />
+    return (
+        <ThemeProvider>
+            <Routes>
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/newpass/:id" element={<LoginNewPass />}></Route>
-          <Route path="/newuser" element={<NewUser />} />
-          <Route path="/forgotpass" element={<ForgotPass />} />
+                {/* =====================================
+                    ROTAS PÚBLICAS
+                ===================================== */}
 
-          <Route path="/mensagem" element={<Mensagem />} />
-          <Route path="/mensagemler/:id" element={<MensagemLer />} />
-          <Route path="/mensagemlista" element={<MensagemLista />} />
-          <Route path="/sendmessage" element={<SendMessage />} />
+                <Route path="/" element={<App />} />
+                <Route path="/planos" element={<Planos />} />
+
+                <Route path="/login" element={<Login />} />
+                <Route path="/newuser" element={<NewUser />} />
+                <Route path="/forgotpass" element={<ForgotPass />} />
+                <Route path="/newpass/:id" element={<LoginNewPass />} />
 
 
-          <Route path="/usuario" element={<Usuario />} />
-          <Route path="/usuarioperfil/:id" element={<UsuarioPerfil />} />
-          <Route path="/usuarioalterarsenha/:id" element={<UsuarioAlterarSenha />} />
-          <Route path="/usuarioslista" element={<UsuariosLista />} />
-          <Route path="/usuarionovo" element={<UsuarioNovo />} />
-          <Route path="/usuarioeditar/:id" element={<UsuarioEditar />} />
+                {/* =====================================
+                    ROTAS PARA USUÁRIOS AUTENTICADOS
+                    ADMIN e USER
+                ===================================== */}
 
-          <Route path="/grafico" element={<Grafico />} />
+                <Route
+                    path="/home"
+                    element={
+                        <RotaProtegida>
+                            <Home />
+                        </RotaProtegida>
+                    }
+                />
 
-          <Route path="/addcardapio" element={<AddCardapio />} />
-          <Route path="/addcategoria" element={< AddCategoria />} />
-          <Route path="/addprato" element={< AddPrato />} />
-          <Route path="/addproduto" element={< AddProduto />} />
-          <Route path="/alterarprato/:id" element={< AlterarPrato />} />
-          <Route path="/alterarcardapio/:id" element={<AlterarCardapio />} />
-          <Route path="/cardapio" element={<Cardapio />} />
-          <Route path="/cardapiolista" element={<CardapioLista />} />
-          <Route path="/pratolista" element={<PratoLista />} />
-        </Routes>
+                <Route
+                    path="/usuario"
+                    element={
+                        <RotaProtegida>
+                            <Usuario />
+                        </RotaProtegida>
+                    }
+                />
 
-      </div>
-    </ThemeProvider>
-  )
-}
-export default AppRoutes
+                <Route
+                    path="/usuarioperfil/:id"
+                    element={
+                        <RotaProtegida>
+                            <UsuarioPerfil />
+                        </RotaProtegida>
+                    }
+                />
+
+                <Route
+                    path="/usuarioalterarsenha/:id"
+                    element={
+                        <RotaProtegida>
+                            <UsuarioAlterarSenha />
+                        </RotaProtegida>
+                    }
+                />
+
+
+                {/* =====================================
+                    ROTAS EXCLUSIVAS PARA ADMINISTRADORES
+                ===================================== */}
+
+                <Route
+                    path="/mensagem"
+                    element={
+                        <RotaProtegida nivelAcesso="ADMIN">
+                            <Mensagem />
+                        </RotaProtegida>
+                    }
+                />
+
+                <Route
+                    path="/mensagemler/:id"
+                    element={
+                        <RotaProtegida nivelAcesso="ADMIN">
+                            <MensagemLer />
+                        </RotaProtegida>
+                    }
+                />
+
+                <Route
+                    path="/mensagemlista"
+                    element={
+                        <RotaProtegida nivelAcesso="ADMIN">
+                            <MensagemLista />
+                        </RotaProtegida>
+                    }
+                />
+
+                <Route
+                    path="/sendmessage"
+                    element={
+                        <RotaProtegida nivelAcesso="ADMIN">
+                            <SendMessage />
+                        </RotaProtegida>
+                    }
+                />
+
+                <Route
+                    path="/usuarioslista"
+                    element={
+                        <RotaProtegida nivelAcesso="ADMIN">
+                            <UsuariosLista />
+                        </RotaProtegida>
+                    }
+                />
+
+                <Route
+                    path="/usuarionovo"
+                    element={
+                        <RotaProtegida nivelAcesso="ADMIN">
+                            <UsuarioNovo />
+                        </RotaProtegida>
+                    }
+                />
+
+                <Route
+                    path="/usuarioeditar/:id"
+                    element={
+                        <RotaProtegida nivelAcesso="ADMIN">
+                            <UsuarioEditar />
+                        </RotaProtegida>
+                    }
+                />
+
+                <Route
+                    path="/grafico"
+                    element={
+                        <RotaProtegida nivelAcesso="ADMIN">
+                            <Grafico />
+                        </RotaProtegida>
+                    }
+                />
+
+            </Routes>
+        </ThemeProvider>
+    );
+};
+
+export default AppRoutes;

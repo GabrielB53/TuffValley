@@ -1,0 +1,279 @@
+
+/* =========================================
+   TUFFVALLEY - IMAGE UPLOADER
+========================================= */
+
+.img-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    width: 100%;
+    padding: 20px;
+
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.image-uploader-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.image-uploader-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.image-uploader-heading > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    background: var(--surface-secondary);
+    color: var(--primary);
+
+    border-radius: 12px;
+
+    font-size: 1.25rem;
+}
+
+.image-uploader-heading h6 {
+    margin: 0 0 4px;
+
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.image-uploader-heading p {
+    margin: 0;
+
+    color: var(--text-secondary);
+    font-size: 0.76rem;
+}
+
+.image-uploader-format {
+    padding: 6px 10px;
+
+    background: var(--surface-secondary);
+    color: var(--text-secondary);
+
+    border-radius: 20px;
+
+    font-size: 0.68rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* =========================================
+   CONTROLES
+========================================= */
+
+.image-uploader-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.image-uploader-input {
+    display: none;
+}
+
+.image-uploader-select-label {
+    display: inline-flex;
+    margin: 0;
+    cursor: pointer;
+}
+
+.image-uploader-select.MuiButton-root {
+    min-height: 40px;
+    padding: 8px 16px;
+
+    background: var(--primary);
+    color: var(--surface);
+
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 750;
+    text-transform: none;
+
+    box-shadow: none;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.image-uploader-select.MuiButton-root:hover {
+    background: var(--accent);
+    color: #242719;
+    box-shadow: none;
+    transform: translateY(-1px);
+}
+
+.image-uploader-empty {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-style: italic;
+}
+
+/* =========================================
+   ARQUIVO SELECIONADO
+========================================= */
+
+.image-uploader-file {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    flex: 1;
+    min-width: 150px;
+
+    padding: 8px 10px;
+
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+
+    color: var(--text-color);
+    font-size: 0.78rem;
+}
+
+.image-uploader-file > i {
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.image-uploader-file span {
+    flex: 1;
+    min-width: 0;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.image-uploader-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    background: transparent;
+    color: var(--danger, #D97863);
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.image-uploader-delete:hover {
+    background: var(--surface);
+}
+
+/* =========================================
+   ERROS
+========================================= */
+
+.image-uploader-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 12px;
+
+    background: rgba(217, 120, 99, 0.12);
+    color: var(--danger, #D97863);
+
+    border: 1px solid rgba(217, 120, 99, 0.3);
+    border-radius: 9px;
+
+    font-size: 0.78rem;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 576px) {
+    .img-card {
+        padding: 16px;
+    }
+
+    .image-uploader-header {
+        align-items: flex-start;
+    }
+
+    .image-uploader-heading {
+        gap: 9px;
+    }
+
+    .image-uploader-heading > i {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+
+    .image-uploader-heading p {
+        max-width: 190px;
+        line-height: 1.4;
+    }
+
+    .image-uploader-controls {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .image-uploader-select-label,
+    .image-uploader-select.MuiButton-root {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .image-uploader-file {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
+
+.image-uploader-select-label:focus-within {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .img-card *,
+    .img-card {
+        transition: none !important;
+    }
+}

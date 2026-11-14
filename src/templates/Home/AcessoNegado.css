@@ -1,0 +1,283 @@
+
+/* =========================================
+   TUFFVALLEY - ACESSO NEGADO
+========================================= */
+
+.access-denied-page {
+    min-height: 100vh;
+    width: 100%;
+    padding: 24px;
+    background: var(--background, #F4F1E8);
+    color: var(--text-color, #242719);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.access-denied-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   CONTEÚDO PRINCIPAL
+========================================= */
+
+.access-denied-content {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 760px;
+    min-height: 570px;
+
+    margin: 55px auto;
+    padding: 55px 40px;
+
+    text-align: center;
+
+    background: var(--surface-color, #FFFFFF);
+    border: 1px solid var(--border-color, #D5D9C8);
+    border-radius: 28px;
+
+    box-shadow: 0 12px 40px rgba(36, 39, 25, 0.07);
+}
+
+/* =========================================
+   DECORAÇÃO BOTÂNICA
+========================================= */
+
+.access-denied-decoration {
+    position: absolute;
+    top: -55px;
+    right: -45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+    background: var(--surface-secondary, #D5D9C8);
+    opacity: 0.45;
+}
+
+.access-denied-leaf {
+    font-size: 100px !important;
+    color: var(--primary, #50552C);
+    transform: rotate(-25deg);
+}
+
+/* =========================================
+   ÍCONE CENTRAL
+========================================= */
+
+.access-denied-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 105px;
+    height: 105px;
+
+    margin-bottom: 25px;
+
+    border-radius: 32px;
+
+    background: rgba(120, 33, 23, 0.10);
+    color: var(--danger, #782117);
+}
+
+.access-denied-icon svg {
+    font-size: 54px;
+}
+
+/* =========================================
+   TEXTOS
+========================================= */
+
+.access-denied-eyebrow {
+    margin-bottom: 12px;
+
+    color: var(--primary, #50552C);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.access-denied-content h1 {
+    max-width: 550px;
+    margin: 0 0 18px;
+
+    color: var(--text-color, #242719);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.access-denied-description {
+    max-width: 500px;
+    margin: 0;
+
+    color: var(--text-secondary, #686C5B);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* =========================================
+   AVISO DE SEGURANÇA
+========================================= */
+
+.access-denied-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    width: 100%;
+    max-width: 470px;
+
+    margin-top: 28px;
+    padding: 16px 20px;
+
+    border: 1px solid var(--border-color, #D5D9C8);
+    border-radius: 14px;
+
+    background: var(--surface-secondary, #D5D9C8);
+
+    color: var(--text-color, #242719);
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.access-denied-notice svg {
+    flex-shrink: 0;
+    color: var(--danger, #782117);
+    font-size: 23px;
+}
+
+/* =========================================
+   BOTÃO
+========================================= */
+
+.access-denied-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    margin-top: 30px;
+    padding: 14px 25px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: var(--primary, #50552C);
+    color: #FFFFFF;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.access-denied-button:hover {
+    background: var(--primary-hover, #3D4320);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(36, 39, 25, 0.16);
+}
+
+.access-denied-button:focus-visible {
+    outline: 3px solid var(--accent, #E79321);
+    outline-offset: 4px;
+}
+
+.access-denied-button svg {
+    font-size: 21px;
+}
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.access-denied-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    margin-top: 35px;
+
+    color: var(--text-secondary, #686C5B);
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.access-denied-footer svg {
+    color: var(--primary, #50552C);
+    font-size: 17px;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 600px) {
+    .access-denied-page {
+        padding: 12px;
+    }
+
+    .access-denied-content {
+        min-height: auto;
+        margin: 30px auto;
+        padding: 55px 22px 40px;
+        border-radius: 20px;
+    }
+
+    .access-denied-icon {
+        width: 85px;
+        height: 85px;
+        border-radius: 25px;
+    }
+
+    .access-denied-icon svg {
+        font-size: 44px;
+    }
+
+    .access-denied-notice {
+        padding: 14px;
+        font-size: 0.82rem;
+    }
+
+    .access-denied-footer {
+        font-size: 0.73rem;
+    }
+
+    .access-denied-decoration {
+        width: 125px;
+        height: 125px;
+    }
+
+    .access-denied-leaf {
+        font-size: 75px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .access-denied-page,
+    .access-denied-button {
+        transition: none;
+    }
+}

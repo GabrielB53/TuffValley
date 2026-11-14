@@ -1,15 +1,30 @@
+
 import React, { useContext } from 'react';
-import { ThemeContext } from '../../contexts/ThemeContext'; // Importe o contexto
 import Button from '@mui/material/Button';
+import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
+import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
+
+import { ThemeContext } from '../../contexts/ThemeContext';
+import './Theme.css';
 
 function BotaoTroca() {
-    const { theme, toggleTheme } = useContext(ThemeContext); // Use o contexto
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
-    const buttonColor = theme === 'Claro' ? 'primary' : 'error';
+    const isDark = theme === 'Escuro';
 
     return (
-        <Button onClick={toggleTheme} variant='contained' color={buttonColor} sx={{ mt: 2, mb: 2 }}>
-            Trocar tema: {theme === 'Claro' ? 'Escuro' : 'Claro'}
+        <Button
+            onClick={toggleTheme}
+            variant="outlined"
+            startIcon={
+                isDark
+                    ? <WbSunnyRoundedIcon />
+                    : <DarkModeRoundedIcon />
+            }
+            aria-label={`Ativar tema ${isDark ? 'claro' : 'escuro'}`}
+            className="tuff-theme-toggle"
+        >
+            {isDark ? 'Tema claro' : 'Tema escuro'}
         </Button>
     );
 }
