@@ -1,9 +1,13 @@
 
 import React, { useContext } from 'react';
 
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import {
+    Container,
+    Nav,
+    Navbar
+} from 'react-bootstrap';
+
+import { Link, useNavigate } from 'react-router-dom';
 
 import ThemeToggleButton from '../Botoes/TrocarCor';
 
@@ -13,11 +17,9 @@ import perfil from '../../assets/images/Logozinha.png';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { UserContext } from '../../contexts/UserContext';
 
-import { useNavigate } from 'react-router-dom';
-
 import './Navegar.css';
 
-function BasicExample() {
+function Navegar() {
 
     const { theme } = useContext(ThemeContext);
     const { currentUser } = useContext(UserContext);
@@ -27,7 +29,7 @@ function BasicExample() {
     const isDark = theme === 'Escuro';
 
     const editarPerfil = () => {
-        if (currentUser) {
+        if (currentUser?.id) {
             navigate(`/usuarioperfil/${currentUser.id}`);
         }
     };
@@ -38,13 +40,19 @@ function BasicExample() {
             className="tuff-navbar"
             data-bs-theme={isDark ? 'dark' : 'light'}
         >
-            <Container fluid="lg">
+            <Container fluid="lg" className="tuff-navbar-container">
 
                 {/* IDENTIDADE VISUAL */}
-                <Navbar.Brand href="#home" className="tuff-brand">
+
+                <Navbar.Brand
+                    as={Link}
+                    to="/"
+                    className="tuff-brand"
+                    aria-label="TuffValley - Página inicial"
+                >
                     <img
                         src={Logo}
-                        alt="Logo TuffValley"
+                        alt=""
                         className="tuff-logo"
                     />
 
@@ -53,31 +61,36 @@ function BasicExample() {
                     </span>
                 </Navbar.Brand>
 
-                {/* MENU MOBILE */}
-                <Navbar.Toggle aria-controls="tuff-navbar-content" />
+                {/* CONTROLE DO MENU MOBILE */}
+
+                <Navbar.Toggle
+                    aria-controls="tuff-navbar-content"
+                    aria-label="Abrir ou fechar menu"
+                />
+
+                {/* CONTEÚDO DA NAVBAR */}
 
                 <Navbar.Collapse id="tuff-navbar-content">
 
                     <Nav className="ms-auto align-items-lg-center tuff-nav-actions">
 
-                        {/* USUÁRIO LOGADO */}
+                        {/* PERFIL DO USUÁRIO */}
+
                         {currentUser && (
-                            <div
+                            <button
+                                type="button"
                                 className="tuff-user-profile"
                                 onClick={editarPerfil}
-                                role="button"
-                                tabIndex={0}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter') editarPerfil();
-                                }}
+                                aria-label={`Acessar perfil de ${currentUser.nome}`}
                             >
                                 <img
                                     src={currentUser.foto || perfil}
-                                    alt="Foto do usuário"
+                                    alt=""
                                     className="tuff-user-avatar"
                                 />
 
-                                <div className="tuff-user-info">
+                                <span className="tuff-user-info">
+
                                     <span className="tuff-user-name">
                                         {currentUser.nome}
                                     </span>
@@ -85,11 +98,18 @@ function BasicExample() {
                                     <span className="tuff-user-role">
                                         {currentUser.nivelAcesso || 'USER'}
                                     </span>
-                                </div>
-                            </div>
+
+                                </span>
+
+                                <span
+                                    className="tuff-user-indicator"
+                                    aria-hidden="true"
+                                />
+                            </button>
                         )}
 
-                        {/* TROCA DE TEMA */}
+                        {/* DIVISOR E TROCA DE TEMA */}
+
                         <div className="tuff-theme-button">
                             <ThemeToggleButton />
                         </div>
@@ -103,4 +123,4 @@ function BasicExample() {
     );
 }
 
-export default BasicExample;
+export default Navegar;

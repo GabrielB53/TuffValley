@@ -1,18 +1,20 @@
-
 /* =========================================
    TUFFVALLEY - NAVBAR
 ========================================= */
 
 .tuff-navbar {
     width: 100%;
-    min-height: 76px;
-    padding: 10px 0;
+    min-height: 78px;
+    padding: 11px 0;
 
-    background-color: var(--surface);
+    background: var(--surface);
     color: var(--text-color);
 
     border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 3px 12px rgba(36, 39, 25, 0.06);
+    box-shadow: 0 4px 18px rgba(36, 39, 25, 0.055);
+
+    position: relative;
+    z-index: 1000;
 
     transition:
         background-color 0.3s ease,
@@ -28,32 +30,47 @@
 .tuff-brand {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 11px;
 
     margin: 0;
+    padding: 4px 0;
+
     color: var(--text-color);
+    text-decoration: none;
 
+    font-size: 1.38rem;
     font-weight: 800;
-    font-size: 1.4rem;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.7px;
 
-    transition: color 0.3s ease;
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
 }
 
 .tuff-brand:hover {
     color: var(--primary);
+    transform: translateY(-1px);
 }
 
 .tuff-logo {
-    width: 46px;
-    height: 46px;
+    width: 45px;
+    height: 45px;
+
     object-fit: contain;
-    border-radius: 12px;
+    border-radius: 13px;
+
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+}
+
+.tuff-brand:hover .tuff-logo {
+    transform: rotate(-4deg) scale(1.04);
 }
 
 .tuff-brand-name {
     color: var(--text-color);
-    transition: color 0.3s ease;
+    transition: color 0.25s ease;
 }
 
 .tuff-brand:hover .tuff-brand-name {
@@ -67,15 +84,20 @@
 .tuff-nav-actions {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 17px;
 }
 
-/* BOTÃO DE TEMA */
+/* =========================================
+   BOTÃO DE TEMA
+========================================= */
 
 .tuff-theme-button {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    padding-left: 15px;
+    border-left: 1px solid var(--border-color);
 }
 
 /* =========================================
@@ -85,63 +107,149 @@
 .tuff-user-profile {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 11px;
 
-    padding: 6px 12px;
-    border-radius: 10px;
+    padding: 7px 13px 7px 8px;
+
+    border: 1px solid transparent;
+    border-radius: 14px;
 
     cursor: pointer;
+    outline: none;
 
     transition:
-        background-color 0.3s ease,
-        transform 0.2s ease;
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .tuff-user-profile:hover {
     background-color: var(--surface-secondary);
+    border-color: var(--border-color);
     transform: translateY(-1px);
 }
 
+.tuff-user-profile:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+}
+
 .tuff-user-avatar {
-    width: 42px;
-    height: 42px;
+    width: 43px;
+    height: 43px;
 
     object-fit: cover;
     border-radius: 50%;
 
     border: 2px solid var(--primary);
+    background-color: var(--surface-secondary);
+
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.tuff-user-profile:hover .tuff-user-avatar {
+    transform: scale(1.04);
 }
 
 .tuff-user-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
+
+    min-width: 0;
 }
 
 .tuff-user-name {
+    max-width: 180px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
     color: var(--text-color);
     font-size: 0.88rem;
     font-weight: 700;
+    line-height: 1.2;
 }
 
 .tuff-user-role {
     color: var(--text-secondary);
-    font-size: 0.68rem;
+
+    font-size: 0.66rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.1px;
 }
 
 /* =========================================
-   MENU MOBILE
+   BOTÃO DO MENU MOBILE
 ========================================= */
 
 .tuff-navbar .navbar-toggler {
-    border-color: var(--border-color);
-    padding: 7px 10px;
+    padding: 8px 10px;
+
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+
+    background-color: var(--surface-secondary);
+
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.tuff-navbar .navbar-toggler:hover {
+    border-color: var(--primary);
+    background-color: var(--surface-secondary);
 }
 
 .tuff-navbar .navbar-toggler:focus {
-    box-shadow: 0 0 0 3px rgba(122, 134, 96, 0.2);
+    box-shadow: 0 0 0 3px rgba(122, 134, 96, 0.22);
+}
+
+/* Ícone do menu no tema escuro */
+
+.dark-theme .tuff-navbar .navbar-toggler-icon {
+    filter: invert(0.85);
+}
+
+/* =========================================
+   TRANSIÇÃO DO MENU
+========================================= */
+
+.tuff-navbar .navbar-collapse {
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* =========================================
+   MODO ESCURO
+========================================= */
+
+.dark-theme .tuff-navbar {
+    background: var(--surface);
+    border-bottom-color: var(--border-color);
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
+}
+
+.dark-theme .tuff-brand:hover,
+.dark-theme .tuff-brand:hover .tuff-brand-name {
+    color: var(--primary);
+}
+
+.dark-theme .tuff-user-profile:hover {
+    background-color: var(--surface-secondary);
+    border-color: var(--border-color);
+}
+
+.dark-theme .tuff-theme-button {
+    border-left-color: var(--border-color);
 }
 
 /* =========================================
@@ -150,43 +258,89 @@
 
 @media (max-width: 991px) {
 
+    .tuff-navbar {
+        min-height: 70px;
+        padding: 9px 0;
+    }
+
     .tuff-navbar .navbar-collapse {
-        padding: 15px 0 8px;
+        margin-top: 12px;
+        padding: 13px 0 5px;
+
+        border-top: 1px solid var(--border-color);
     }
 
     .tuff-nav-actions {
         align-items: flex-start !important;
         gap: 12px;
-        padding-top: 15px;
+
+        padding-top: 5px;
     }
 
     .tuff-user-profile {
-        padding-left: 0;
+        width: fit-content;
+        max-width: 100%;
+
+        padding-left: 8px;
     }
 
     .tuff-theme-button {
         justify-content: flex-start;
-        margin-top: 10px;
+
+        margin-top: 3px;
+        padding: 12px 0 0;
+
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+
+        width: 100%;
     }
 }
 
 @media (max-width: 576px) {
 
+    .tuff-navbar {
+        min-height: 66px;
+    }
+
     .tuff-brand {
+        gap: 9px;
         font-size: 1.2rem;
     }
 
     .tuff-logo {
-        width: 40px;
-        height: 40px;
+        width: 39px;
+        height: 39px;
+        border-radius: 11px;
     }
 
     .tuff-user-avatar {
-        width: 38px;
-        height: 38px;
+        width: 39px;
+        height: 39px;
     }
 
     .tuff-user-name {
-        font-size: 0.82rem;
+        max-width: 220px;
+        font-size: 0.83rem;
+    }
+
+    .tuff-user-role {
+        font-size: 0.63rem;
+    }
+
+    .tuff-user-profile {
+        gap: 9px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .tuff-navbar,
+    .tuff-brand,
+    .tuff-logo,
+    .tuff-user-profile,
+    .tuff-user-avatar,
+    .tuff-navbar .navbar-toggler {
+        transition: none;
     }
 }
