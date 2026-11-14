@@ -1,0 +1,456 @@
+
+/* =========================================
+   TUFFVALLEY - NOVO USUÁRIO
+========================================= */
+
+.newuser-page {
+    --newuser-primary: var(--primary, #50552C);
+    --newuser-primary-hover: var(--primary-hover, #414622);
+    --newuser-background: var(--background, #F4F1E8);
+    --newuser-surface: var(--surface, #FFFFFF);
+    --newuser-surface-secondary: var(--surface-secondary, #D5D9C8);
+    --newuser-text: var(--text-color, #242719);
+    --newuser-muted: var(--text-secondary, #77796C);
+    --newuser-border: var(--border-color, rgba(80, 85, 44, 0.18));
+
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(122, 134, 96, 0.13),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(231, 147, 33, 0.09),
+            transparent 30%
+        ),
+        var(--newuser-background);
+
+    color: var(--newuser-text);
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.newuser-container {
+    width: 100%;
+    max-width: 480px !important;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.newuser-card {
+    width: 100%;
+
+    padding: 42px 38px 24px;
+
+    border: 1px solid var(--newuser-border);
+    border-radius: 24px !important;
+
+    background: var(--newuser-surface) !important;
+
+    box-shadow:
+        0 20px 55px rgba(36, 39, 25, 0.08),
+        0 3px 12px rgba(36, 39, 25, 0.04) !important;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.newuser-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    margin-bottom: 32px;
+}
+
+.newuser-avatar {
+    width: 64px !important;
+    height: 64px !important;
+
+    margin-bottom: 17px;
+
+    background: var(--newuser-primary) !important;
+    color: #FFFFFF !important;
+
+    box-shadow: 0 8px 20px rgba(80, 85, 44, 0.2);
+}
+
+.newuser-avatar svg {
+    font-size: 32px;
+}
+
+.newuser-brand {
+    color: var(--newuser-primary);
+
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 3px !important;
+
+    margin-bottom: 10px !important;
+}
+
+.newuser-title {
+    color: var(--newuser-text);
+
+    font-size: 1.7rem !important;
+    font-weight: 750 !important;
+    letter-spacing: -0.8px !important;
+
+    line-height: 1.3 !important;
+
+    margin-bottom: 9px !important;
+}
+
+.newuser-description {
+    max-width: 320px;
+
+    color: var(--newuser-muted);
+
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+}
+
+/* =========================================
+   FORMULÁRIO
+========================================= */
+
+.newuser-form {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+}
+
+.newuser-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.newuser-field-label {
+    color: var(--newuser-text);
+
+    font-size: 0.84rem !important;
+    font-weight: 650 !important;
+}
+
+/* =========================================
+   CAMPOS MUI
+========================================= */
+
+.newuser-field .MuiOutlinedInput-root {
+    min-height: 54px;
+
+    color: var(--newuser-text);
+    background: var(--newuser-background);
+
+    border-radius: 11px;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.newuser-field .MuiOutlinedInput-notchedOutline {
+    border-color: var(--newuser-border);
+}
+
+.newuser-field .MuiOutlinedInput-root:hover
+.MuiOutlinedInput-notchedOutline {
+    border-color: var(--newuser-primary);
+}
+
+.newuser-field .MuiOutlinedInput-root.Mui-focused
+.MuiOutlinedInput-notchedOutline {
+    border-color: var(--newuser-primary);
+    border-width: 2px;
+}
+
+.newuser-field .MuiInputBase-input {
+    color: var(--newuser-text);
+    font-size: 0.92rem;
+}
+
+.newuser-field .MuiInputBase-input::placeholder {
+    color: var(--newuser-muted);
+    opacity: 0.8;
+}
+
+.newuser-field .MuiIconButton-root {
+    color: var(--newuser-muted);
+}
+
+.newuser-field .MuiIconButton-root:hover {
+    color: var(--newuser-primary);
+    background: transparent;
+}
+
+.newuser-field .MuiFormHelperText-root {
+    margin-left: 2px;
+    font-size: 0.76rem;
+    color: var(--newuser-muted);
+}
+
+.newuser-field .MuiFormHelperText-root.Mui-error {
+    color: #D45D4C;
+}
+
+/* =========================================
+   FEEDBACK
+========================================= */
+
+.newuser-feedback,
+.newuser-success-alert {
+    border-radius: 12px !important;
+    font-size: 0.88rem !important;
+}
+
+/* =========================================
+   BOTÃO PRINCIPAL
+========================================= */
+
+.newuser-submit {
+    min-height: 51px !important;
+
+    border-radius: 11px !important;
+
+    background: var(--newuser-primary) !important;
+    color: #FFFFFF !important;
+
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+
+    text-transform: none !important;
+
+    box-shadow: 0 5px 14px rgba(80, 85, 44, 0.17) !important;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease !important;
+}
+
+.newuser-submit:hover {
+    background: var(--newuser-primary-hover) !important;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(80, 85, 44, 0.23) !important;
+}
+
+.newuser-submit.Mui-disabled {
+    background: var(--newuser-surface-secondary) !important;
+    color: var(--newuser-muted) !important;
+
+    box-shadow: none !important;
+    opacity: 0.7;
+}
+
+/* =========================================
+   LINK PARA LOGIN
+========================================= */
+
+.newuser-login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    margin-top: 2px;
+}
+
+.newuser-login-wrapper p {
+    color: var(--newuser-muted);
+    font-size: 0.84rem;
+}
+
+.newuser-login-link {
+    color: var(--newuser-primary);
+
+    font-size: 0.84rem;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.newuser-login-link:hover {
+    color: var(--newuser-primary-hover);
+    text-decoration: underline;
+}
+
+/* =========================================
+   SUCESSO
+========================================= */
+
+.newuser-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    padding-top: 8px;
+}
+
+.newuser-success-avatar {
+    width: 66px !important;
+    height: 66px !important;
+
+    background: rgba(76, 150, 95, 0.13) !important;
+    color: #4C965F !important;
+}
+
+.newuser-success-avatar svg {
+    font-size: 36px;
+}
+
+.newuser-success-alert {
+    width: 100%;
+}
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.newuser-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+
+    margin-top: 30px;
+    padding-top: 18px;
+
+    border-top: 1px solid var(--newuser-border);
+
+    text-align: center;
+}
+
+.newuser-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--newuser-muted);
+
+    font-size: 0.84rem;
+    font-weight: 550;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.newuser-back-link:hover {
+    color: var(--newuser-primary);
+    transform: translateX(-3px);
+}
+
+.newuser-footer p {
+    color: var(--newuser-muted);
+
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+/* =========================================
+   TEMA ESCURO
+========================================= */
+
+.dark-theme .newuser-page {
+    --newuser-primary: var(--primary, #A8B58A);
+    --newuser-primary-hover: var(--primary-hover, #BBC69F);
+    --newuser-background: var(--background, #191D17);
+    --newuser-surface: var(--surface, #242B20);
+    --newuser-surface-secondary: var(--surface-secondary, #303A29);
+    --newuser-text: var(--text-color, #F2F0E6);
+    --newuser-muted: var(--text-secondary, #C2C8B3);
+    --newuser-border: var(--border-color, #46513A);
+}
+
+.dark-theme .newuser-avatar {
+    color: #242719 !important;
+}
+
+.dark-theme .newuser-submit {
+    color: #242719 !important;
+}
+
+.dark-theme .newuser-submit:hover {
+    background: var(--newuser-primary-hover) !important;
+}
+
+.dark-theme .newuser-submit.Mui-disabled {
+    color: var(--newuser-muted) !important;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 600px) {
+    .newuser-page {
+        padding: 24px 14px;
+    }
+
+    .newuser-card {
+        padding: 32px 22px 20px;
+        border-radius: 19px !important;
+    }
+
+    .newuser-title {
+        font-size: 1.5rem !important;
+    }
+
+    .newuser-footer {
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 360px) {
+    .newuser-card {
+        padding: 28px 17px 18px;
+    }
+
+    .newuser-title {
+        font-size: 1.35rem !important;
+    }
+}
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .newuser-page *,
+    .newuser-page *::before,
+    .newuser-page *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}

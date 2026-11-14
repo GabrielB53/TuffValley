@@ -54,9 +54,9 @@ const AppRoutes = () => {
                 <Route
                     path="/home"
                     element={
-                       
+                        <RotaProtegida>
                             <Home />
-                       
+                        </RotaProtegida>
                     }
                 />
 

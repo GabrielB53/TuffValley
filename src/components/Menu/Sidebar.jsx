@@ -1,13 +1,11 @@
 
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { UserContext } from "../../contexts/UserContext";
-import { ThemeContext } from "../../contexts/ThemeContext";
 
 import perfil from "../../assets/images/Logozinha.png";
 import "./Sidebar.css";
-
-import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import {
     Avatar,
@@ -27,67 +25,138 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import MenuOpenRoundedIcon from "@mui/icons-material/MenuOpenRounded";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
+// =========================================
+// CONFIGURAÇÕES
+// =========================================
+
 const SIDEBAR_STORAGE_KEY = "tuffvalley-sidebar-collapsed";
+
+const MENU_ITEMS = [
+    {
+        label: "Dashboard",
+        path: "/home",
+        icon: DashboardRoundedIcon
+    },
+    {
+        label: "Mensagem",
+        path: "/mensagem",
+        icon: MessageRoundedIcon,
+        adminOnly: true
+    },
+    {
+        label: "Usuário",
+        path: "/usuarioslista",
+        icon: PeopleAltRoundedIcon,
+        adminOnly: true
+    },
+    {
+        label: "Gráfico",
+        path: "/grafico",
+        icon: BarChartRoundedIcon,
+        adminOnly: true
+    }
+];
+
+// =========================================
+// FUNÇÕES AUXILIARES
+// =========================================
+
+// Recupera a preferência de exibição da sidebar
+const getSavedSidebarState = () => {
+    try {
+        return localStorage.getItem(SIDEBAR_STORAGE_KEY) === "true";
+    } catch {
+        return false;
+    }
+};
+
+// Verifica se a rota atual corresponde ao item
+const isRouteActive = (currentPath, itemPath) => {
+    return (
+        currentPath === itemPath ||
+        currentPath.startsWith(`${itemPath}/`)
+    );
+};
+
+// =========================================
+// COMPONENTE
+// =========================================
 
 const Sidebar = () => {
 
     const { currentUser, clearUser } = useContext(UserContext);
-    const { theme } = useContext(ThemeContext);
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Recupera o estado salvo no navegador
-    const [collapsed, setCollapsed] = useState(() => {
-        return localStorage.getItem(SIDEBAR_STORAGE_KEY) === "true";
-    });
+    // =====================================
+    // ESTADOS
+    // =====================================
 
-    // Salva sempre que o estado da sidebar mudar
+    const [collapsed, setCollapsed] = useState(getSavedSidebarState);
+
+    // Persiste a preferência sempre que houver alteração
     useEffect(() => {
-        localStorage.setItem(
-            SIDEBAR_STORAGE_KEY,
-            String(collapsed)
-        );
+        try {
+            localStorage.setItem(
+                SIDEBAR_STORAGE_KEY,
+                String(collapsed)
+            );
+        } catch {
+            // A sidebar continua funcionando mesmo sem acesso ao storage.
+        }
     }, [collapsed]);
 
-    const logout = () => {
-        clearUser();
-        navigate("/");
-    };
-
-    const editar = () => {
-        navigate(`/usuarioperfil/${currentUser.id}`);
-    };
-
-    const menuItems = [
-        {
-            label: "Dashboard",
-            path: "/home",
-            icon: <DashboardRoundedIcon />
-        },
-        {
-            label: "Mensagem",
-            path: "/mensagem",
-            icon: <MessageRoundedIcon />
-        },
-        {
-            label: "Usuário",
-            path: "/usuarioslista",
-            icon: <PeopleAltRoundedIcon />
-        },
-        {
-            label: "Gráfico",
-            path: "/grafico",
-            icon: <BarChartRoundedIcon />
-        }
-    ];
+    // =====================================
+    // DADOS DO USUÁRIO
+    // =====================================
 
     if (!currentUser) return null;
 
-    return (
-        <aside className={`sidebar ${collapsed ? "sidebar-collapsed" : ""}`}>
+    const userName = currentUser.nome?.trim() || "Usuário";
 
-            {/* CABEÇALHO DA SIDEBAR */}
+    const userRole =
+        currentUser.nivelAcesso?.toUpperCase() || "USER";
+
+    const userId = currentUser.id;
+
+    const isAdmin = userRole === "ADMIN";
+
+    // Filtra os itens conforme o nível de acesso
+    const visibleMenuItems = MENU_ITEMS.filter(
+        (item) => !item.adminOnly || isAdmin
+    );
+
+    // =====================================
+    // AÇÕES
+    // =====================================
+
+    const toggleSidebar = () => {
+        setCollapsed((previousState) => !previousState);
+    };
+
+    const handleLogout = () => {
+        clearUser();
+        navigate("/", { replace: true });
+    };
+
+    const handleEditProfile = () => {
+        if (!userId) return;
+
+        navigate(`/usuarioperfil/${userId}`);
+    };
+
+    // =====================================
+    // RENDERIZAÇÃO
+    // =====================================
+
+    return (
+        <aside
+            className={`sidebar ${collapsed ? "sidebar-collapsed" : ""}`}
+            aria-label="Menu principal do TuffValley"
+        >
+
+            {/* CABEÇALHO */}
             <div className="sidebar-header">
 
                 {!collapsed && (
@@ -96,11 +165,19 @@ const Sidebar = () => {
                     </span>
                 )}
 
-                <Tooltip title={collapsed ? "Expandir menu" : "Recolher menu"}>
+                <Tooltip
+                    title={collapsed ? "Expandir menu" : "Recolher menu"}
+                    placement="right"
+                    arrow
+                >
                     <IconButton
-                        onClick={() => setCollapsed(prev => !prev)}
+                        onClick={toggleSidebar}
                         className="sidebar-toggle"
-                        aria-label={collapsed ? "Expandir menu" : "Recolher menu"}
+                        aria-label={
+                            collapsed ? "Expandir menu" : "Recolher menu"
+                        }
+                        aria-expanded={!collapsed}
+                        type="button"
                     >
                         {collapsed
                             ? <MenuRoundedIcon />
@@ -114,10 +191,14 @@ const Sidebar = () => {
             {/* PERFIL */}
             <div className="sidebar-profile">
 
-                <Tooltip title={collapsed ? currentUser.nome : ""}>
+                <Tooltip
+                    title={collapsed ? userName : ""}
+                    placement="right"
+                    arrow
+                >
                     <Avatar
                         src={currentUser.foto || perfil}
-                        alt={currentUser.nome}
+                        alt={`Foto de perfil de ${userName}`}
                         className="sidebar-avatar"
                     />
                 </Tooltip>
@@ -127,11 +208,11 @@ const Sidebar = () => {
                         <div className="sidebar-user-info">
 
                             <span className="sidebar-user-name">
-                                {currentUser.nome}
+                                {userName}
                             </span>
 
                             <span className="sidebar-user-role">
-                                {currentUser.nivelAcesso || "USER"}
+                                {userRole}
                             </span>
 
                         </div>
@@ -141,17 +222,28 @@ const Sidebar = () => {
                             size="small"
                             className="sidebar-profile-actions"
                         >
-                            <Tooltip title="Sair da conta">
-                                <Button onClick={logout}>
+
+                            <Tooltip title="Sair da conta" arrow>
+                                <Button
+                                    onClick={handleLogout}
+                                    aria-label="Sair da conta"
+                                    type="button"
+                                >
                                     <LogoutRoundedIcon fontSize="small" />
                                 </Button>
                             </Tooltip>
 
-                            <Tooltip title="Editar perfil">
-                                <Button onClick={editar}>
+                            <Tooltip title="Editar perfil" arrow>
+                                <Button
+                                    onClick={handleEditProfile}
+                                    aria-label="Editar perfil"
+                                    disabled={!userId}
+                                    type="button"
+                                >
                                     <AccountCircleRoundedIcon fontSize="small" />
                                 </Button>
                             </Tooltip>
+
                         </ButtonGroup>
                     </>
                 )}
@@ -159,14 +251,25 @@ const Sidebar = () => {
                 {collapsed && (
                     <div className="sidebar-collapsed-actions">
 
-                        <Tooltip title="Editar perfil">
-                            <IconButton onClick={editar}>
-                                <AccountCircleRoundedIcon />
-                            </IconButton>
+                        <Tooltip title="Editar perfil" placement="right" arrow>
+                            <span>
+                                <IconButton
+                                    onClick={handleEditProfile}
+                                    disabled={!userId}
+                                    aria-label="Editar perfil"
+                                    type="button"
+                                >
+                                    <AccountCircleRoundedIcon />
+                                </IconButton>
+                            </span>
                         </Tooltip>
 
-                        <Tooltip title="Sair da conta">
-                            <IconButton onClick={logout}>
+                        <Tooltip title="Sair da conta" placement="right" arrow>
+                            <IconButton
+                                onClick={handleLogout}
+                                aria-label="Sair da conta"
+                                type="button"
+                            >
                                 <LogoutRoundedIcon />
                             </IconButton>
                         </Tooltip>
@@ -187,9 +290,14 @@ const Sidebar = () => {
                     </span>
                 )}
 
-                {menuItems.map((item) => {
+                {visibleMenuItems.map((item) => {
 
-                    const isActive = location.pathname === item.path;
+                    const isActive = isRouteActive(
+                        location.pathname,
+                        item.path
+                    );
+
+                    const ItemIcon = item.icon;
 
                     return (
                         <Tooltip
@@ -203,14 +311,18 @@ const Sidebar = () => {
                                 className={`sidebar-link ${
                                     isActive ? "active" : ""
                                 }`}
+                                aria-current={isActive ? "page" : undefined}
                             >
                                 <span className="sidebar-link-icon">
-                                    {item.icon}
+                                    <ItemIcon />
                                 </span>
 
                                 {!collapsed && (
-                                    <span>{item.label}</span>
+                                    <span className="sidebar-link-label">
+                                        {item.label}
+                                    </span>
                                 )}
+
                             </Link>
                         </Tooltip>
                     );
@@ -221,8 +333,13 @@ const Sidebar = () => {
             {/* RODAPÉ */}
             {!collapsed && (
                 <div className="sidebar-footer">
+
                     <span>TuffValley</span>
-                    <small>Conectando experiências.</small>
+
+                    <small>
+                        Conectando experiências.
+                    </small>
+
                 </div>
             )}
 

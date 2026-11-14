@@ -1,0 +1,384 @@
+
+/* =========================================
+   TUFFVALLEY - RECUPERAÇÃO DE SENHA
+========================================= */
+
+.forgot-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(122, 134, 96, 0.12),
+            transparent 35%
+        ),
+        var(--background, #F4F1E8);
+
+    color: var(--text-color, #242719);
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.forgot-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.forgot-card {
+    width: 100%;
+    max-width: 460px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 44px 42px 30px;
+
+    border: 1px solid var(--border-color, rgba(80, 85, 44, 0.15));
+    border-radius: 24px;
+
+    background: var(--surface, #FFFFFF);
+
+    box-shadow: var(--card-shadow, 0 12px 35px rgba(36, 39, 25, 0.08));
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* =========================================
+   IDENTIDADE VISUAL
+========================================= */
+
+.forgot-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 26px;
+}
+
+.forgot-avatar {
+    width: 66px !important;
+    height: 66px !important;
+
+    border-radius: 20px !important;
+
+    background: var(--primary, #50552C) !important;
+    color: #FFFFFF !important;
+
+    box-shadow: 0 7px 18px rgba(80, 85, 44, 0.2);
+}
+
+.forgot-avatar svg {
+    font-size: 32px;
+}
+
+.forgot-eyebrow {
+    color: var(--primary, #50552C);
+
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+/* =========================================
+   TÍTULOS
+========================================= */
+
+.forgot-heading {
+    width: 100%;
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.forgot-heading h1 {
+    margin: 0 0 12px;
+
+    color: var(--text-color, #242719);
+
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+.forgot-heading p {
+    max-width: 340px;
+
+    margin: 0 auto;
+
+    color: var(--text-secondary, #77796C);
+
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+/* =========================================
+   FORMULÁRIO
+========================================= */
+
+.forgot-form {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Campos MUI */
+
+.forgot-form .MuiInputLabel-root {
+    color: var(--text-secondary, #77796C);
+}
+
+.forgot-form .MuiInputLabel-root.Mui-focused {
+    color: var(--primary, #50552C);
+}
+
+.forgot-form .MuiOutlinedInput-root {
+    color: var(--text-color, #242719);
+
+    border-radius: 12px;
+
+    background: var(--background, #F4F1E8);
+
+    transition: background-color 0.25s ease;
+}
+
+.forgot-form .MuiOutlinedInput-notchedOutline {
+    border-color: var(--border-color, rgba(80, 85, 44, 0.2));
+}
+
+.forgot-form .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: var(--primary, #50552C);
+}
+
+.forgot-form .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: var(--primary, #50552C);
+    border-width: 2px;
+}
+
+.forgot-form .MuiFormHelperText-root {
+    margin-left: 4px;
+}
+
+/* =========================================
+   BOTÃO
+========================================= */
+
+.forgot-form .forgot-submit {
+    min-height: 48px;
+
+    border-radius: 12px;
+
+    background: var(--primary, #50552C);
+    color: #FFFFFF;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: none;
+
+    box-shadow: none;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.forgot-form .forgot-submit:hover {
+    background: var(--primary-hover, #414624);
+
+    box-shadow: 0 5px 14px rgba(36, 39, 25, 0.14);
+
+    transform: translateY(-1px);
+}
+
+/* =========================================
+   LINK VOLTAR
+========================================= */
+
+.forgot-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    margin-top: 25px;
+
+    color: var(--primary, #50552C);
+
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        gap 0.2s ease;
+}
+
+.forgot-back:hover {
+    color: var(--accent, #E79321);
+    gap: 11px;
+}
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.forgot-footer {
+    width: 100%;
+
+    margin-top: 30px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border-color, rgba(80, 85, 44, 0.15));
+
+    text-align: center;
+}
+
+.forgot-footer span {
+    color: var(--text-secondary, #77796C);
+
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+}
+
+/* =========================================
+   TEMA ESCURO
+========================================= */
+
+.dark-theme .forgot-page {
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(122, 134, 96, 0.12),
+            transparent 35%
+        ),
+        var(--background, #191D17);
+}
+
+.dark-theme .forgot-card {
+    background: var(--surface, #242B20);
+    border-color: var(--border-color, #46513A);
+}
+
+.dark-theme .forgot-avatar {
+    background: var(--primary, #A8B58A) !important;
+    color: #191D17 !important;
+}
+
+.dark-theme .forgot-eyebrow {
+    color: var(--primary, #A8B58A);
+}
+
+.dark-theme .forgot-heading h1 {
+    color: var(--text-color, #F2F0E6);
+}
+
+.dark-theme .forgot-heading p {
+    color: var(--text-secondary, #C2C8B3);
+}
+
+.dark-theme .forgot-form .MuiInputLabel-root {
+    color: var(--text-secondary, #C2C8B3);
+}
+
+.dark-theme .forgot-form .MuiInputLabel-root.Mui-focused {
+    color: var(--primary, #A8B58A);
+}
+
+.dark-theme .forgot-form .MuiOutlinedInput-root {
+    background: var(--background, #191D17);
+    color: var(--text-color, #F2F0E6);
+}
+
+.dark-theme .forgot-form .MuiOutlinedInput-notchedOutline {
+    border-color: var(--border-color, #46513A);
+}
+
+.dark-theme .forgot-form .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: var(--primary, #A8B58A);
+}
+
+.dark-theme .forgot-form .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: var(--primary, #A8B58A);
+}
+
+.dark-theme .forgot-form .forgot-submit {
+    background: var(--primary, #A8B58A);
+    color: #191D17;
+}
+
+.dark-theme .forgot-form .forgot-submit:hover {
+    background: var(--primary-hover, #BAC69F);
+}
+
+.dark-theme .forgot-back {
+    color: var(--primary, #A8B58A);
+}
+
+.dark-theme .forgot-back:hover {
+    color: var(--accent, #E9A23B);
+}
+
+.dark-theme .forgot-footer {
+    border-top-color: var(--border-color, #46513A);
+}
+
+.dark-theme .forgot-footer span {
+    color: var(--text-secondary, #C2C8B3);
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 480px) {
+    .forgot-page {
+        padding: 24px 16px;
+    }
+
+    .forgot-card {
+        padding: 34px 23px 25px;
+        border-radius: 20px;
+    }
+
+    .forgot-heading h1 {
+        font-size: 1.55rem;
+    }
+
+    .forgot-heading p {
+        font-size: 0.85rem;
+    }
+}
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .forgot-page *,
+    .forgot-page *::before,
+    .forgot-page *::after {
+        transition: none !important;
+    }
+}

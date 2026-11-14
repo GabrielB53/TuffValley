@@ -1,0 +1,459 @@
+
+/* =========================================
+   TUFFVALLEY - ALTERAÇÃO DE SENHA
+========================================= */
+
+.newpass-page {
+    --newpass-primary: var(--primary, #50552C);
+    --newpass-primary-hover: var(--primary-hover, #414622);
+    --newpass-background: var(--background, #F4F1E8);
+    --newpass-surface: var(--surface, #FFFFFF);
+    --newpass-surface-secondary: var(--surface-secondary, #D5D9C8);
+    --newpass-text: var(--text-color, #242719);
+    --newpass-muted: var(--text-secondary, #77796C);
+    --newpass-border: var(--border-color, rgba(80, 85, 44, 0.18));
+
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(122, 134, 96, 0.13),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(231, 147, 33, 0.09),
+            transparent 30%
+        ),
+        var(--newpass-background);
+
+    color: var(--newpass-text);
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.newpass-container {
+    width: 100%;
+    max-width: 480px !important;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.newpass-card {
+    width: 100%;
+    padding: 42px 38px 24px;
+
+    border: 1px solid var(--newpass-border);
+    border-radius: 24px !important;
+
+    background: var(--newpass-surface) !important;
+
+    box-shadow:
+        0 20px 55px rgba(36, 39, 25, 0.08),
+        0 3px 12px rgba(36, 39, 25, 0.04) !important;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.newpass-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.newpass-avatar {
+    width: 64px !important;
+    height: 64px !important;
+
+    margin-bottom: 17px;
+
+    background: var(--newpass-primary) !important;
+    color: #FFFFFF !important;
+
+    box-shadow: 0 8px 20px rgba(80, 85, 44, 0.2);
+}
+
+.newpass-avatar svg {
+    font-size: 32px;
+}
+
+.newpass-brand {
+    color: var(--newpass-primary);
+
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 3px !important;
+
+    margin-bottom: 10px !important;
+}
+
+.newpass-title {
+    color: var(--newpass-text);
+
+    font-size: 1.75rem !important;
+    font-weight: 750 !important;
+    letter-spacing: -0.8px !important;
+    line-height: 1.25 !important;
+
+    margin-bottom: 9px !important;
+}
+
+.newpass-description {
+    max-width: 310px;
+
+    color: var(--newpass-muted);
+
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+}
+
+/* =========================================
+   FORMULÁRIO
+========================================= */
+
+.newpass-form {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+}
+
+.newpass-warning {
+    border-radius: 12px !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+}
+
+.newpass-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.newpass-field-label {
+    color: var(--newpass-text);
+
+    font-size: 0.84rem !important;
+    font-weight: 650 !important;
+}
+
+/* =========================================
+   CAMPOS MUI
+========================================= */
+
+.newpass-field .MuiOutlinedInput-root {
+    min-height: 54px;
+
+    color: var(--newpass-text);
+    background: var(--newpass-background);
+
+    border-radius: 11px;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.newpass-field .MuiOutlinedInput-notchedOutline {
+    border-color: var(--newpass-border);
+}
+
+.newpass-field .MuiOutlinedInput-root:hover
+.MuiOutlinedInput-notchedOutline {
+    border-color: var(--newpass-primary);
+}
+
+.newpass-field .MuiOutlinedInput-root.Mui-focused
+.MuiOutlinedInput-notchedOutline {
+    border-color: var(--newpass-primary);
+    border-width: 2px;
+}
+
+.newpass-field .MuiInputBase-input {
+    color: var(--newpass-text);
+    font-size: 0.92rem;
+}
+
+.newpass-field .MuiInputBase-input::placeholder {
+    color: var(--newpass-muted);
+    opacity: 0.8;
+}
+
+.newpass-field .MuiInputBase-input.Mui-disabled {
+    -webkit-text-fill-color: var(--newpass-muted);
+}
+
+.newpass-field .MuiIconButton-root {
+    color: var(--newpass-muted);
+}
+
+.newpass-field .MuiIconButton-root:hover {
+    color: var(--newpass-primary);
+    background: transparent;
+}
+
+.newpass-field .MuiFormHelperText-root {
+    margin-left: 2px;
+    font-size: 0.76rem;
+    color: var(--newpass-muted);
+}
+
+.newpass-field .MuiFormHelperText-root.Mui-error {
+    color: #D45D4C;
+}
+
+/* =========================================
+   MENSAGENS
+========================================= */
+
+.newpass-feedback {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.newpass-feedback-alert,
+.newpass-success-alert {
+    border-radius: 12px !important;
+    font-size: 0.88rem !important;
+}
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+.newpass-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-top: 7px;
+}
+
+.newpass-cancel,
+.newpass-submit {
+    min-height: 48px !important;
+
+    border-radius: 11px !important;
+
+    font-size: 0.86rem !important;
+    font-weight: 700 !important;
+    text-transform: none !important;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease !important;
+}
+
+.newpass-cancel {
+    flex: 0 0 auto;
+
+    border-color: var(--newpass-border) !important;
+    color: var(--newpass-text) !important;
+}
+
+.newpass-cancel:hover {
+    border-color: var(--newpass-primary) !important;
+    background: var(--newpass-surface-secondary) !important;
+}
+
+.newpass-submit {
+    flex: 1;
+
+    background: var(--newpass-primary) !important;
+    color: #FFFFFF !important;
+
+    box-shadow: 0 5px 14px rgba(80, 85, 44, 0.17) !important;
+}
+
+.newpass-submit:hover {
+    background: var(--newpass-primary-hover) !important;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(80, 85, 44, 0.23) !important;
+}
+
+.newpass-submit.Mui-disabled {
+    background: var(--newpass-surface-secondary) !important;
+    color: var(--newpass-muted) !important;
+    box-shadow: none !important;
+    opacity: 0.7;
+}
+
+/* =========================================
+   SUCESSO
+========================================= */
+
+.newpass-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    padding-top: 8px;
+}
+
+.newpass-success-avatar {
+    width: 66px !important;
+    height: 66px !important;
+
+    background: rgba(76, 150, 95, 0.13) !important;
+    color: #4C965F !important;
+}
+
+.newpass-success-avatar svg {
+    font-size: 36px;
+}
+
+.newpass-success-alert {
+    width: 100%;
+}
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.newpass-footer {
+    margin-top: 30px;
+    padding-top: 18px;
+
+    border-top: 1px solid var(--newpass-border);
+
+    text-align: center;
+}
+
+.newpass-footer p {
+    color: var(--newpass-muted);
+
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+/* =========================================
+   CARREGAMENTO
+========================================= */
+
+.newpass-loading {
+    flex-direction: column;
+    gap: 16px;
+}
+
+.newpass-loading .MuiCircularProgress-root {
+    color: var(--newpass-primary);
+}
+
+.newpass-loading p {
+    color: var(--newpass-muted);
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   TEMA ESCURO
+========================================= */
+
+.dark-theme .newpass-page {
+    --newpass-primary: var(--primary, #A8B58A);
+    --newpass-primary-hover: var(--primary-hover, #BBC69F);
+    --newpass-background: var(--background, #191D17);
+    --newpass-surface: var(--surface, #242B20);
+    --newpass-surface-secondary: var(--surface-secondary, #303A29);
+    --newpass-text: var(--text-color, #F2F0E6);
+    --newpass-muted: var(--text-secondary, #C2C8B3);
+    --newpass-border: var(--border-color, #46513A);
+}
+
+.dark-theme .newpass-avatar {
+    color: #242719 !important;
+}
+
+.dark-theme .newpass-submit {
+    color: #242719 !important;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark-theme .newpass-submit:hover {
+    background: var(--newpass-primary-hover) !important;
+}
+
+.dark-theme .newpass-submit.Mui-disabled {
+    color: var(--newpass-muted) !important;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 600px) {
+    .newpass-page {
+        padding: 24px 14px;
+    }
+
+    .newpass-card {
+        padding: 32px 22px 20px;
+        border-radius: 19px !important;
+    }
+
+    .newpass-title {
+        font-size: 1.5rem !important;
+    }
+
+    .newpass-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .newpass-cancel,
+    .newpass-submit {
+        width: 100%;
+    }
+
+    .newpass-footer {
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 360px) {
+    .newpass-card {
+        padding: 28px 17px 18px;
+    }
+
+    .newpass-title {
+        font-size: 1.35rem !important;
+    }
+}
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .newpass-page *,
+    .newpass-page *::before,
+    .newpass-page *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}

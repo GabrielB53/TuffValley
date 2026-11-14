@@ -1,201 +1,446 @@
-import React, { useEffect, useState } from "react";
+
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+
 import UsuarioService from "../../services/UsuarioService";
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+
+import {
+    Alert,
+    Avatar,
+    Box,
+    Button,
+    CircularProgress,
+    Container,
+    IconButton,
+    InputAdornment,
+    Paper,
+    TextField,
+    Typography
+} from "@mui/material";
+
+import LockResetRoundedIcon from "@mui/icons-material/LockResetRounded";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
+import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+
+import "./LoginNewPass.css";
 
 const LoginNewPass = () => {
-  const navigate = useNavigate();
-  const { id } = useParams();
+    const navigate = useNavigate();
+    const { id } = useParams();
 
-  const [usuario, setUsuario] = useState({ email: "" });
-  // só senha, nova senha e confirm
-  const [formData, setFormData] = useState({ senha: "", newpass: "" });
-  const [msgConfirm, setMsgConfirm] = useState("");
-  const [message, setMessage] = useState("");
-  const [successful, setSuccessful] = useState(false);
-  const [theme, setTheme] = useState('Claro');
+    const [usuario, setUsuario] = useState({ email: "" });
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('tema') || 'Claro';
-    setTheme(savedTheme);
+    const [formData, setFormData] = useState({
+        senha: "",
+        newpass: ""
+    });
 
-    UsuarioService.findById(id)
-      .then((response) => {
-        setUsuario(response.data);
-      })
-      .catch(console.error);
-  }, [id]);
+    const [loading, setLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const buttonColor = theme === 'Claro' ? 'primary' : 'error';
-  const avatarBgColor = theme === 'Claro' ? 'primary.main' : 'error.main';
-  const textColor = theme === 'Claro' ? '' : 'white';
+    const [message, setMessage] = useState("");
+    const [successful, setSuccessful] = useState(false);
+    const [loadError, setLoadError] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(data => ({ ...data, [name]: value }));
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmation, setShowConfirmation] = useState(false);
 
-    if (name === 'newpass' || name === 'senha') {
-      setMsgConfirm(
-        name === 'newpass' && formData.senha !== value ? 'As senhas não conferem!' : ''
-      );
-    }
-  };
+    // Busca os dados do usuário
+    useEffect(() => {
+        let active = true;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setMessage("");
+        if (!id) {
+            setLoadError(true);
+            setLoading(false);
+            return;
+        }
 
-    if (formData.senha !== formData.newpass) {
-      setMsgConfirm('As senhas não conferem!');
-      return;
-    }
+        UsuarioService.findById(id)
+            .then((response) => {
+                if (active) {
+                    setUsuario(response.data);
+                }
+            })
+            .catch((error) => {
+                console.error("Erro ao buscar usuário:", error);
 
-    // Envia { senha: "novaSenha" } como o controller espera
-    UsuarioService.alterarSenha(id, { senha: formData.senha })
-      .then(response => {
-        setMessage(response.data.message || "Senha alterada com sucesso!");
-        setSuccessful(true);
-      })
-      .catch(error => {
-        const respMessage =
-          error.response?.data?.message || error.message || error.toString();
-        setMessage(respMessage);
-        setSuccessful(false);
-      });
-  };
+                if (active) {
+                    setLoadError(true);
+                }
+            })
+            .finally(() => {
+                if (active) {
+                    setLoading(false);
+                }
+            });
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <Box className="caixota" sx={{ marginTop: 8 }}>
-        <form onSubmit={handleSubmit} noValidate>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Avatar sx={{ m: 1, bgcolor: avatarBgColor }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5" sx={{ color: textColor }}>
-              Alterar Senha
-            </Typography>
-          </Box>
+        return () => {
+            active = false;
+        };
+    }, [id]);
 
-          {!successful && (
-            <>
-              <Typography sx={{ mt: 1, mb: 2, textAlign: 'center', color: theme === 'Claro' ? 'error.main' : 'warning.main' }}>
-                O Usuário precisa Alterar a senha para ter acesso.
-              </Typography>
+    // Atualiza os campos
+    const handleChange = (e) => {
+        const { name, value } = e.target;
 
-              <TextField
-                margin="normal"
-                fullWidth
-                id="email"
-                name="email"
-                label="Email"
-                value={usuario.email || ""}
-                InputProps={{ readOnly: true, style: { color: textColor } }}
-                InputLabelProps={{ style: { color: textColor } }}
-              />
+        setFormData((previous) => ({
+            ...previous,
+            [name]: value
+        }));
 
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="senha"
-                name="senha"
-                label="Nova Senha"
-                type="password"
-                value={formData.senha}
-                onChange={handleChange}
-                InputProps={{ style: { color: textColor } }}
-                InputLabelProps={{ style: { color: textColor } }}
-              />
+        setMessage("");
+    };
 
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="newpass"
-                name="newpass"
-                label="Confirmar Senha"
-                type="password"
-                value={formData.newpass}
-                onChange={handleChange}
-                InputProps={{ style: { color: textColor } }}
-                InputLabelProps={{ style: { color: textColor } }}
-              />
+    // Validação da confirmação
+    const passwordsDoNotMatch =
+        formData.newpass.length > 0 &&
+        formData.senha !== formData.newpass;
 
-              {msgConfirm && (
-                <Typography color="error" variant="body2" sx={{ mt: 1 }}>
-                  {msgConfirm}
-                </Typography>
-              )}
+    // Envio da nova senha
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-                <Button variant="outlined" color="warning" onClick={() => navigate("/")}>
-                  Cancelar
-                </Button>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color={buttonColor}
-                  disabled={!formData.senha || !formData.newpass}
-                >
-                  Alterar Senha
-                </Button>
-              </Box>
-            </>
-          )}
+        setMessage("");
 
-          {message && successful && (
-            <Box sx={{ mt: 3 }}>
-              <Typography
-                variant="body1"
-                sx={{
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                  p: 2,
-                  borderRadius: 2,
-                  bgcolor: 'success.main',
-                  color: 'white',
-                }}
-              >
-                {message}
-              </Typography>
-              <Box textAlign="center" mt={2}>
-                <Link to="/home">
-                  <Button variant="contained" color="warning">
-                    Acessar o sistema
-                  </Button>
-                </Link>
-              </Box>
+        if (!formData.senha || !formData.newpass) {
+            setMessage("Preencha os dois campos de senha.");
+            return;
+        }
+
+        if (formData.senha !== formData.newpass) {
+            setMessage("As senhas não conferem.");
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            const response = await UsuarioService.alterarSenha(id, {
+                senha: formData.senha
+            });
+
+            setMessage(
+                response.data?.message ||
+                "Sua senha foi alterada com sucesso!"
+            );
+
+            setSuccessful(true);
+            setFormData({ senha: "", newpass: "" });
+
+        } catch (error) {
+            console.error("Erro ao alterar senha:", error);
+
+            const errorMessage =
+                error.response?.data?.message ||
+                "Não foi possível alterar sua senha. Tente novamente.";
+
+            setMessage(errorMessage);
+            setSuccessful(false);
+
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    // Carregamento inicial
+    if (loading) {
+        return (
+            <Box className="newpass-page newpass-loading">
+                <CircularProgress />
+                <Typography>Carregando seus dados...</Typography>
             </Box>
-          )}
+        );
+    }
 
-          {message && !successful && (
-            <Box sx={{ mt: 3 }}>
-              <Typography
-                variant="body1"
-                sx={{
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                  p: 2,
-                  borderRadius: 2,
-                  bgcolor: 'error.main',
-                  color: 'white',
-                }}
-              >
-                {message}
-              </Typography>
-            </Box>
-          )}
-        </form>
-      </Box>
-    </Container>
-  );
+    return (
+        <Box className="newpass-page">
+            <Container maxWidth="sm" className="newpass-container">
+
+                <Paper elevation={0} className="newpass-card">
+
+                    {/* Cabeçalho */}
+                    <Box className="newpass-header">
+
+                        <Avatar className="newpass-avatar">
+                            <LockResetRoundedIcon />
+                        </Avatar>
+
+                        <Typography className="newpass-brand">
+                            TUFFVALLEY
+                        </Typography>
+
+                        <Typography
+                            component="h1"
+                            className="newpass-title"
+                        >
+                            {successful
+                                ? "Tudo certo!"
+                                : "Defina sua nova senha"}
+                        </Typography>
+
+                        <Typography className="newpass-description">
+                            {successful
+                                ? "Sua conta está pronta para continuar."
+                                : "Um novo começo também merece uma nova senha."}
+                        </Typography>
+
+                    </Box>
+
+                    {/* Erro ao carregar usuário */}
+                    {loadError && (
+                        <Box className="newpass-feedback">
+
+                            <Alert severity="error">
+                                Não foi possível carregar os dados da sua
+                                conta. Verifique o acesso e tente novamente.
+                            </Alert>
+
+                            <Button
+                                component={Link}
+                                to="/login"
+                                variant="contained"
+                                fullWidth
+                                className="newpass-submit"
+                            >
+                                Voltar para o login
+                            </Button>
+
+                        </Box>
+                    )}
+
+                    {/* Formulário */}
+                    {!loadError && !successful && (
+                        <Box
+                            component="form"
+                            onSubmit={handleSubmit}
+                            className="newpass-form"
+                            noValidate
+                        >
+
+                            <Alert
+                                severity="warning"
+                                className="newpass-warning"
+                            >
+                                Para continuar utilizando o sistema, é
+                                necessário atualizar sua senha.
+                            </Alert>
+
+                            {/* E-mail */}
+                            <Box className="newpass-field-group">
+                                <Typography className="newpass-field-label">
+                                    Conta vinculada
+                                </Typography>
+
+                                <TextField
+                                    fullWidth
+                                    name="email"
+                                    value={usuario.email || ""}
+                                    placeholder="Seu e-mail"
+                                    disabled={!usuario.email}
+                                    slotProps={{
+                                        input: {
+                                            readOnly: true
+                                        }
+                                    }}
+                                    className="newpass-field"
+                                />
+                            </Box>
+
+                            {/* Nova senha */}
+                            <Box className="newpass-field-group">
+                                <Typography className="newpass-field-label">
+                                    Nova senha
+                                </Typography>
+
+                                <TextField
+                                    fullWidth
+                                    required
+                                    name="senha"
+                                    type={showPassword ? "text" : "password"}
+                                    value={formData.senha}
+                                    onChange={handleChange}
+                                    placeholder="Digite sua nova senha"
+                                    autoComplete="new-password"
+                                    className="newpass-field"
+                                    slotProps={{
+                                        input: {
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        onClick={() =>
+                                                            setShowPassword(
+                                                                !showPassword
+                                                            )
+                                                        }
+                                                        edge="end"
+                                                        aria-label={
+                                                            showPassword
+                                                                ? "Ocultar senha"
+                                                                : "Mostrar senha"
+                                                        }
+                                                    >
+                                                        {showPassword
+                                                            ? <VisibilityOffRoundedIcon />
+                                                            : <VisibilityRoundedIcon />
+                                                        }
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            )
+                                        }
+                                    }}
+                                />
+                            </Box>
+
+                            {/* Confirmação */}
+                            <Box className="newpass-field-group">
+                                <Typography className="newpass-field-label">
+                                    Confirmar nova senha
+                                </Typography>
+
+                                <TextField
+                                    fullWidth
+                                    required
+                                    name="newpass"
+                                    type={
+                                        showConfirmation
+                                            ? "text"
+                                            : "password"
+                                    }
+                                    value={formData.newpass}
+                                    onChange={handleChange}
+                                    placeholder="Digite novamente sua senha"
+                                    autoComplete="new-password"
+                                    error={passwordsDoNotMatch}
+                                    helperText={
+                                        passwordsDoNotMatch
+                                            ? "As senhas não conferem."
+                                            : "Repita a senha para confirmar."
+                                    }
+                                    className="newpass-field"
+                                    slotProps={{
+                                        input: {
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        onClick={() =>
+                                                            setShowConfirmation(
+                                                                !showConfirmation
+                                                            )
+                                                        }
+                                                        edge="end"
+                                                        aria-label={
+                                                            showConfirmation
+                                                                ? "Ocultar confirmação"
+                                                                : "Mostrar confirmação"
+                                                        }
+                                                    >
+                                                        {showConfirmation
+                                                            ? <VisibilityOffRoundedIcon />
+                                                            : <VisibilityRoundedIcon />
+                                                        }
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            )
+                                        }
+                                    }}
+                                />
+                            </Box>
+
+                            {/* Mensagem de erro */}
+                            {message && (
+                                <Alert
+                                    severity="error"
+                                    className="newpass-feedback-alert"
+                                >
+                                    {message}
+                                </Alert>
+                            )}
+
+                            {/* Ações */}
+                            <Box className="newpass-actions">
+
+                                <Button
+                                    variant="outlined"
+                                    startIcon={<ArrowBackRoundedIcon />}
+                                    onClick={() => navigate("/")}
+                                    disabled={isSubmitting}
+                                    className="newpass-cancel"
+                                >
+                                    Cancelar
+                                </Button>
+
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    disabled={
+                                        !formData.senha ||
+                                        !formData.newpass ||
+                                        passwordsDoNotMatch ||
+                                        isSubmitting
+                                    }
+                                    className="newpass-submit"
+                                >
+                                    {isSubmitting ? (
+                                        <>
+                                            <CircularProgress
+                                                size={19}
+                                                color="inherit"
+                                                sx={{ mr: 1 }}
+                                            />
+                                            Salvando...
+                                        </>
+                                    ) : (
+                                        "Alterar senha"
+                                    )}
+                                </Button>
+
+                            </Box>
+
+                        </Box>
+                    )}
+
+                    {/* Sucesso */}
+                    {successful && (
+                        <Box className="newpass-success">
+
+                            <Avatar className="newpass-success-avatar">
+                                <CheckCircleRoundedIcon />
+                            </Avatar>
+
+                            <Alert
+                                severity="success"
+                                className="newpass-success-alert"
+                            >
+                                {message}
+                            </Alert>
+
+                            <Button
+                                component={Link}
+                                to="/home"
+                                variant="contained"
+                                fullWidth
+                                className="newpass-submit"
+                            >
+                                Acessar o sistema
+                            </Button>
+
+                        </Box>
+                    )}
+
+                    {/* Rodapé */}
+                    <Box className="newpass-footer">
+                        <Typography>
+                            Cultivando conexões, experiências e possibilidades.
+                        </Typography>
+                    </Box>
+
+                </Paper>
+
+            </Container>
+        </Box>
+    );
 };
 
 export default LoginNewPass;

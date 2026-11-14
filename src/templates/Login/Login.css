@@ -1,0 +1,417 @@
+
+/* =========================================
+   TUFFVALLEY - LOGIN
+========================================= */
+
+.login-page {
+    --login-primary: var(--primary, #50552C);
+    --login-primary-hover: var(--primary-hover, #414622);
+    --login-background: var(--background, #F4F1E8);
+    --login-surface: var(--surface, #FFFFFF);
+    --login-surface-secondary: var(--surface-secondary, #D5D9C8);
+    --login-text: var(--text-color, #242719);
+    --login-muted: var(--text-secondary, #77796C);
+    --login-border: var(--border-color, rgba(80, 85, 44, 0.18));
+
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(122, 134, 96, 0.13),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(231, 147, 33, 0.09),
+            transparent 30%
+        ),
+        var(--login-background);
+
+    color: var(--login-text);
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 480px !important;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.login-card {
+    width: 100%;
+
+    padding: 42px 38px 24px;
+
+    border: 1px solid var(--login-border);
+    border-radius: 24px !important;
+
+    background: var(--login-surface) !important;
+
+    box-shadow:
+        0 20px 55px rgba(36, 39, 25, 0.08),
+        0 3px 12px rgba(36, 39, 25, 0.04) !important;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.login-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    margin-bottom: 34px;
+}
+
+.login-avatar {
+    width: 64px !important;
+    height: 64px !important;
+
+    margin-bottom: 17px;
+
+    background: var(--login-primary) !important;
+    color: #FFFFFF !important;
+
+    box-shadow: 0 8px 20px rgba(80, 85, 44, 0.2);
+}
+
+.login-avatar svg {
+    font-size: 32px;
+}
+
+.login-brand {
+    color: var(--login-primary);
+
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 3px !important;
+
+    margin-bottom: 10px !important;
+}
+
+.login-title {
+    color: var(--login-text);
+
+    font-size: 1.8rem !important;
+    font-weight: 750 !important;
+    letter-spacing: -0.8px !important;
+
+    line-height: 1.25 !important;
+
+    margin-bottom: 9px !important;
+}
+
+.login-description {
+    max-width: 310px;
+
+    color: var(--login-muted);
+
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+}
+
+/* =========================================
+   FORMULÁRIO
+========================================= */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
+.login-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.login-field-label {
+    color: var(--login-text);
+
+    font-size: 0.84rem !important;
+    font-weight: 650 !important;
+}
+
+.login-password-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* =========================================
+   CAMPOS MUI
+========================================= */
+
+.login-field .MuiOutlinedInput-root {
+    min-height: 54px;
+
+    color: var(--login-text);
+    background: var(--login-background);
+
+    border-radius: 11px;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.login-field .MuiOutlinedInput-notchedOutline {
+    border-color: var(--login-border);
+}
+
+.login-field .MuiOutlinedInput-root:hover
+.MuiOutlinedInput-notchedOutline {
+    border-color: var(--login-primary);
+}
+
+.login-field .MuiOutlinedInput-root.Mui-focused
+.MuiOutlinedInput-notchedOutline {
+    border-color: var(--login-primary);
+    border-width: 2px;
+}
+
+.login-field .MuiInputBase-input {
+    color: var(--login-text);
+    font-size: 0.92rem;
+}
+
+.login-field .MuiInputBase-input::placeholder {
+    color: var(--login-muted);
+    opacity: 0.8;
+}
+
+.login-field .MuiIconButton-root {
+    color: var(--login-muted);
+}
+
+.login-field .MuiIconButton-root:hover {
+    color: var(--login-primary);
+    background: transparent;
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+.login-forgot-link {
+    color: var(--login-primary);
+
+    font-size: 0.78rem;
+    font-weight: 650;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.login-forgot-link:hover {
+    color: var(--login-primary-hover);
+    text-decoration: underline;
+}
+
+.login-back-wrapper {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 2px;
+}
+
+.login-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--login-muted);
+
+    font-size: 0.84rem;
+    font-weight: 550;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.login-back-link:hover {
+    color: var(--login-primary);
+    transform: translateX(-3px);
+}
+
+/* =========================================
+   MENSAGEM DE ERRO
+========================================= */
+
+.login-error {
+    border-radius: 12px !important;
+    font-size: 0.88rem !important;
+}
+
+/* =========================================
+   BOTÃO PRINCIPAL
+========================================= */
+
+.login-submit {
+    min-height: 51px !important;
+
+    border-radius: 11px !important;
+
+    background: var(--login-primary) !important;
+    color: #FFFFFF !important;
+
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+
+    text-transform: none !important;
+
+    box-shadow: 0 5px 14px rgba(80, 85, 44, 0.17) !important;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease !important;
+}
+
+.login-submit:hover {
+    background: var(--login-primary-hover) !important;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(80, 85, 44, 0.23) !important;
+}
+
+.login-submit.Mui-disabled {
+    background: var(--login-surface-secondary) !important;
+    color: var(--login-muted) !important;
+
+    box-shadow: none !important;
+    opacity: 0.7;
+}
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.login-footer {
+    margin-top: 30px;
+    padding-top: 18px;
+
+    border-top: 1px solid var(--login-border);
+
+    text-align: center;
+}
+
+.login-footer p {
+    color: var(--login-muted);
+
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+/* =========================================
+   TEMA ESCURO
+========================================= */
+
+.dark-theme .login-page {
+    --login-primary: var(--primary, #A8B58A);
+    --login-primary-hover: var(--primary-hover, #BBC69F);
+    --login-background: var(--background, #191D17);
+    --login-surface: var(--surface, #242B20);
+    --login-surface-secondary: var(--surface-secondary, #303A29);
+    --login-text: var(--text-color, #F2F0E6);
+    --login-muted: var(--text-secondary, #C2C8B3);
+    --login-border: var(--border-color, #46513A);
+}
+
+.dark-theme .login-avatar {
+    color: #242719 !important;
+}
+
+.dark-theme .login-submit {
+    color: #242719 !important;
+}
+
+.dark-theme .login-submit:hover {
+    background: var(--login-primary-hover) !important;
+}
+
+.dark-theme .login-submit.Mui-disabled {
+    color: var(--login-muted) !important;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 600px) {
+    .login-page {
+        padding: 24px 14px;
+    }
+
+    .login-card {
+        padding: 32px 22px 20px;
+        border-radius: 19px !important;
+    }
+
+    .login-title {
+        font-size: 1.55rem !important;
+    }
+
+    .login-footer {
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 360px) {
+    .login-card {
+        padding: 28px 17px 18px;
+    }
+
+    .login-title {
+        font-size: 1.4rem !important;
+    }
+
+    .login-password-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .login-page *,
+    .login-page *::before,
+    .login-page *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
