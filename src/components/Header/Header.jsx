@@ -1,6 +1,7 @@
 
+import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import Logo from '../../assets/images/Logo.png';
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -9,11 +10,9 @@ import Typography from "@mui/material/Typography";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
-import defaultLogo from "../../assets/images/Logo.png";
-
 import "./Header.css";
 
-const Header = ({ goto = "/", title = "Página", logo = defaultLogo }) => {
+const Header = ({ goto = "/", title = "Página", logo }) => {
     const navigate = useNavigate();
 
     const vaipara = () => {
@@ -29,7 +28,7 @@ const Header = ({ goto = "/", title = "Página", logo = defaultLogo }) => {
                     variant="contained"
                     startIcon={<ArrowBackRoundedIcon />}
                     className="tuff-header-back"
-                    aria-label={`Voltar para ${title}`}
+                    aria-label="Voltar para a página anterior"
                 >
                     Voltar
                 </Button>
@@ -42,10 +41,9 @@ const Header = ({ goto = "/", title = "Página", logo = defaultLogo }) => {
                 </Typography>
 
                 <Avatar
-                    src={logo}
+                    src={Logo}
                     className="tuff-header-avatar"
                     variant="rounded"
-                    alt="Logo TuffValley"
                 >
                     <HomeRoundedIcon />
                 </Avatar>
@@ -55,4 +53,4 @@ const Header = ({ goto = "/", title = "Página", logo = defaultLogo }) => {
     );
 };
 
-export default Header;s
+export default Header;

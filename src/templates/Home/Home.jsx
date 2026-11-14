@@ -63,32 +63,7 @@ const Home = () => {
                         </div>
                     </section>
 
-                    {/* EXPLORAÇÃO DE ESPAÇOS */}
-                    <section
-                        className="home-carousel-section"
-                        aria-label="Exploração de espaços"
-                    >
-
-                        <div className="home-section-heading">
-                            <div>
-                                <span className="home-section-eyebrow">
-                                    DESCUBRA
-                                </span>
-
-                                <h3>
-                                    Explore novos espaços
-                                </h3>
-
-                                <p>
-                                    Encontre experiências que combinam
-                                    com o seu momento.
-                                </p>
-                            </div>
-                        </div>
-
-                        <CustomCarousel />
-
-                    </section>
+                    <CustomCarousel />
 
                     {/* CONTEÚDO DO DASHBOARD */}
                     <section className="home-main">
