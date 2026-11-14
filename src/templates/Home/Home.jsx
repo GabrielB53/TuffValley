@@ -6,9 +6,17 @@ import logo from "../../assets/images/home.png";
 import CustomCarousel from "../../components/Carousel/Carousel";
 import ContentHome from "../../components/Secoes/ContentHome";
 
+import { useUser } from "../../contexts/UserContext";
+
 import "./Home.css";
 
 const Home = () => {
+    const { currentUser } = useUser();
+
+    const primeiroNome = currentUser?.nome?.trim()
+        ? currentUser.nome.trim().split(" ")[0]
+        : "cultivador";
+
     return (
         <div className="home-layout">
 
@@ -22,33 +30,75 @@ const Home = () => {
                     logo={logo}
                 />
 
-                <div className="home-dashboard">
+                <main className="home-dashboard">
 
+                    {/* BOAS-VINDAS */}
                     <section className="home-welcome">
-                        <div className="home-welcome-heading">
+                        <div className="home-welcome-content">
+
                             <span className="home-eyebrow">
-                                TUFFVALLEY
+                                <span className="home-eyebrow-dot" />
+                                SEU ESPAÇO TUFFVALLEY
                             </span>
 
-                            <h2>Bem-vindo!</h2>
+                            <h2>
+                                Olá, {primeiroNome}!
+                            </h2>
 
                             <p>
-                                Explore o sistema e acompanhe as
-                                informações disponíveis.
+                                Cada experiência é uma oportunidade
+                                de florescer. Explore novos espaços,
+                                descubra possibilidades e aproveite
+                                tudo o que a TuffValley preparou para você.
                             </p>
+
+                        </div>
+
+                        <div
+                            className="home-welcome-decoration"
+                            aria-hidden="true"
+                        >
+                            <span className="home-decoration-circle" />
+                            <span className="home-decoration-circle home-decoration-circle-secondary" />
                         </div>
                     </section>
 
-                    <section className="home-carousel-section">
+                    {/* EXPLORAÇÃO DE ESPAÇOS */}
+                    <section
+                        className="home-carousel-section"
+                        aria-label="Exploração de espaços"
+                    >
+
+                        <div className="home-section-heading">
+                            <div>
+                                <span className="home-section-eyebrow">
+                                    DESCUBRA
+                                </span>
+
+                                <h3>
+                                    Explore novos espaços
+                                </h3>
+
+                                <p>
+                                    Encontre experiências que combinam
+                                    com o seu momento.
+                                </p>
+                            </div>
+                        </div>
+
                         <CustomCarousel />
+
                     </section>
 
-                    <main className="home-main">
+                    {/* CONTEÚDO DO DASHBOARD */}
+                    <section className="home-main">
                         <ContentHome />
-                    </main>
+                    </section>
 
-                </div>
+                </main>
+
             </div>
+
         </div>
     );
 };

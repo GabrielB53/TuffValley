@@ -1,5 +1,5 @@
 
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import { UserContext } from "../../contexts/UserContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
@@ -27,6 +27,8 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import MenuOpenRoundedIcon from "@mui/icons-material/MenuOpenRounded";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
+const SIDEBAR_STORAGE_KEY = "tuffvalley-sidebar-collapsed";
+
 const Sidebar = () => {
 
     const { currentUser, clearUser } = useContext(UserContext);
@@ -35,7 +37,18 @@ const Sidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [collapsed, setCollapsed] = useState(false);
+    // Recupera o estado salvo no navegador
+    const [collapsed, setCollapsed] = useState(() => {
+        return localStorage.getItem(SIDEBAR_STORAGE_KEY) === "true";
+    });
+
+    // Salva sempre que o estado da sidebar mudar
+    useEffect(() => {
+        localStorage.setItem(
+            SIDEBAR_STORAGE_KEY,
+            String(collapsed)
+        );
+    }, [collapsed]);
 
     const logout = () => {
         clearUser();
@@ -85,7 +98,7 @@ const Sidebar = () => {
 
                 <Tooltip title={collapsed ? "Expandir menu" : "Recolher menu"}>
                     <IconButton
-                        onClick={() => setCollapsed(!collapsed)}
+                        onClick={() => setCollapsed(prev => !prev)}
                         className="sidebar-toggle"
                         aria-label={collapsed ? "Expandir menu" : "Recolher menu"}
                     >

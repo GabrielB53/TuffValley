@@ -1,73 +1,89 @@
 
-/* ========================================
-   CONTENT HOME — TUFFVALLEY
-======================================== */
+/* =========================================
+   TUFFVALLEY — CONTENT HOME
+========================================= */
 
 .content-home {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 38px;
+
+    width: 100%;
+    min-width: 0;
 
     color: var(--text-color);
 }
 
-/* ========================================
-   INTRODUÇÃO
-======================================== */
+/* =========================================
+   IDENTIDADE DAS SEÇÕES
+========================================= */
+
+.content-home-eyebrow,
+.content-home-section-label {
+    display: block;
+
+    color: var(--primary);
+
+    font-size: 0.69rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+/* =========================================
+   APRESENTAÇÃO
+========================================= */
 
 .content-home-intro {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-}
+    gap: 14px;
 
-.content-home-eyebrow {
-    color: var(--primary);
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 2.5px;
+    max-width: 850px;
 }
 
 .content-home-intro h2 {
+    max-width: 750px;
     margin: 0;
 
     color: var(--text-color);
 
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.8rem, 3vw, 2.35rem);
     font-weight: 800;
-    letter-spacing: -0.7px;
+    line-height: 1.2;
+    letter-spacing: -1.1px;
 }
 
 .content-home-highlight {
-    max-width: 800px;
+    max-width: 780px;
     margin: 0;
 
-    color: var(--primary);
+    color: var(--text-secondary);
 
-    font-size: 1.05rem;
-    font-weight: 600;
-    line-height: 1.7;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.8;
 }
 
-/* ========================================
+/* =========================================
    TEXTOS INSTITUCIONAIS
-======================================== */
+========================================= */
 
 .content-home-text {
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    max-width: 950px;
 }
 
-.content-home-text h3,
-.content-home-benefits > h3 {
+.content-home-text h3 {
     margin: 0;
 
     color: var(--text-color);
 
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 800;
+    letter-spacing: -0.4px;
 }
 
 .content-home-text p {
@@ -75,20 +91,46 @@
 
     color: var(--text-secondary);
 
-    font-size: 0.96rem;
-    line-height: 1.9;
-    text-align: justify;
+    font-size: 0.94rem;
+    line-height: 1.85;
 }
 
-/* ========================================
+/* =========================================
    BENEFÍCIOS
-======================================== */
+========================================= */
 
 .content-home-benefits {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 22px;
 }
+
+.content-home-benefits-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.content-home-benefits-heading h3 {
+    margin: 0;
+
+    color: var(--text-color);
+
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.content-home-benefits-heading p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* GRADE */
 
 .content-home-grid {
     display: grid;
@@ -96,48 +138,63 @@
     gap: 16px;
 }
 
+/* CARDS */
+
 .content-home-card {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
     min-width: 0;
-    padding: 22px;
+    min-height: 190px;
+    padding: 24px;
 
-    background-color: var(--surface-secondary);
-
+    background: var(--surface);
     border: 1px solid var(--border-color);
-    border-radius: 14px;
+    border-radius: 16px;
 
     transition:
         transform 0.25s ease,
-        background-color 0.25s ease,
         border-color 0.25s ease,
-        box-shadow 0.25s ease;
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
 }
 
 .content-home-card:hover {
     transform: translateY(-4px);
+
+    border-color: var(--primary);
     box-shadow: var(--card-shadow);
 }
 
-.content-home-icon {
-    width: 46px;
-    height: 46px;
-    margin-bottom: 15px;
+/* ÍCONES */
 
+.content-home-icon {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 12px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 17px;
 
-    background-color: var(--surface);
     color: var(--primary);
+    background: var(--surface-secondary);
+
+    border-radius: 14px;
 }
 
 .content-home-icon svg {
-    font-size: 1.7rem;
+    font-size: 1.65rem;
 }
 
+/* TEXTOS DOS CARDS */
+
 .content-home-card h4 {
-    margin: 0 0 8px;
+    margin: 0 0 9px;
 
     color: var(--text-color);
 
@@ -150,53 +207,85 @@
 
     color: var(--text-secondary);
 
-    font-size: 0.88rem;
-    line-height: 1.7;
+    font-size: 0.87rem;
+    line-height: 1.75;
 }
 
-/* ========================================
+/* =========================================
    CONCLUSÃO
-======================================== */
+========================================= */
 
 .content-home-conclusion {
-    padding: 26px;
+    position: relative;
+    overflow: hidden;
 
-    background-color: var(--surface-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
 
+    padding: 28px;
+
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-color);
     border-left: 4px solid var(--primary);
-    border-radius: 12px;
+    border-radius: 16px;
+}
+
+.content-home-conclusion-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 48px;
+
+    color: var(--primary);
+    background: var(--surface);
+
+    border-radius: 14px;
+}
+
+.content-home-conclusion-icon svg {
+    font-size: 1.7rem;
+}
+
+.content-home-conclusion-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    min-width: 0;
 }
 
 .content-home-conclusion h3 {
-    margin: 0 0 14px;
+    margin: 0;
 
-    color: var(--primary);
+    color: var(--text-color);
 
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     font-weight: 800;
+    letter-spacing: -0.5px;
 }
 
 .content-home-conclusion p {
-    margin: 0 0 12px;
+    max-width: 800px;
+    margin: 0;
 
     color: var(--text-secondary);
 
-    font-size: 0.94rem;
+    font-size: 0.92rem;
     line-height: 1.8;
-    text-align: justify;
 }
 
-.content-home-conclusion p:last-child {
-    margin-bottom: 0;
-}
-
-/* ========================================
+/* =========================================
    RESPONSIVIDADE
-======================================== */
+========================================= */
 
 @media (max-width: 768px) {
     .content-home {
-        gap: 25px;
+        gap: 30px;
     }
 
     .content-home-grid {
@@ -204,29 +293,63 @@
     }
 
     .content-home-card {
-        padding: 18px;
+        min-height: auto;
+        padding: 21px;
     }
 
     .content-home-conclusion {
-        padding: 20px;
+        padding: 22px;
     }
 }
 
 @media (max-width: 480px) {
-    .content-home-text p,
-    .content-home-conclusion p {
+    .content-home {
+        gap: 25px;
+    }
+
+    .content-home-intro h2 {
+        font-size: 1.65rem;
+    }
+
+    .content-home-highlight {
+        font-size: 0.9rem;
+    }
+
+    .content-home-text h3 {
+        font-size: 1.15rem;
+    }
+
+    .content-home-text p {
         font-size: 0.88rem;
         line-height: 1.75;
     }
 
-    .content-home-highlight {
-        font-size: 0.95rem;
+    .content-home-benefits-heading h3 {
+        font-size: 1.2rem;
     }
 
-    .content-home-intro h2 {
-        font-size: 1.45rem;
+    .content-home-card {
+        padding: 18px;
+    }
+
+    .content-home-conclusion {
+        flex-direction: column;
+        gap: 15px;
+        padding: 19px;
+    }
+
+    .content-home-conclusion h3 {
+        font-size: 1.2rem;
+    }
+
+    .content-home-conclusion p {
+        font-size: 0.87rem;
     }
 }
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
     .content-home-card {

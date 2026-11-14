@@ -1,62 +1,46 @@
 
-/* ========================================
-   HEADER — TUFFVALLEY
-======================================== */
-.tuff-logo {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-}
+/* =========================================
+   TUFFVALLEY - HEADER
+========================================= */
 
 .tuff-header {
     width: 100%;
-    min-height: 76px;
-    padding: 14px 22px;
-
-    display: flex;
-    align-items: center;
-
-    background-color: var(--surface);
-    color: var(--text-color);
-
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-
-    box-shadow: var(--card-shadow);
-
+    position: relative;
+    z-index: 10;
+    background: var(--background, #F4F1E8);
+    color: var(--text-color, #242719);
+    border-bottom: 1px solid var(--border-color, rgba(80, 85, 44, 0.14));
     transition:
-        background-color 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
+        background-color 0.25s ease,
+        border-color 0.25s ease;
 }
 
 .tuff-header-content {
     width: 100%;
-
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    min-height: 76px;
+    display: flex;
     align-items: center;
-    gap: 16px;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 12px 28px;
 }
 
-/* ========================================
+/* =========================================
    BOTÃO VOLTAR
-======================================== */
+========================================= */
 
-.tuff-header-back.MuiButton-root {
-    justify-self: start;
+.tuff-header .tuff-header-back {
+    min-width: 112px;
+    min-height: 40px;
+    padding: 8px 18px;
 
-    min-height: 42px;
-    padding: 9px 17px;
-
-    border-radius: 10px;
-
-    background-color: var(--primary);
+    border-radius: 12px;
+    background: var(--primary, #50552C);
     color: #FFFFFF;
 
-    font-size: 0.88rem;
-    font-weight: 700;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
     text-transform: none;
 
     box-shadow: none;
@@ -67,95 +51,137 @@
         box-shadow 0.2s ease;
 }
 
-.tuff-header-back.MuiButton-root:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--card-shadow);
+.tuff-header .tuff-header-back:hover {
+    background: var(--primary-hover, #414624);
+    box-shadow: 0 4px 12px rgba(36, 39, 25, 0.14);
+    transform: translateY(-1px);
 }
 
-.tuff-header-back.MuiButton-root:active {
+.tuff-header .tuff-header-back:active {
     transform: translateY(0);
 }
 
-/* ========================================
+/* =========================================
    TÍTULO
-======================================== */
+========================================= */
 
-.tuff-header-title.MuiTypography-root {
-    justify-self: center;
+.tuff-header .tuff-header-title {
+    flex: 1;
+    min-width: 0;
 
-    margin: 0;
-
-    color: var(--text-color);
-
-    font-size: clamp(1.15rem, 2.5vw, 1.65rem);
-    font-weight: 800;
-    letter-spacing: -0.5px;
+    color: var(--text-color, #242719);
+    font-family: inherit;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
 
     text-align: center;
+    letter-spacing: -0.025em;
 }
 
-/* ========================================
-   AVATAR / LOGO
-======================================== */
+/* =========================================
+   LOGO
+========================================= */
 
-.tuff-header-avatar.MuiAvatar-root {
-    justify-self: end;
+.tuff-header .tuff-header-avatar {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
 
-    width: 46px;
-    height: 46px;
+    border-radius: 12px;
+    background: var(--surface-secondary, #D5D9C8);
+    color: var(--primary, #50552C);
 
-
-    font-size: 1.5rem;
+    border: 1px solid var(--border-color, rgba(80, 85, 44, 0.16));
 }
 
-.tuff-header-avatar img {
-    object-fit: contain;
-    padding: 4px;
+/* =========================================
+   DARK THEME
+========================================= */
+
+.dark-theme .tuff-header {
+    background: var(--background, #191D17);
+    border-bottom-color: var(--border-color, #46513A);
 }
 
-/* ========================================
+.dark-theme .tuff-header .tuff-header-title {
+    color: var(--text-color, #F2F0E6);
+}
+
+.dark-theme .tuff-header .tuff-header-back {
+    background: var(--primary, #A8B58A);
+    color: #191D17;
+}
+
+.dark-theme .tuff-header .tuff-header-back:hover {
+    background: var(--primary-hover, #BAC69F);
+}
+
+.dark-theme .tuff-header .tuff-header-avatar {
+    background: var(--surface-secondary, #303A29);
+    border-color: var(--border-color, #46513A);
+    color: var(--primary, #A8B58A);
+}
+
+/* =========================================
    RESPONSIVIDADE
-======================================== */
+========================================= */
 
-@media (max-width: 600px) {
-    .tuff-header {
-        min-height: 66px;
-        padding: 12px;
-    }
-
+@media (max-width: 768px) {
     .tuff-header-content {
-        gap: 8px;
+        min-height: 68px;
+        gap: 14px;
+        padding: 12px 18px;
     }
 
-    .tuff-header-back.MuiButton-root {
-        min-height: 38px;
-        padding: 7px 10px;
-        font-size: 0.8rem;
+    .tuff-header .tuff-header-title {
+        font-size: 1.15rem;
     }
 
-    .tuff-header-title.MuiTypography-root {
-        font-size: 1.05rem;
+    .tuff-header .tuff-header-back {
+        min-width: auto;
+        padding: 8px 12px;
     }
 
-    .tuff-header-avatar.MuiAvatar-root {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
+    .tuff-header .tuff-header-avatar {
+        width: 40px;
+        height: 40px;
     }
 }
 
-@media (max-width: 380px) {
-    .tuff-header-back.MuiButton-root {
-        min-width: 0;
-        padding: 7px;
+@media (max-width: 480px) {
+    .tuff-header-content {
+        gap: 10px;
+        padding: 10px 12px;
     }
 
-    .tuff-header-back .MuiButton-startIcon {
-        margin-right: 4px;
+    .tuff-header .tuff-header-back {
+        min-width: 40px;
+        width: 40px;
+        padding: 8px;
     }
 
-    .tuff-header-title.MuiTypography-root {
-        font-size: 0.95rem;
+    .tuff-header .tuff-header-back .MuiButton-startIcon {
+        margin: 0;
+    }
+
+    .tuff-header .tuff-header-back .MuiButton-startIcon + span {
+        display: none;
+    }
+
+    .tuff-header .tuff-header-title {
+        font-size: 1rem;
+    }
+
+    .tuff-header .tuff-header-avatar {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tuff-header,
+    .tuff-header .tuff-header-back {
+        transition: none;
     }
 }

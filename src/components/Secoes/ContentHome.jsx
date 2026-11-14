@@ -1,5 +1,4 @@
 
-import React from "react";
 import "./ContentHome.css";
 
 import SpaRoundedIcon from "@mui/icons-material/SpaRounded";
@@ -7,138 +6,178 @@ import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 import PsychologyRoundedIcon from "@mui/icons-material/PsychologyRounded";
 import BalanceRoundedIcon from "@mui/icons-material/BalanceRounded";
 
-const ContentHome = () => {
-    const benefits = [
-        {
-            icon: <SpaRoundedIcon />,
-            title: "Bem-estar",
-            description:
-                "Um ambiente acolhedor para descansar, relaxar e cuidar de si."
-        },
-        {
-            icon: <GroupsRoundedIcon />,
-            title: "Conexões humanas",
-            description:
-                "Momentos de convivência que fortalecem os relacionamentos interpessoais."
-        },
-        {
-            icon: <PsychologyRoundedIcon />,
-            title: "Desenvolvimento pessoal",
-            description:
-                "Atividades que estimulam a criatividade, a concentração e o autoconhecimento."
-        },
-        {
-            icon: <BalanceRoundedIcon />,
-            title: "Equilíbrio digital",
-            description:
-                "Uma relação mais consciente e saudável com a tecnologia."
-        }
-    ];
+const benefits = [
+    {
+        icon: <SpaRoundedIcon />,
+        title: "Bem-estar",
+        description:
+            "Descubra espaços e experiências que incentivam o cuidado pessoal e uma rotina mais equilibrada."
+    },
+    {
+        icon: <GroupsRoundedIcon />,
+        title: "Conexões humanas",
+        description:
+            "Aproveite ambientes que aproximam pessoas e proporcionam momentos de convivência."
+    },
+    {
+        icon: <PsychologyRoundedIcon />,
+        title: "Novas experiências",
+        description:
+            "Amplie seus horizontes conhecendo atividades, serviços e lugares diferentes."
+    },
+    {
+        icon: <BalanceRoundedIcon />,
+        title: "Liberdade de escolha",
+        description:
+            "Encontre experiências que combinam com seus interesses, necessidades e estilo de vida."
+    }
+];
 
+const ContentHome = () => {
     return (
         <section className="content-home">
 
             {/* APRESENTAÇÃO */}
             <div className="content-home-intro">
+
                 <span className="content-home-eyebrow">
-                    NOSSA PROPOSTA
+                    CULTIVE NOVAS EXPERIÊNCIAS
                 </span>
 
-                <h2>Uma breve descrição sobre a gente!</h2>
+                <h2>
+                    Um mundo de possibilidades em um só lugar.
+                </h2>
 
                 <p className="content-home-highlight">
-                    Desconectar-se um pouco também é uma forma de
-                    reconectar-se com aquilo que realmente importa.
+                    Acreditamos que uma vida mais rica começa quando
+                    abrimos espaço para conhecer novos lugares,
+                    experimentar coisas diferentes e aproveitar cada momento.
                 </p>
+
             </div>
 
-            {/* CONTEXTO */}
+            {/* SOBRE A PLATAFORMA */}
             <div className="content-home-text">
-                <h3>Por que existimos?</h3>
+
+                <span className="content-home-section-label">
+                    NOSSA ESSÊNCIA
+                </span>
+
+                <h3>
+                    O que é a TuffValley?
+                </h3>
 
                 <p>
-                    Na sociedade contemporânea, a tecnologia está cada
-                    vez mais presente no cotidiano das pessoas,
-                    facilitando a comunicação, o acesso à informação e
-                    a realização de diversas atividades. Entretanto,
-                    o uso excessivo de aparelhos eletrônicos,
-                    especialmente celulares e computadores, pode
-                    prejudicar a concentração, a produtividade, a
-                    convivência social e o bem-estar mental.
+                    A TuffValley é uma plataforma que conecta pessoas
+                    a diferentes espaços e estabelecimentos parceiros,
+                    reunindo oportunidades de lazer, cuidado pessoal,
+                    atividade física e convivência em um só ambiente.
                 </p>
 
                 <p>
-                    Diante dessa realidade, torna-se importante buscar
-                    alternativas que incentivem uma relação mais
-                    equilibrada entre a vida digital e as experiências
-                    offline.
+                    Nossa proposta é tornar mais simples a descoberta
+                    de novas experiências, permitindo que cada pessoa
+                    encontre opções que façam sentido para sua rotina,
+                    seus interesses e seu momento de vida.
                 </p>
+
             </div>
 
             {/* PROPOSTA */}
             <div className="content-home-text">
-                <h3>O que queremos proporcionar?</h3>
+
+                <span className="content-home-section-label">
+                    NOSSO PROPÓSITO
+                </span>
+
+                <h3>
+                    Mais possibilidades para sua rotina.
+                </h3>
 
                 <p>
-                    Este projeto tem como propósito desenvolver um
-                    espaço voltado à desconexão temporária da
-                    tecnologia, proporcionando aos frequentadores um
-                    ambiente seguro, confortável e acolhedor, no qual
-                    possam aproveitar momentos de lazer, descanso e
-                    desenvolvimento pessoal.
+                    Acreditamos que os melhores momentos podem surgir
+                    de experiências simples: conhecer uma cafeteria,
+                    experimentar uma nova atividade física, cuidar da
+                    aparência ou descobrir um lugar diferente.
                 </p>
 
                 <p>
-                    Por meio de atividades artísticas, práticas de
-                    relaxamento, contato com a natureza e oportunidades
-                    de interação social, buscamos estimular a
-                    valorização das relações humanas e das experiências
-                    longe das telas.
+                    Por isso, buscamos aproximar nossos usuários de
+                    estabelecimentos e serviços parceiros, criando
+                    oportunidades para explorar, aproveitar e cultivar
+                    novas experiências.
                 </p>
+
             </div>
 
             {/* BENEFÍCIOS */}
             <div className="content-home-benefits">
-                <h3>O que valorizamos</h3>
+
+                <div className="content-home-benefits-heading">
+                    <span className="content-home-section-label">
+                        O QUE NOS MOVE
+                    </span>
+
+                    <h3>
+                        Os pilares da nossa experiência
+                    </h3>
+
+                    <p>
+                        Mais do que encontrar lugares, queremos
+                        proporcionar motivos para explorar.
+                    </p>
+                </div>
 
                 <div className="content-home-grid">
-                    {benefits.map((benefit, index) => (
+
+                    {benefits.map((benefit) => (
                         <article
                             className="content-home-card"
-                            key={index}
+                            key={benefit.title}
                         >
                             <div className="content-home-icon">
                                 {benefit.icon}
                             </div>
 
-                            <h4>{benefit.title}</h4>
+                            <h4>
+                                {benefit.title}
+                            </h4>
 
-                            <p>{benefit.description}</p>
+                            <p>
+                                {benefit.description}
+                            </p>
                         </article>
                     ))}
+
                 </div>
             </div>
 
             {/* CONCLUSÃO */}
             <div className="content-home-conclusion">
-                <h3>Mais experiências, menos telas.</h3>
 
-                <p>
-                    A intenção não é eliminar a tecnologia da vida
-                    das pessoas, mas demonstrar a importância de
-                    utilizá-la de maneira moderada, evitando que seu
-                    uso excessivo interfira negativamente nos estudos,
-                    no trabalho e nas relações interpessoais.
-                </p>
+                <div className="content-home-conclusion-icon">
+                    <SpaRoundedIcon />
+                </div>
 
-                <p>
-                    Assim, queremos demonstrar que reduzir o tempo
-                    dedicado aos dispositivos eletrônicos pode abrir
-                    espaço para novas experiências, aprendizados e
-                    conexões humanas, promovendo uma relação mais
-                    consciente com a tecnologia e valorizando o
-                    bem-estar físico, mental e social.
-                </p>
+                <div className="content-home-conclusion-content">
+
+                    <span className="content-home-section-label">
+                        CULTIVE SEU PRÓXIMO MOMENTO
+                    </span>
+
+                    <h3>
+                        Sua próxima experiência começa aqui.
+                    </h3>
+
+                    <p>
+                        Seja para cuidar de si, encontrar pessoas,
+                        experimentar algo novo ou simplesmente mudar
+                        um pouco a rotina, a TuffValley está aqui para
+                        aproximar você de novas possibilidades.
+                    </p>
+
+                </div>
+
             </div>
 
         </section>

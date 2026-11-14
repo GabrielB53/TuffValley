@@ -1,7 +1,7 @@
 
-/* ========================================
-   HOME — ESTRUTURA PRINCIPAL
-======================================== */
+/* =========================================
+   TUFFVALLEY — HOME DASHBOARD
+========================================= */
 
 .home-layout {
     display: flex;
@@ -9,196 +9,361 @@
     min-height: 100vh;
     min-height: 100dvh;
 
-    background-color: var(--background);
+    background: var(--background);
     color: var(--text-color);
-}
-
-.home-content {
-    flex: 1;
-    min-width: 0;
-    padding: 18px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-
-    background-color: var(--background);
 
     transition:
         background-color 0.3s ease,
         color 0.3s ease;
 }
 
-/* ========================================
-   DASHBOARD
-======================================== */
+/* =========================================
+   ÁREA PRINCIPAL
+========================================= */
+
+.home-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 22px;
+
+    min-width: 0;
+    padding: 22px 26px;
+
+    background: var(--background);
+}
 
 .home-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
     width: 100%;
     min-width: 0;
-    padding: 24px;
+    padding: 0;
 
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-
-    background-color: var(--surface);
-
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-
-    box-shadow: var(--card-shadow);
-
-    transition:
-        background-color 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
+    background: transparent;
 }
 
-/* ========================================
+/* =========================================
    BOAS-VINDAS
-======================================== */
+========================================= */
 
 .home-welcome {
-    width: 100%;
-    padding: 12px 10px 20px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 
-    text-align: center;
+    min-height: 205px;
+    padding: 38px 44px;
 
-    border-bottom: 1px solid var(--border-color);
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            110deg,
+            var(--surface-secondary) 0%,
+            var(--surface) 100%
+        );
+
+    box-shadow: var(--card-shadow);
 }
 
-.home-welcome-heading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+.home-welcome-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 650px;
 }
 
 .home-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 17px;
+
     color: var(--primary);
-    font-size: 0.75rem;
+
+    font-size: 0.72rem;
     font-weight: 800;
-    letter-spacing: 3px;
+    letter-spacing: 2.5px;
 }
 
-.home-welcome-heading h2 {
-    margin: 0;
+.home-eyebrow-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.home-welcome-heading h2,
+.home-welcome-content h2 {
+    margin: 0 0 12px;
 
     color: var(--text-color);
 
-    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 800;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
+    line-height: 1.15;
 }
 
-.home-welcome-heading p {
-    max-width: 550px;
+.home-welcome-content p {
+    max-width: 540px;
     margin: 0;
 
     color: var(--text-secondary);
 
-    font-size: 0.95rem;
+    font-size: 0.98rem;
+    line-height: 1.8;
+}
+
+/* Elementos decorativos */
+
+.home-welcome-decoration {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: 7%;
+
+    width: 210px;
+    height: 210px;
+
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.home-decoration-circle {
+    position: absolute;
+
+    width: 175px;
+    height: 175px;
+
+    top: 10px;
+    right: 0;
+
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+
+    opacity: 0.18;
+}
+
+.home-decoration-circle-secondary {
+    top: 35px;
+    right: 35px;
+
+    width: 125px;
+    height: 125px;
+
+    border-width: 2px;
+    opacity: 0.13;
+}
+
+/* =========================================
+   SEÇÕES
+========================================= */
+
+.home-carousel-section {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    width: 100%;
+    min-width: 0;
+}
+
+.home-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.home-section-eyebrow {
+    display: block;
+    margin-bottom: 7px;
+
+    color: var(--primary);
+
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.home-section-heading h3 {
+    margin: 0;
+
+    color: var(--text-color);
+
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    font-weight: 800;
+    letter-spacing: -0.7px;
+}
+
+.home-section-heading p {
+    margin: 7px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.9rem;
     line-height: 1.6;
 }
 
-/* ========================================
+/* =========================================
    CARROSSEL
-======================================== */
+========================================= */
 
-.home-carousel-section {
+.home-carousel-section .tuff-carousel {
     width: 100%;
-    min-width: 0;
-    overflow: hidden;
-
-    border-radius: 14px;
+    max-width: 100%;
 }
 
-/*
-   Mantém o carrossel dentro do dashboard.
-   A aparência interna dos slides continua
-   sendo controlada por Carousel/Style.css.
-*/
+/* Não altera os slides nem os elementos
+   internos do componente compartilhado. */
 
 .home-carousel-section img {
     max-width: 100%;
 }
 
-/* ========================================
+/* =========================================
    CONTEÚDO PRINCIPAL
-======================================== */
+========================================= */
 
 .home-main {
     width: 100%;
     min-width: 0;
-    padding: 8px 0;
+    padding: 8px 0 18px;
 }
-
-/* Evita que elementos internos ultrapassem
-   os limites do dashboard. */
 
 .home-main > * {
     max-width: 100%;
 }
 
-/* ========================================
+/* =========================================
+   TEMA ESCURO
+========================================= */
+
+.dark-theme .home-welcome {
+    background:
+        linear-gradient(
+            110deg,
+            var(--surface-secondary) 0%,
+            var(--surface) 100%
+        );
+
+    border-color: var(--border-color);
+}
+
+.dark-theme .home-decoration-circle {
+    border-color: var(--primary);
+}
+
+/* =========================================
    RESPONSIVIDADE
-======================================== */
+========================================= */
 
 @media (max-width: 991px) {
     .home-content {
-        padding: 14px;
+        padding: 18px;
     }
 
     .home-dashboard {
-        padding: 18px;
-        gap: 20px;
+        gap: 26px;
+    }
+
+    .home-welcome {
+        min-height: 185px;
+        padding: 30px;
+    }
+
+    .home-welcome-decoration {
+        right: 2%;
+        opacity: 0.7;
     }
 }
 
 @media (max-width: 768px) {
-    .home-layout {
-        align-items: stretch;
-    }
-
     .home-content {
-        padding: 12px;
-    }
-
-    .home-dashboard {
-        padding: 16px;
-        border-radius: 12px;
+        padding: 14px;
+        gap: 18px;
     }
 
     .home-welcome {
-        padding: 10px 5px 18px;
+        min-height: 170px;
+        padding: 27px 24px;
+        border-radius: 18px;
     }
 
-    .home-welcome-heading p {
-        font-size: 0.88rem;
+    .home-welcome-content {
+        max-width: 85%;
+    }
+
+    .home-welcome-content p {
+        font-size: 0.9rem;
+    }
+
+    .home-welcome-decoration {
+        right: -45px;
+        opacity: 0.4;
+    }
+
+    .home-dashboard {
+        gap: 24px;
     }
 }
 
 @media (max-width: 480px) {
     .home-content {
-        padding: 8px;
-        gap: 12px;
+        padding: 10px;
+        gap: 14px;
     }
 
-    .home-dashboard {
-        padding: 12px;
-        gap: 16px;
+    .home-welcome {
+        min-height: 160px;
+        padding: 24px 19px;
+        border-radius: 15px;
     }
 
-    .home-welcome-heading h2 {
-        font-size: 1.6rem;
+    .home-welcome-content {
+        max-width: 100%;
+    }
+
+    .home-welcome-content h2 {
+        font-size: 1.85rem;
+    }
+
+    .home-welcome-content p {
+        font-size: 0.84rem;
+        line-height: 1.65;
     }
 
     .home-eyebrow {
-        font-size: 0.68rem;
+        margin-bottom: 13px;
+        font-size: 0.64rem;
+        letter-spacing: 1.8px;
+    }
+
+    .home-welcome-decoration {
+        right: -100px;
+        opacity: 0.2;
+    }
+
+    .home-section-heading h3 {
+        font-size: 1.35rem;
+    }
+
+    .home-section-heading p {
+        font-size: 0.84rem;
+    }
+
+    .home-dashboard {
+        gap: 21px;
     }
 }
