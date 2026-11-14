@@ -49,7 +49,23 @@ const create = data => {
 };
 
 const update = (id, data) => {
-    return http.multipartInstance.put(API_URL + `editar/${id}`, data);
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+        if (
+            key !== "id" &&
+            key !== "dataCadastro" &&
+            value !== null &&
+            value !== undefined
+        ) {
+            formData.append(key, value);
+        }
+    });
+
+    return http.multipartInstance.put(
+        API_URL + `editar/${id}`,
+        formData
+    );
 };
 
 const updateProfile = (id, data) => {
